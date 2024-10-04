@@ -1,4 +1,8 @@
-class room {
+abstract class room {
+
+}
+
+class roomA extends room {
 
 }
 
