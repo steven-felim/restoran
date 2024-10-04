@@ -3,7 +3,7 @@ abstract class room {
 }
 
 class roomA extends room {
-
+    private int test;
 }
 
 public class Main {
