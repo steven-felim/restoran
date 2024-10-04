@@ -2,6 +2,10 @@ class room {
 
 }
 
+class roomA extends room {
+    private int test;
+}
+
 class table {
 
 }
