@@ -1,9 +1,13 @@
-abstract class room {
+class room {
 
 }
 
 class roomA extends room {
     private int test;
+}
+
+class table {
+
 }
 
 public class Main {
