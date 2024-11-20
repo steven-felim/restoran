@@ -1,3 +1,5 @@
+package model.classes;
+
 abstract class Scedule {
     private int roomID;
     private int tableNo;

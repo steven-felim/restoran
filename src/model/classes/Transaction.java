@@ -1,3 +1,5 @@
+package model.classes;
+
 import java.util.Calendar;
 
 public class Transaction {

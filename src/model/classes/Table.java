@@ -1,3 +1,7 @@
+package model.classes;
+
+import model.enums.SeatCapacity;
+
 public class Table {
     private int tableNum;
     private SeatCapacity seats;
