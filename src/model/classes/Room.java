@@ -1,3 +1,7 @@
+package model.classes;
+
+import model.enums.RoomType;
+
 public class Room {
     String roomID;
     RoomType type;
