@@ -1,5 +1,7 @@
 package model.classes;
 
+import java.util.Calendar;
+
 abstract class Scedule {
     private int roomID;
     private int tableNo;
