@@ -1,3 +1,5 @@
+package model.classes;
+
 abstract class Menu {
     private String menuID;
     private String menuName;
