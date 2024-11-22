@@ -3,29 +3,29 @@ package model.classes;
 import java.util.Calendar;
 
 abstract class Scedule {
-    private int roomID;
-    private int tableNo;
+    private Room roomID;
+    private Table tableNo;
     private Calendar bookDate;
 
-    public Scedule(int roomID, int tableNo, Calendar bookDate) {
+    public Scedule(Room roomID, Table tableNo, Calendar bookDate) {
         this.roomID = roomID;
         this.tableNo = tableNo;
         this.bookDate = bookDate;
     }
 
-    public int getRoomID() {
+    public Room getRoomID() {
         return roomID;
     }
 
-    public void setRoomID(int roomID) {
+    public void setRoomID(Room roomID) {
         this.roomID = roomID;
     }
 
-    public int getTableNo() {
+    public Table getTableNo() {
         return tableNo;
     }
 
-    public void setTableNo(int tableNo) {
+    public void setTableNo(Table tableNo) {
         this.tableNo = tableNo;
     }
 
