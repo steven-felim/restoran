@@ -5,12 +5,10 @@ import model.enums.RoomType;
 public class Room {
     String roomID;
     RoomType type;
-    Table[] tables;
 
-    public Room(String roomID, RoomType type, Table[] tables) {
+    public Room(String roomID, RoomType type) {
         this.roomID = roomID;
         this.type = type;
-        this.tables = tables;
     }
 
     public String getRoomID() {
@@ -29,13 +27,6 @@ public class Room {
         this.type = type;
     }
 
-    public Table[] getTables() {
-        return tables;
-    }
-
-    public void setTables(Table[] tables) {
-        this.tables = tables;
-    }
 }
 
 
