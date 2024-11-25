@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public class Member extends NonGuest implements Discount {
 	Wallet wallet;
-	Point point;
+	int point;
 	ArrayList<Transaction> transactions;
 
-	public Member(Integer id, String name, String email, String password, String cellphone, Wallet wallet, Point point, ArrayList<Transaction> transactions) {
+	public Member(Integer id, String name, String email, String password, String cellphone, Wallet wallet, int point, ArrayList<Transaction> transactions) {
 		super(id, name, email, password, cellphone);
 		this.wallet = wallet;
 		this.point = point;
@@ -24,11 +24,11 @@ public class Member extends NonGuest implements Discount {
 		this.wallet = wallet;
 	}
 
-	public Point getPoint() {
+	public int getPoint() {
 		return point;
 	}
 
-	public void setPoint(Point point) {
+	public void setPoint(int point) {
 		this.point = point;
 	}
 
