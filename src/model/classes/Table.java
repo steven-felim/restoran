@@ -1,29 +1,29 @@
 package model.classes;
 
-import model.enums.SeatCapacity;
+import java.util.Calendar;
 
 public class Table {
-    private int tableNum;
-    private SeatCapacity seats;
+    int tableID;
+    Room room;
 
-    public Table(int tableNum, SeatCapacity seats) {
-        this.tableNum = tableNum;
-        this.seats = seats;
+    public Table(int tableID, Room room) {
+        this.tableID = tableID;
+        this.room = room;
     }
 
-    public int getTableNum() {
-        return tableNum;
+    public int getTableID() {
+        return tableID;
     }
 
-    public void setTableNum(int tableNum) {
-        this.tableNum = tableNum;
+    public void setTableID(int tableID) {
+        this.tableID = tableID;
     }
 
-    public SeatCapacity getSeats() {
-        return seats;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setSeats(SeatCapacity seats) {
-        this.seats = seats;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }

@@ -1,12 +1,32 @@
 package model.classes;
 
+import model.enums.TransactionStatus;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Transaction {
+	private Integer transactionId;
 	private Calendar datePurchase;
-	private int seats;
-	private boolean status;
-	private String menuID;
+	private TransactionStatus status;
+	private ArrayList<Table> listBookTable;
+	private ArrayList<FoodAndBeverage> listFnB;
+
+	public Transaction(Integer transactionId, Calendar datePurchase, TransactionStatus status, ArrayList<Table> listBookTable, ArrayList<FoodAndBeverage> listFnB) {
+		this.transactionId = transactionId;
+		this.datePurchase = datePurchase;
+		this.status = status;
+		this.listBookTable = listBookTable;
+		this.listFnB = listFnB;
+	}
+
+	public Integer getTransactionId() {
+		return transactionId;
+	}
+
+	public void setTransactionId(Integer transactionId) {
+		this.transactionId = transactionId;
+	}
 
 	public Calendar getDatePurchase() {
 		return datePurchase;
@@ -16,34 +36,27 @@ public class Transaction {
 		this.datePurchase = datePurchase;
 	}
 
-	public int getSeats() {
-		return seats;
-	}
-
-	public void setSeats(int seats) {
-		this.seats = seats;
-	}
-
-	public boolean isStatus() {
+	public TransactionStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(TransactionStatus status) {
 		this.status = status;
 	}
 
-	public String getMenuID() {
-		return menuID;
+	public ArrayList<Table> getListBookTable() {
+		return listBookTable;
 	}
 
-	public void setMenuID(String menuID) {
-		this.menuID = menuID;
+	public void setListBookTable(ArrayList<Table> listBookTable) {
+		this.listBookTable = listBookTable;
 	}
 
-	public Transaction(Calendar datePurchase, int seats, boolean status, String menuID) {
-		this.datePurchase = datePurchase;
-		this.seats = seats;
-		this.status = status;
-		this.menuID = menuID;
+	public ArrayList<FoodAndBeverage> getListFnB() {
+		return listFnB;
+	}
+
+	public void setListFnB(ArrayList<FoodAndBeverage> listFnB) {
+		this.listFnB = listFnB;
 	}
 }
