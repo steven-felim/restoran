@@ -1,17 +1,29 @@
 package model.classes;
 
+import java.util.Calendar;
+
 public class Table {
-    private int tableNum;
+    int tableID;
+    Room room;
 
-    public Table(int tableNum) {
-        this.tableNum = tableNum;
+    public Table(int tableID, Room room) {
+        this.tableID = tableID;
+        this.room = room;
     }
 
-    public int getTableNum() {
-        return tableNum;
+    public int getTableID() {
+        return tableID;
     }
 
-    public void setTableNum(int tableNum) {
-        this.tableNum = tableNum;
+    public void setTableID(int tableID) {
+        this.tableID = tableID;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }
