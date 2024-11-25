@@ -1,22 +1,30 @@
 package model.classes;
 
 public class Voucher {
-    private String voucher;
+    private int voucherID;
+    private String voucherName;
     private double discount;
-    private boolean used;
 
-    public Voucher(String voucher, double discount, boolean used) {
-        this.voucher = voucher;
+    public Voucher(int voucherID, String voucherName, double discount) {
+        this.voucherID = voucherID;
+        this.voucherName = voucherName;
         this.discount = discount;
-        this.used = used;
     }
 
-    public String getVoucher() {
-        return voucher;
+    public int getVoucherID() {
+        return voucherID;
     }
 
-    public void setVoucher(String voucher) {
-        this.voucher = voucher;
+    public void setVoucherID(int voucherID) {
+        this.voucherID = voucherID;
+    }
+
+    public String getVoucherName() {
+        return voucherName;
+    }
+
+    public void setVoucherName(String voucherName) {
+        this.voucherName = voucherName;
     }
 
     public double getDiscount() {
@@ -25,13 +33,5 @@ public class Voucher {
 
     public void setDiscount(double discount) {
         this.discount = discount;
-    }
-
-    public boolean isUsed() {
-        return used;
-    }
-
-    public void setUsed(boolean used) {
-        this.used = used;
     }
 }
