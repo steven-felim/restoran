@@ -1,53 +1,81 @@
 package view.admin;
 
-import controller.OrderController;
-import controller.orderController;
-import model.Order;
-
 import javax.swing.*;
-import java.awt.color.*;
-import java.util.List;
+import java.awt.*;
 
-public class AdminMenu extends JFrame{
-    public AdminMenu(){
+public class AdminMenu extends JFrame {
+    public AdminMenu() {
         initComponents();
-        this.setVisible(true);
+        setVisible(true);
     }
 
-    public void initComponents(){
-        this.setSize(400, 600);
-        this.setResizable(false);
-        this.setLayout(null);
-        this.setTitle("Admin Menu");
+    private void initComponents() {
+        this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setTitle("Admin Menu");
 
-        JLabel title = new JLabel("Admin Menu");
-        title.setFont(new Font(Font.TIMES_NEW_ROMAN, Font.Bold, 28));
-        title.setBounds(120, 20, 200, 50);
-        this.add(title);
+        JLabel title = new JLabel("Welcome back, Admin");
+        title.setBounds(290, 50, 700, 60);
+        title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
-        JButton viewOrdersButton = new JButton("view Order");
-        viewOrdersButton.setBounds(50, 100, 300, 40);
-        viewOrdersButton.addActionListener(e -> viewOrders());
-        this.add(viewOrdersButton);
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBounds(100, 60, 1080, 600);
+
+        JButton approveReschedule = new JButton("Approve Table Reschedule");
+        approveReschedule.setBounds(180, 100, 440, 40);
+        panel.add(approveReschedule);
+
+        JButton viewTableOrder = new JButton("View Table Order");
+        viewTableOrder.setBounds(180, 150, 440, 40);
+        panel.add(viewTableOrder);
+
+        JButton addMenu = new JButton("Add F&B Menu");
+        addMenu.setBounds(180, 200, 440, 40);
+        panel.add(addMenu);
+
+        JButton editMenu = new JButton("Edit F&B Menu");
+        editMenu.setBounds(180, 250, 440, 40);
+        panel.add(editMenu);
+
+        JButton deleteMenu = new JButton("Delete F&B Menu");
+        deleteMenu.setBounds(180, 300, 440, 40);
+        panel.add(deleteMenu);
+
+        JButton viewTransaction = new JButton("View User's Transaction");
+        viewTransaction.setBounds(180, 350, 440, 40);
+        panel.add(viewTransaction);
+
+        JButton viewSales = new JButton("View Sales Report");
+        viewSales.setBounds(660, 100, 440, 40);
+        panel.add(viewSales);
+
+        JButton editEmployee = new JButton("Edit Employee");
+        editEmployee.setBounds(660, 150, 440, 40);
+        panel.add(editEmployee);
+
+        JButton viewDeliveryMan = new JButton("View Delivery Man");
+        viewDeliveryMan.setBounds(660, 200, 440, 40);
+        panel.add(viewDeliveryMan);
+
+        JButton approveUserDetail = new JButton("Approve User Details");
+        approveUserDetail.setBounds(660, 250, 440, 40);
+        panel.add(approveUserDetail);
+
+        JButton addVoucher = new JButton("Add Voucher");
+        addVoucher.setBounds(660, 300, 440, 40);
+        panel.add(addVoucher);
+
+        JButton addDiscount = new JButton("Add Discount");
+        addDiscount.setBounds(660, 350, 440, 40);
+        panel.add(addDiscount);
+
+        add(title);
+        add(panel);
     }
 
-    private void viewOrders(){
-        List<Order> orders = OrderController.getOrdersByUser(0);
-        StringBuilder sb = new StringBuilder("Orders : \n");
-
-        for (Order order : orders) {
-            sb.append("Order ID: ").append(order.getId())
-                .append(", Menu ID: ").append(order.getMenuId())
-                .append(", Quantity: ").append(order.getQuantity())
-                .append(", Status: ").append(order.getStatus()).append("\n");
-        }
-
-        JOptionPane.showMessageDialog(this, sb.toString());
-    }
-
-    public static void main(String[] args){
+    public static void main(String[] args) {
         new AdminMenu();
     }
 }
