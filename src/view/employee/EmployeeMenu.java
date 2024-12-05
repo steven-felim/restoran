@@ -1,7 +1,5 @@
 package view.employee;
 
-import view.admin.AdminMenu;
-
 import javax.swing.*;
 import java.awt.*;
 
