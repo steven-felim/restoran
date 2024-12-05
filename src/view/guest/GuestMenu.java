@@ -1,79 +1,57 @@
 package view.guest;
 
-import controller.TableController;
-import model.Table;
-
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 public class GuestMenu extends JFrame {
-
-    public GuestMenu(){
+    public GuestMenu() {
         initComponents();
         this.setVisible(true);
     }
 
-    public void initComponents(){
-        this.setSize(400, 600);
-        this.setResizable(false);
-        this.setLayout(null);
-        this.setTitle("Guest Menu");
+    private void initComponents() {
+        this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setTitle("Guest Menu");
 
-        JLabel title = new JLabel("Guest Menu");
-        title.setFont(new Font(Font.TIMES_NEW_ROMAN, Font.BOLD, 30));
-        title.setBounds(120, 20, 200, 50);
-        this.add(title);
+        JLabel title = new JLabel("Welcome, Guest!");
+        title.setBounds(290, 50, 700, 60);
+        title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
+
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBounds(100, 60, 1080, 600);
 
         JButton bookTableButton = new JButton("Book Table");
-        bookTableButton.setBounds(50, 100, 300, 40);
-        bookTableButton.addActionListener(e -> bookTable());
-        this.add(bookTableButton);
+        bookTableButton.setBounds(180, 100, 440, 40);
+        panel.add(bookTableButton);
 
-        JButton viewMenuButton = new JButton("View Menu");
-        viewMenuButton.setBounds(50, 150, 300, 40);
-        viewMenuButton.addActionListener(e -> viewMenu());
-        this.add(viewMenuButton);
+        JButton rescheduleTableButton = new JButton("Reschedule Table");
+        rescheduleTableButton.setBounds(180, 150, 440, 40);
+        panel.add(rescheduleTableButton);
+
+        JButton cancelTableButton = new JButton("Cancel Table");
+        cancelTableButton.setBounds(180, 200, 440, 40);
+        panel.add(cancelTableButton);
+
+        JButton viewTableOrder = new JButton("View Table Order");
+        viewTableOrder.setBounds(660, 100, 440, 40);
+        panel.add(viewTableOrder);
+
+        JButton orderMenuButton = new JButton("Order F&B Menu");
+        orderMenuButton.setBounds(660, 150, 440, 40);
+        panel.add(orderMenuButton);
+
+        JButton viewCartButton = new JButton("Cart");
+        viewCartButton.setBounds(660, 200, 440, 40);
+        panel.add(viewCartButton);
+
+        add(title);
+        add(panel);
     }
 
-    private void bookTable(){
-        List<Table> availableTables = TableController.getAvailableTables();
-        if(availableTables.isEmpty()){
-            JOptionPane.showMessageDialog(this, "No table available");
-            return;
-        }
-
-        String[] tableOptions = availableTables.stream().map(table -> 
-            "Table " + table.getName() + " Capacity: " + table.getCapacity())
-            .toArray(String[]::new);
-
-        String selectedTable = (String) JOptionPane.showInputDialog(this, 
-            "Select a table to book:", "Book Table", 
-            JOptionPane.QUESTION_MESSAGE, null, tableOptions, tableOptions[0]);
-
-        if(selectedTable != null){
-            int tableIndex = java.util.Arrays.asList(tableOptions).indexOf(selectedTable);
-            Table table = availableTables.get(tableIndex);
-
-            String date = JOptionPane.showInputDialog(this, "Enter Booking Date (YYYY-MM-DD):");
-            String time = JOptionPane.showInputDialog(this, "Enter Booking Time (HH:MM):");
-
-            boolean success = TableController.bookTable(table.getId(), 1, date, time);
-            if(success){
-                JOptionPane.showMessageDialog(this, "Table booked successfully!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Failed to book table");
-            }
-        }
-    }
-
-    private void viewMenu(){
-        JOptionPane.showMessageDialog(this, "Menu functionality to be added.");
-    }
-
-    public static void main(String[] args){
+    public static void main(String[] args) {
         new GuestMenu();
     }
 }
