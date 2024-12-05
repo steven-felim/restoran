@@ -1,8 +1,5 @@
 package view.guest;
 
-import controller.AuthenticationController;
-import view.admin.AdminMenu;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -64,11 +61,11 @@ public class Login extends JFrame {
 			new Register();
 		});
 
-		JButton backButton = new JButton("Guest");
-		backButton.setBounds(200, 0, 100, 40);
-		buttonPanel.add(backButton);
+		JButton guestButton = new JButton("Guest");
+		guestButton.setBounds(200, 0, 100, 40);
+		buttonPanel.add(guestButton);
 
-		backButton.addActionListener(e -> {
+		guestButton.addActionListener(e -> {
 			this.dispose();
 			new GuestMenu();
 		});
@@ -76,9 +73,5 @@ public class Login extends JFrame {
 		add(title);
 		add(formLogin);
 		add(buttonPanel);
-	}
-
-	public static void main(String[] args) {
-		Login login = new Login();
 	}
 }
