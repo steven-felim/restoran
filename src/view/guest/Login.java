@@ -1,7 +1,16 @@
 package view.guest;
 
+import model.classes.DatabaseHandler;
+import view.admin.AdminMenu;
+import view.member.MemberMenu;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Login extends JFrame {
 	public Login() {
@@ -10,6 +19,8 @@ public class Login extends JFrame {
 	}
 
 	private void initComponents() {
+
+
 		this.setSize(400, 600);
 		this.setResizable(false);
 		this.setLayout(null);
@@ -39,9 +50,10 @@ public class Login extends JFrame {
 		passwordUser.setBounds(113, 77, 130, 30);
 		formLogin.add(passwordUser);
 
-		JTextField passwordField = new JTextField(255);
+		JPasswordField passwordField = new JPasswordField(255);
 		passwordField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
 		passwordField.setBounds(0, 110, 298, 30);
+		passwordField.setEchoChar('*');
 		formLogin.add(passwordField);
 
 		JPanel buttonPanel = new JPanel();
@@ -51,6 +63,29 @@ public class Login extends JFrame {
 		JButton loginButton = new JButton("Login");
 		loginButton.setBounds(0, 0, 100, 40);
 		buttonPanel.add(loginButton);
+
+		loginButton.addActionListener(e -> {
+			DatabaseHandler conn = new DatabaseHandler();
+			conn.connect();
+			String query = "SELECT role FROM user WHERE email = '" + profileField.getText() + "' AND password = '" + passwordField.getText() + "'";
+			try {
+				Statement stmt = conn.con.createStatement();
+				ResultSet rs = stmt.executeQuery(query);
+				switch (rs.getString("role")) {
+					case "ADMIN":
+						new AdminMenu();
+						this.dispose();
+					case "MEMBER":
+						new MemberMenu();
+						this.dispose();
+				}
+				//return true;
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+				conn.disconnect();
+				//return (false);
+			}
+		});
 
 		JButton registerButton = new JButton("Register");
 		registerButton.setBounds(100, 0, 100, 40);
