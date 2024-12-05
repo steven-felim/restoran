@@ -1,10 +1,10 @@
-package view.guest;
+package view.member;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class GuestMenu extends JFrame {
-    public GuestMenu() {
+public class MemberMenu extends JFrame {
+    public MemberMenu() {
         initComponents();
         this.setVisible(true);
     }
@@ -35,6 +35,10 @@ public class GuestMenu extends JFrame {
         cancelTableButton.setBounds(180, 200, 440, 40);
         panel.add(cancelTableButton);
 
+        JButton walletButton = new JButton("Wallet");
+        walletButton.setBounds(180, 250, 440, 40);
+        panel.add(walletButton);
+
         JButton viewTableOrder = new JButton("View Table Order");
         viewTableOrder.setBounds(660, 100, 440, 40);
         panel.add(viewTableOrder);
@@ -47,11 +51,19 @@ public class GuestMenu extends JFrame {
         viewCartButton.setBounds(660, 200, 440, 40);
         panel.add(viewCartButton);
 
+        JButton editProfile = new JButton("Edit Profile Details");
+        editProfile.setBounds(660, 200, 440, 40);
+        panel.add(editProfile);
+
+        JButton viewPointButton = new JButton("View Point");
+        viewPointButton.setBounds(660, 250, 440, 40);
+        panel.add(viewPointButton);
+
         add(title);
         add(panel);
     }
 
     public static void main(String[] args) {
-        new GuestMenu();
+        new MemberMenu();
     }
 }
