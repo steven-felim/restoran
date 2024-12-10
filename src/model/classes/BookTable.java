@@ -10,7 +10,6 @@ public class BookTable {
     private Date date;
     private BookStatus status;
 
-    
     public BookTable(int bookID, Table table, User user, Date date, BookStatus status) {
         this.bookID = bookID;
         this.table = table;
