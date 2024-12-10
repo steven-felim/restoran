@@ -58,5 +58,4 @@ public class BookTable {
     public void setStatus(BookStatus status) {
         this.status = status;
     }
-
 }
