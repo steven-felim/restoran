@@ -35,4 +35,27 @@ public class FnBTableController {
 
         return fnbList;
     }
+
+    public FoodAndBeverage getDataFromDB (String searchID) {
+        DatabaseHandler conn = new DatabaseHandler();
+        conn.connect();
+
+        FoodAndBeverage fnb = new FoodAndBeverage();
+
+        try (
+                Statement stmt = conn.con.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT * FROM fnb WHERE fnb_id = " + searchID + ";")) {
+
+            while (rs.next()) {
+                fnb.setId(rs.getInt("fnb_id"));
+                fnb.setName(rs.getString("name"));
+                fnb.setStock(rs.getInt("stock"));
+                fnb.setPrice(rs.getInt("price"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return fnb;
+    }
 }

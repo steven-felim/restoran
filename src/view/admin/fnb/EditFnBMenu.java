@@ -12,6 +12,7 @@ public class EditFnBMenu extends JFrame {
     private JTable table;
     private DefaultTableModel model;
     private FnBTableController fnbc;
+    private FoodAndBeverage temp;
 
     public EditFnBMenu() {
         initComponents();

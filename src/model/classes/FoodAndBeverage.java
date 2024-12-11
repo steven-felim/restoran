@@ -13,6 +13,10 @@ public class FoodAndBeverage {
 		this.price = price;
 	}
 
+	public FoodAndBeverage() {
+
+	}
+
 	public int getId() {
 		return id;
 	}
