@@ -12,9 +12,9 @@ import view.admin.transaction.ViewSalesReport;
 import view.admin.transaction.ViewUserTransaction;
 import view.admin.users.ApproveUserDetails;
 import view.admin.voucher.AddVoucher;
+import view.guest.Login;
 
 import javax.swing.*;
-import javax.swing.text.ViewFactory;
 import java.awt.*;
 
 public class AdminMenu extends JFrame {
@@ -30,7 +30,7 @@ public class AdminMenu extends JFrame {
         this.setTitle("Admin Menu");
 
         JLabel title = new JLabel("Welcome back, Admin");
-        title.setBounds(290, 50, 700, 60);
+        title.setBounds(490, 50, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel panel = new JPanel();
@@ -143,6 +143,15 @@ public class AdminMenu extends JFrame {
         addDiscount.addActionListener(e -> {
             this.dispose();
             new AddDiscount();
+        });
+
+        JButton logout = new JButton("Logout");
+        logout.setBounds(180, 400, 440, 40);
+        panel.add(logout);
+
+        logout.addActionListener(e -> {
+            this.dispose();
+            new Login();
         });
 
         add(title);
