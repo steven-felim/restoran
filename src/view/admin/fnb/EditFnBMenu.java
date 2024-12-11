@@ -1,6 +1,6 @@
 package view.admin.fnb;
 
-import controller.FnBTableController;
+import controller.FnBController;
 import model.classes.FoodAndBeverage;
 
 import javax.swing.*;
@@ -11,7 +11,7 @@ import java.util.List;
 public class EditFnBMenu extends JFrame {
     private JTable table;
     private DefaultTableModel model;
-    private FnBTableController fnbc;
+    private FnBController fnbc;
     private FoodAndBeverage temp;
 
     public EditFnBMenu() {
@@ -21,7 +21,7 @@ public class EditFnBMenu extends JFrame {
 
     private void initComponents() {
         model = new DefaultTableModel();
-        fnbc = new FnBTableController();
+        fnbc = new FnBController();
 
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);

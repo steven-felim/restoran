@@ -1,6 +1,6 @@
 package view.admin.fnb;
 
-import controller.FnBTableController;
+import controller.FnBController;
 import model.classes.FoodAndBeverage;
 import view.admin.AdminMenu;
 
@@ -9,10 +9,10 @@ import java.awt.*;
 
 public class EditFnBForm extends JFrame {
     private FoodAndBeverage temp;
-    private FnBTableController fnbc;
+    private FnBController fnbc;
 
     public EditFnBForm(String id) {
-        fnbc = new FnBTableController();
+        fnbc = new FnBController();
         temp = fnbc.getDataFromDB(id);
 
         initComponents();
