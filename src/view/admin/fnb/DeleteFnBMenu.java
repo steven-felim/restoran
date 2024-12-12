@@ -1,6 +1,6 @@
 package view.admin.fnb;
 
-import controller.FnBTableController;
+import controller.FnBController;
 import model.classes.FoodAndBeverage;
 
 import javax.swing.*;
@@ -11,7 +11,7 @@ import java.util.List;
 public class DeleteFnBMenu extends JFrame {
     private JTable table;
     private DefaultTableModel model;
-    private FnBTableController fnbc;
+    private FnBController fnbc;
 
     public DeleteFnBMenu() {
         initComponents();
@@ -20,7 +20,7 @@ public class DeleteFnBMenu extends JFrame {
 
     private void initComponents() {
         model = new DefaultTableModel();
-        fnbc = new FnBTableController();
+        fnbc = new FnBController();
 
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);

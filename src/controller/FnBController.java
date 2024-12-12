@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class FnBTableController {
+public class FnBController {
     public List<FoodAndBeverage> getAllFnb() {
         List<FoodAndBeverage> fnbList = new ArrayList<>();
 
