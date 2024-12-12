@@ -25,7 +25,7 @@ public class ViewUserTransaction extends JFrame {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Sales Report");
+        this.setTitle("User Transaction");
 
         JLabel title = new JLabel("User Transaction");
         title.setBounds(490, 20, 700, 60);
