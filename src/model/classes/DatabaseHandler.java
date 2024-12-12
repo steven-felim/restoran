@@ -19,6 +19,7 @@ public class DatabaseHandler {
 
     public Connection con;
     private String driver = "com.mysql.cj.jdbc.Driver";
+
     //private String url = "jdbc:mysql://localhost/restoran";
     private String url = "jdbc:mysql://localhost/restoran?serverTimezone=UTC&useSSL=false";
     private String username = "root";
