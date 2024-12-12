@@ -73,13 +73,6 @@ CREATE TABLE `fnb` (
                        `price` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Dumping data for table `fnb`
---
-
-INSERT INTO `fnb` (`fnb_id`, `name`, `stock`, `price`) VALUES
-                                                           (1, 'air', 5, 3000),
-                                                           (2, 'teh', 5, 5000);
 
 -- --------------------------------------------------------
 
@@ -129,19 +122,13 @@ CREATE TABLE `user` (
                         `email` varchar(255) NOT NULL,
                         `password` varchar(255) NOT NULL,
                         `cellphone` varchar(13) NOT NULL,
-                        `role` enum('ADMIN','EMPLOYEE','MEMBER','GUEST') NOT NULL,
+                        `role` enum('ADMIN','EMPLOYEE','MEMBER') NOT NULL,
                         `wallet_balance` double(7,2) DEFAULT 0.00,
                         `pin` char(6) DEFAULT NULL,
                         `point` int(11) DEFAULT 0,
                         `jobdesk` enum('CASHIER','CHEF','WAITER','DELIVERYMAN') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`user_id`, `name`, `email`, `password`, `cellphone`, `role`, `wallet_balance`, `pin`, `point`, `jobdesk`) VALUES
-    (1, 'hehe', 'gg', 'ss', '45453', 'MEMBER', 0.00, '354444', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -155,9 +142,6 @@ CREATE TABLE `voucher` (
                            `discount` double(2,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Indexes for dumped tables
---
 
 --
 -- Indexes for table `booktable`
