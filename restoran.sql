@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2024 at 04:42 PM
+-- Generation Time: Dec 12, 2024 at 02:04 PM
 -- Server version: 11.3.0-MariaDB
 -- PHP Version: 8.0.30
 
@@ -44,10 +44,20 @@ CREATE TABLE `booktable` (
 
 CREATE TABLE `cart` (
                         `cart_id` int(11) NOT NULL,
-                        `fnb_id` int(11) NOT NULL,
                         `user_id` int(11) DEFAULT NULL,
-                        `guest_id` int(11) DEFAULT NULL,
-                        `quantity` int(11) DEFAULT NULL
+                        `guest_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_items`
+--
+
+CREATE TABLE `cart_items` (
+                              `cart_id` int(11) NOT NULL,
+                              `fnb_id` int(11) NOT NULL,
+                              `quantity` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
@@ -62,6 +72,14 @@ CREATE TABLE `fnb` (
                        `stock` int(11) DEFAULT 0,
                        `price` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `fnb`
+--
+
+INSERT INTO `fnb` (`fnb_id`, `name`, `stock`, `price`) VALUES
+                                                           (1, 'air', 5, 3000),
+                                                           (2, 'teh', 5, 5000);
 
 -- --------------------------------------------------------
 
@@ -93,8 +111,6 @@ CREATE TABLE `tables` (
 
 CREATE TABLE `transaction` (
                                `transaction_id` int(11) NOT NULL,
-                               `user_id` int(11) DEFAULT NULL,
-                               `guest_id` int(11) DEFAULT NULL,
                                `cart_id` int(11) NOT NULL,
                                `voucher_id` int(11) DEFAULT NULL,
                                `date` date DEFAULT NULL,
@@ -119,6 +135,13 @@ CREATE TABLE `user` (
                         `point` int(11) DEFAULT 0,
                         `jobdesk` enum('CASHIER','CHEF','WAITER','DELIVERYMAN') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `name`, `email`, `password`, `cellphone`, `role`, `wallet_balance`, `pin`, `point`, `jobdesk`) VALUES
+    (1, 'hehe', 'gg', 'ss', '45453', 'MEMBER', 0.00, '354444', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -150,9 +173,15 @@ ALTER TABLE `booktable`
 --
 ALTER TABLE `cart`
     ADD PRIMARY KEY (`cart_id`),
-    ADD KEY `fnb_id` (`fnb_id`),
     ADD KEY `user_id` (`user_id`),
     ADD KEY `guest_id` (`guest_id`);
+
+--
+-- Indexes for table `cart_items`
+--
+ALTER TABLE `cart_items`
+    ADD PRIMARY KEY (`cart_id`,`fnb_id`),
+    ADD KEY `fnb_id` (`fnb_id`);
 
 --
 -- Indexes for table `fnb`
@@ -177,8 +206,6 @@ ALTER TABLE `tables`
 --
 ALTER TABLE `transaction`
     ADD PRIMARY KEY (`transaction_id`),
-    ADD KEY `user_id` (`user_id`),
-    ADD KEY `guest_id` (`guest_id`),
     ADD KEY `cart_id` (`cart_id`),
     ADD KEY `voucher_id` (`voucher_id`);
 
@@ -214,7 +241,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `fnb`
 --
 ALTER TABLE `fnb`
-    MODIFY `fnb_id` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `fnb_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `guest`
@@ -232,7 +259,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-    MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `voucher`
@@ -256,18 +283,22 @@ ALTER TABLE `booktable`
 -- Constraints for table `cart`
 --
 ALTER TABLE `cart`
-    ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`fnb_id`) REFERENCES `fnb` (`fnb_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD CONSTRAINT `cart_ibfk_3` FOREIGN KEY (`guest_id`) REFERENCES `guest` (`guest_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+    ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`guest_id`) REFERENCES `guest` (`guest_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `cart_items`
+--
+ALTER TABLE `cart_items`
+    ADD CONSTRAINT `cart_items_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT `cart_items_ibfk_2` FOREIGN KEY (`fnb_id`) REFERENCES `fnb` (`fnb_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `transaction`
 --
 ALTER TABLE `transaction`
-    ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`guest_id`) REFERENCES `guest` (`guest_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD CONSTRAINT `transaction_ibfk_3` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`fnb_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD CONSTRAINT `transaction_ibfk_4` FOREIGN KEY (`voucher_id`) REFERENCES `voucher` (`voucher_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+    ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`voucher_id`) REFERENCES `voucher` (`voucher_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
