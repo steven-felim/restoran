@@ -142,9 +142,6 @@ CREATE TABLE `voucher` (
                            `discount` double(2,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Indexes for dumped tables
---
 
 --
 -- Indexes for table `booktable`
