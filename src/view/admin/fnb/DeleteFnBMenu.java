@@ -2,6 +2,7 @@ package view.admin.fnb;
 
 import controller.FnBController;
 import model.classes.FoodAndBeverage;
+import view.admin.AdminMenu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -51,6 +52,15 @@ public class DeleteFnBMenu extends JFrame {
 
         submit.addActionListener(e -> {
             // controller hapus data
+        });
+
+        JButton back = new JButton("Back to Main Menu");
+        back.setBounds(0, 0, 160, 30);
+        panel.add(back);
+
+        back.addActionListener(e ->  {
+            this.dispose();
+            new AdminMenu();
         });
 
         table = new JTable(model);

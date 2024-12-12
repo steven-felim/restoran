@@ -2,6 +2,7 @@ package view.admin.transaction;
 
 import controller.TransactionController;
 import model.classes.Transaction;
+import view.admin.AdminMenu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -33,6 +34,15 @@ public class ViewSalesReport extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBounds(100, 80, 1080, 600);
+
+        JButton back = new JButton("Back to Main Menu");
+        back.setBounds(0, 0, 160, 30);
+        panel.add(back);
+
+        back.addActionListener(e ->  {
+            this.dispose();
+            new AdminMenu();
+        });
 
         JTable table = new JTable(model);
         model.addColumn("Transaction ID");
