@@ -52,7 +52,7 @@ public class EditFnBMenu extends JFrame {
 
         submit.addActionListener(e -> {
             this.dispose();
-            new EditFnBForm(idField.getText());
+            new EditFnBForm(Integer.parseInt(idField.getText()));
         });
 
         JButton back = new JButton("Back to Main Menu");
