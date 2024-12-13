@@ -11,7 +11,7 @@ public class EditFnBForm extends JFrame {
     private FoodAndBeverage temp;
     private FnBController fnbc;
 
-    public EditFnBForm(String id) {
+    public EditFnBForm(int id) {
         fnbc = new FnBController();
         temp = fnbc.getDataFromDB(id);
 
