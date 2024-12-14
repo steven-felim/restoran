@@ -2,6 +2,7 @@ package view.admin.employee;
 
 import controller.EmployeeController;
 import model.classes.Employee;
+import model.enums.Jobdesk;
 import view.admin.AdminMenu;
 
 import javax.swing.*;
@@ -67,6 +68,37 @@ public class EditEmployeeForm extends JFrame {
         role.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
         role.setBounds(200, 260, 220, 30);
         panel.add(role);
+
+        JRadioButton cashier = new JRadioButton(String.valueOf(Jobdesk.CASHIER));
+        cashier.setBounds(510, 260, 100, 30);
+        JRadioButton chef = new JRadioButton(String.valueOf(Jobdesk.CHEF));
+        chef.setBounds(660, 260, 100, 30);
+        JRadioButton waiter = new JRadioButton(String.valueOf(Jobdesk.WAITER));
+        waiter.setBounds(810, 260, 100, 30);
+        JRadioButton deliveryman = new JRadioButton(String.valueOf(Jobdesk.DELIVERYMAN));
+        deliveryman.setBounds(960, 260, 150, 30);
+
+        switch(temp.getJobdesk()) {
+            case CASHIER:
+                cashier.setSelected(true);
+            case CHEF:
+                chef.setSelected(true);
+            case WAITER:
+                waiter.setSelected(true);
+            case DELIVERYMAN:
+                deliveryman.setSelected(true);
+        }
+
+        ButtonGroup job = new ButtonGroup();
+        job.add(cashier);
+        job.add(chef);
+        job.add(waiter);
+        job.add(deliveryman);
+
+        panel.add(cashier);
+        panel.add(chef);
+        panel.add(waiter);
+        panel.add(deliveryman);
 
         JButton submit = new JButton("Edit");
         submit.setBounds(440, 310, 440, 40);
