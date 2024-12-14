@@ -71,7 +71,7 @@ public class ViewSalesReport extends JFrame {
         model.setRowCount(0);
 
         for (Transaction t : transList) {
-            Object[] rowData = { t.getTransactionId(), t.getDatePurchase() };
+            Object[] rowData = { t.getTransactionId(), t.getUserId(), t.getGuestId(), t.getDatePurchase() };
             model.addRow(rowData);
         }
     }
