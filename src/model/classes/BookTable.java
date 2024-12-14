@@ -5,15 +5,17 @@ import java.util.Date;
 
 public class BookTable {
     private int bookID;
-    private Table table;
-    private User user;
+    private String tableID;
+    private int userID;
+    private int guestID;
     private Date date;
     private BookStatus status;
 
-    public BookTable(int bookID, Table table, User user, Date date, BookStatus status) {
+    public BookTable(int bookID, String tableID, int userID, int guestID, Date date, BookStatus status) {
         this.bookID = bookID;
-        this.table = table;
-        this.user = user;
+        this.tableID = tableID;
+        this.userID = userID;
+        this.guestID = guestID;
         this.date = date;
         this.status = status;
     }
@@ -26,20 +28,28 @@ public class BookTable {
         this.bookID = bookID;
     }
 
-    public Table getTable() {
-        return table;
+    public String getTableID() {
+        return tableID;
     }
 
-    public void setTable(Table table) {
-        this.table = table;
+    public void setTableID(String tableID) {
+        this.tableID = tableID;
     }
 
-    public User getUser() {
-        return user;
+    public int getGuestID() {
+        return guestID;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setGuestID(int guestID) {
+        this.guestID = guestID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public Date getDate() {
