@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2024 at 02:04 PM
+-- Generation Time: Dec 14, 2024 at 04:34 PM
 -- Server version: 11.3.0-MariaDB
 -- PHP Version: 8.0.30
 
@@ -33,7 +33,7 @@ CREATE TABLE `booktable` (
                              `user_id` int(11) DEFAULT NULL,
                              `guest_id` int(11) DEFAULT NULL,
                              `date` date NOT NULL,
-                             `status` enum('AVAILABLE','BOOKED') NOT NULL
+                             `status` enum('BOOKED','PENDING') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
@@ -72,7 +72,6 @@ CREATE TABLE `fnb` (
                        `stock` int(11) DEFAULT 0,
                        `price` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
 
 -- --------------------------------------------------------
 
@@ -122,13 +121,12 @@ CREATE TABLE `user` (
                         `email` varchar(255) NOT NULL,
                         `password` varchar(255) NOT NULL,
                         `cellphone` varchar(13) NOT NULL,
-                        `role` enum('ADMIN','EMPLOYEE','MEMBER') NOT NULL,
+                        `role` enum('ADMIN','EMPLOYEE','MEMBER','GUEST') NOT NULL,
                         `wallet_balance` double(7,2) DEFAULT 0.00,
                         `pin` char(6) DEFAULT NULL,
                         `point` int(11) DEFAULT 0,
                         `jobdesk` enum('CASHIER','CHEF','WAITER','DELIVERYMAN') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
 
 -- --------------------------------------------------------
 
@@ -142,6 +140,9 @@ CREATE TABLE `voucher` (
                            `discount` double(2,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Indexes for dumped tables
+--
 
 --
 -- Indexes for table `booktable`
