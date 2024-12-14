@@ -50,6 +50,7 @@ public class EditEmployeeForm extends JFrame {
         panel.add(email);
 
         JTextField emailField = new JTextField(String.valueOf(temp.getEmail()), 20);
+        emailField.setEnabled(false);
         emailField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
         emailField.setBounds(510, 160, 220, 30);
         panel.add(emailField);
@@ -60,6 +61,7 @@ public class EditEmployeeForm extends JFrame {
         panel.add(cellPhone);
 
         JTextField cellPhoneField = new JTextField(String.valueOf(temp.getCellphone()), 20);
+        cellPhoneField.setEnabled(false);
         cellPhoneField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
         cellPhoneField.setBounds(510, 210, 220, 30);
         panel.add(cellPhoneField);
