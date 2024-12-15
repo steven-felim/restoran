@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2024 at 04:34 PM
+-- Generation Time: Dec 15, 2024 at 10:22 AM
 -- Server version: 11.3.0-MariaDB
 -- PHP Version: 8.0.30
 
@@ -58,6 +58,19 @@ CREATE TABLE `cart_items` (
                               `cart_id` int(11) NOT NULL,
                               `fnb_id` int(11) NOT NULL,
                               `quantity` int(11) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `delivery`
+--
+
+CREATE TABLE `delivery` (
+                            `delivery_id` int(11) NOT NULL,
+                            `delivery_status` enum('PENDING','CONFIRMED','DELIVERED') DEFAULT 'PENDING',
+                            `transaction_id` int(11) DEFAULT NULL,
+                            `deliveryman_id` int(11) DEFAULT -1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
@@ -121,11 +134,12 @@ CREATE TABLE `user` (
                         `email` varchar(255) NOT NULL,
                         `password` varchar(255) NOT NULL,
                         `cellphone` varchar(13) NOT NULL,
-                        `role` enum('ADMIN','EMPLOYEE','MEMBER','GUEST') NOT NULL,
+                        `role` enum('ADMIN','EMPLOYEE','MEMBER') NOT NULL,
                         `wallet_balance` double(7,2) DEFAULT 0.00,
                         `pin` char(6) DEFAULT NULL,
                         `point` int(11) DEFAULT 0,
-                        `jobdesk` enum('CASHIER','CHEF','WAITER','DELIVERYMAN') DEFAULT NULL
+                        `jobdesk` enum('CASHIER','CHEF','WAITER','DELIVERYMAN') DEFAULT NULL,
+                        `deliveryman_status` enum('AVAILABLE','DELIVER') DEFAULT 'AVAILABLE'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
@@ -167,6 +181,13 @@ ALTER TABLE `cart`
 ALTER TABLE `cart_items`
     ADD PRIMARY KEY (`cart_id`,`fnb_id`),
     ADD KEY `fnb_id` (`fnb_id`);
+
+--
+-- Indexes for table `delivery`
+--
+ALTER TABLE `delivery`
+    ADD PRIMARY KEY (`delivery_id`),
+    ADD KEY `deliveryman_id` (`deliveryman_id`);
 
 --
 -- Indexes for table `fnb`
@@ -223,6 +244,12 @@ ALTER TABLE `cart`
     MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `delivery`
+--
+ALTER TABLE `delivery`
+    MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `fnb`
 --
 ALTER TABLE `fnb`
@@ -277,6 +304,12 @@ ALTER TABLE `cart`
 ALTER TABLE `cart_items`
     ADD CONSTRAINT `cart_items_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD CONSTRAINT `cart_items_ibfk_2` FOREIGN KEY (`fnb_id`) REFERENCES `fnb` (`fnb_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `delivery`
+--
+ALTER TABLE `delivery`
+    ADD CONSTRAINT `delivery_ibfk_1` FOREIGN KEY (`deliveryman_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `transaction`
