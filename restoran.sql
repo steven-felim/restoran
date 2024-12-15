@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2024 at 10:22 AM
+-- Generation Time: Dec 15, 2024 at 02:38 PM
 -- Server version: 11.3.0-MariaDB
 -- PHP Version: 8.0.30
 
@@ -76,6 +76,26 @@ CREATE TABLE `delivery` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `discount`
+--
+
+CREATE TABLE `discount` (
+                            `discount_id` int(11) NOT NULL,
+                            `role` enum('GUEST','MEMBER') DEFAULT NULL,
+                            `discount_percent` decimal(5,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `discount`
+--
+
+INSERT INTO `discount` (`discount_id`, `role`, `discount_percent`) VALUES
+                                                                       (1, 'GUEST', 0.00),
+                                                                       (2, 'MEMBER', 10.00);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `fnb`
 --
 
@@ -94,7 +114,8 @@ CREATE TABLE `fnb` (
 
 CREATE TABLE `guest` (
                          `guest_id` int(11) NOT NULL,
-                         `guest_name` varchar(255) NOT NULL
+                         `guest_name` varchar(255) NOT NULL,
+                         `role` enum('GUEST') DEFAULT 'GUEST'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
@@ -119,7 +140,8 @@ CREATE TABLE `transaction` (
                                `cart_id` int(11) NOT NULL,
                                `voucher_id` int(11) DEFAULT NULL,
                                `date` date DEFAULT NULL,
-                               `status` enum('PENDING','SUCCESS') NOT NULL
+                               `status` enum('PENDING','SUCCESS') NOT NULL,
+                               `discount_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
@@ -190,6 +212,12 @@ ALTER TABLE `delivery`
     ADD KEY `deliveryman_id` (`deliveryman_id`);
 
 --
+-- Indexes for table `discount`
+--
+ALTER TABLE `discount`
+    ADD PRIMARY KEY (`discount_id`);
+
+--
 -- Indexes for table `fnb`
 --
 ALTER TABLE `fnb`
@@ -213,7 +241,8 @@ ALTER TABLE `tables`
 ALTER TABLE `transaction`
     ADD PRIMARY KEY (`transaction_id`),
     ADD KEY `cart_id` (`cart_id`),
-    ADD KEY `voucher_id` (`voucher_id`);
+    ADD KEY `voucher_id` (`voucher_id`),
+    ADD KEY `discount_id` (`discount_id`) USING BTREE;
 
 --
 -- Indexes for table `user`
@@ -248,6 +277,12 @@ ALTER TABLE `cart`
 --
 ALTER TABLE `delivery`
     MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `discount`
+--
+ALTER TABLE `discount`
+    MODIFY `discount_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `fnb`
@@ -315,6 +350,7 @@ ALTER TABLE `delivery`
 -- Constraints for table `transaction`
 --
 ALTER TABLE `transaction`
+    ADD CONSTRAINT `fk_discount_id` FOREIGN KEY (`discount_id`) REFERENCES `discount` (`discount_id`),
     ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`voucher_id`) REFERENCES `voucher` (`voucher_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
