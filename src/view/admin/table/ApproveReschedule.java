@@ -3,7 +3,6 @@ package view.admin.table;
 import controller.BookingController;
 import model.classes.BookTable;
 import view.admin.AdminMenu;
-import view.admin.fnb.EditFnBForm;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
