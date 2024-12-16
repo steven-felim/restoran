@@ -141,7 +141,8 @@ CREATE TABLE `transaction` (
                                `voucher_id` int(11) DEFAULT NULL,
                                `date` date DEFAULT NULL,
                                `status` enum('PENDING','SUCCESS') NOT NULL,
-                               `discount_id` int(11) DEFAULT NULL
+                               `discount_id` int(11) DEFAULT NULL,
+                               'discount_percent' decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
@@ -351,6 +352,7 @@ ALTER TABLE `delivery`
 --
 ALTER TABLE `transaction`
     ADD CONSTRAINT `fk_discount_id` FOREIGN KEY (`discount_id`) REFERENCES `discount` (`discount_id`),
+    ADD CONSTRAINT `fk_discount_percent` FOREIGN KEY (`discount_percent`) REFERENCES `discount` (`discount_percent`),
     ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`voucher_id`) REFERENCES `voucher` (`voucher_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
