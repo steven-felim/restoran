@@ -1,7 +1,7 @@
-package view.admin.fnb;
+package view.admin.table;
 
-import controller.FnBController;
-import model.classes.FoodAndBeverage;
+import controller.BookingController;
+import model.classes.BookTable;
 import view.admin.AdminMenu;
 
 import javax.swing.*;
@@ -9,26 +9,25 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class DeleteFnBMenu extends JFrame {
-    private JTable table;
+public class ApproveReschedule extends JFrame {
     private DefaultTableModel model;
-    private FnBController fnbc;
+    private BookingController bc;
 
-    public DeleteFnBMenu() {
+    public ApproveReschedule() {
         initComponents();
         this.setVisible(true);
     }
 
     private void initComponents() {
         model = new DefaultTableModel();
-        fnbc = new FnBController();
+        bc = new BookingController();
 
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Edit F&B Menu");
+        this.setTitle("Approve Table Reschedule");
 
-        JLabel title = new JLabel("Edit F&B Menu");
+        JLabel title = new JLabel("Approve Table Reschedule");
         title.setBounds(490, 20, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
@@ -36,7 +35,7 @@ public class DeleteFnBMenu extends JFrame {
         panel.setLayout(null);
         panel.setBounds(100, 80, 1080, 600);
 
-        JLabel id = new JLabel("Insert FnB ID");
+        JLabel id = new JLabel("Insert Book ID");
         id.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
         id.setBounds(200, 0, 220, 30);
         panel.add(id);
@@ -46,12 +45,20 @@ public class DeleteFnBMenu extends JFrame {
         idField.setBounds(410, 0, 220, 30);
         panel.add(idField);
 
-        JButton submit = new JButton("Delete");
-        submit.setBounds(660, 0, 220, 30);
-        panel.add(submit);
+        JButton approve = new JButton("Approve");
+        approve.setBounds(660, 0, 120, 30);
+        panel.add(approve);
 
-        submit.addActionListener(e -> {
-            // controller hapus data
+        approve.addActionListener(e -> {
+            // Controller update status dari pending ke booked
+        });
+
+        JButton decline = new JButton("Decline");
+        decline.setBounds(800, 0, 120, 30);
+        panel.add(decline);
+
+        decline.addActionListener(e -> {
+            // Controller kembalikan ke book table asal
         });
 
         JButton back = new JButton("Back to Main Menu");
@@ -63,11 +70,13 @@ public class DeleteFnBMenu extends JFrame {
             new AdminMenu();
         });
 
-        table = new JTable(model);
-        model.addColumn("Fnb ID");
-        model.addColumn("Name");
-        model.addColumn("Stock");
-        model.addColumn("Price");
+        JTable table = new JTable(model);
+        model.addColumn("Book ID");
+        model.addColumn("Table ID");
+        model.addColumn("User ID");
+        model.addColumn("Guest ID");
+        model.addColumn("Date");
+        model.addColumn("Status");
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(0, 60, 1080, 600);
@@ -82,14 +91,13 @@ public class DeleteFnBMenu extends JFrame {
     }
 
     private void loadDataToView() {
-        List<FoodAndBeverage> fnbList = fnbc.getAllFnb();
+        List<BookTable> bookList = bc.getAllRescheduledBookTable();
 
         model.setRowCount(0);
 
-        for (FoodAndBeverage fnb : fnbList) {
-            Object[] rowData = { fnb.getId(), fnb.getName(), fnb.getStock(), fnb.getPrice() };
+        for (BookTable t : bookList) {
+            Object[] rowData = { t.getBookID(), t.getTableID(), t.getUserID(), t.getGuestID(), t.getDate(), t.getStatus() };
             model.addRow(rowData);
         }
     }
 }
-

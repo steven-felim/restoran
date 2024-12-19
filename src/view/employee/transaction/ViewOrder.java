@@ -1,34 +1,33 @@
-package view.admin.fnb;
+package view.employee.transaction;
 
-import controller.FnBController;
-import model.classes.FoodAndBeverage;
-import view.admin.AdminMenu;
+import controller.TransactionController;
+import model.classes.Transaction;
+import view.employee.EmployeeMenu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class DeleteFnBMenu extends JFrame {
-    private JTable table;
+public class ViewOrder extends JFrame {
     private DefaultTableModel model;
-    private FnBController fnbc;
+    private TransactionController tc;
 
-    public DeleteFnBMenu() {
+    public ViewOrder() {
         initComponents();
         this.setVisible(true);
     }
 
     private void initComponents() {
         model = new DefaultTableModel();
-        fnbc = new FnBController();
+        tc = new TransactionController();
 
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Edit F&B Menu");
+        this.setTitle("View Order");
 
-        JLabel title = new JLabel("Edit F&B Menu");
+        JLabel title = new JLabel("View Order");
         title.setBounds(490, 20, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
@@ -36,7 +35,16 @@ public class DeleteFnBMenu extends JFrame {
         panel.setLayout(null);
         panel.setBounds(100, 80, 1080, 600);
 
-        JLabel id = new JLabel("Insert FnB ID");
+        JButton back = new JButton("Back to Main Menu");
+        back.setBounds(0, 0, 160, 30);
+        panel.add(back);
+
+        back.addActionListener(e ->  {
+            this.dispose();
+            new EmployeeMenu();
+        });
+
+        JLabel id = new JLabel("Insert Transaction ID");
         id.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
         id.setBounds(200, 0, 220, 30);
         panel.add(id);
@@ -46,28 +54,22 @@ public class DeleteFnBMenu extends JFrame {
         idField.setBounds(410, 0, 220, 30);
         panel.add(idField);
 
-        JButton submit = new JButton("Delete");
+        JButton submit = new JButton("Confirm");
         submit.setBounds(660, 0, 220, 30);
         panel.add(submit);
 
         submit.addActionListener(e -> {
-            // controller hapus data
+            // controller, update status di tabel transaksi dari PENDING ke SUCCESS
         });
 
-        JButton back = new JButton("Back to Main Menu");
-        back.setBounds(0, 0, 160, 30);
-        panel.add(back);
-
-        back.addActionListener(e ->  {
-            this.dispose();
-            new AdminMenu();
-        });
-
-        table = new JTable(model);
-        model.addColumn("Fnb ID");
-        model.addColumn("Name");
-        model.addColumn("Stock");
-        model.addColumn("Price");
+        JTable table = new JTable(model);
+        model.addColumn("Transaction ID");
+        model.addColumn("User ID");
+        model.addColumn("Guest ID");
+        model.addColumn("Cart ID");
+        model.addColumn("Purchase Date");
+        model.addColumn("Status");
+        model.addColumn("Total Amount");
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(0, 60, 1080, 600);
@@ -82,14 +84,13 @@ public class DeleteFnBMenu extends JFrame {
     }
 
     private void loadDataToView() {
-        List<FoodAndBeverage> fnbList = fnbc.getAllFnb();
+        List<Transaction> transList = tc.getAllTransaction();
 
         model.setRowCount(0);
 
-        for (FoodAndBeverage fnb : fnbList) {
-            Object[] rowData = { fnb.getId(), fnb.getName(), fnb.getStock(), fnb.getPrice() };
+        for (Transaction t : transList) {
+            Object[] rowData = { t.getTransactionId(), t.getUserId(), t.getGuestId(), t.getDatePurchase() };
             model.addRow(rowData);
         }
     }
 }
-

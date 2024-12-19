@@ -1,17 +1,17 @@
-package view.admin.fnb;
+package view.employee.fnb;
 
 import controller.FnBController;
 import model.classes.FoodAndBeverage;
-import view.admin.AdminMenu;
+import view.employee.EmployeeMenu;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class EditFnBForm extends JFrame {
+public class EditFnBStock extends JFrame {
     private FoodAndBeverage temp;
     private FnBController fnbc;
 
-    public EditFnBForm(int id) {
+    public EditFnBStock(int id) {
         fnbc = new FnBController();
         temp = fnbc.getDataFromDB(id);
 
@@ -23,9 +23,9 @@ public class EditFnBForm extends JFrame {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Edit F&B Menu");
+        this.setTitle("Edit F&B Stock");
 
-        JLabel title = new JLabel("Edit F&B Menu");
+        JLabel title = new JLabel("Edit F&B Stock");
         title.setBounds(490, 20, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
@@ -40,6 +40,7 @@ public class EditFnBForm extends JFrame {
 
         JTextField menuNameField = new JTextField(temp.getName(), 20);
         menuNameField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
+        menuNameField.setEnabled(false);
         menuNameField.setBounds(510, 110, 220, 30);
         panel.add(menuNameField);
 
@@ -60,10 +61,11 @@ public class EditFnBForm extends JFrame {
 
         JTextField priceField = new JTextField(String.valueOf(temp.getPrice()), 20);
         priceField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
+        priceField.setEnabled(false);
         priceField.setBounds(510, 210, 220, 30);
         panel.add(priceField);
 
-        JButton submit = new JButton("Add Menu");
+        JButton submit = new JButton("Add Stock");
         submit.setBounds(440, 260, 440, 40);
         panel.add(submit);
 
@@ -77,7 +79,7 @@ public class EditFnBForm extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new AdminMenu();
+            new EmployeeMenu();
         });
 
         this.add(title);

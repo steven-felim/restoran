@@ -2,6 +2,7 @@ package view.admin.fnb;
 
 import controller.FnBController;
 import model.classes.FoodAndBeverage;
+import view.admin.AdminMenu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,7 +13,6 @@ public class EditFnBMenu extends JFrame {
     private JTable table;
     private DefaultTableModel model;
     private FnBController fnbc;
-    private FoodAndBeverage temp;
 
     public EditFnBMenu() {
         initComponents();
@@ -52,7 +52,16 @@ public class EditFnBMenu extends JFrame {
 
         submit.addActionListener(e -> {
             this.dispose();
-            new EditFnBForm(idField.getText());
+            new EditFnBForm(Integer.parseInt(idField.getText()));
+        });
+
+        JButton back = new JButton("Back to Main Menu");
+        back.setBounds(0, 0, 160, 30);
+        panel.add(back);
+
+        back.addActionListener(e ->  {
+            this.dispose();
+            new AdminMenu();
         });
 
         table = new JTable(model);
@@ -84,4 +93,3 @@ public class EditFnBMenu extends JFrame {
         }
     }
 }
-

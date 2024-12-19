@@ -1,7 +1,7 @@
-package view.admin.fnb;
+package view.admin.employee;
 
-import controller.FnBController;
-import model.classes.FoodAndBeverage;
+import controller.EmployeeController;
+import model.classes.Deliveryman;
 import view.admin.AdminMenu;
 
 import javax.swing.*;
@@ -9,50 +9,32 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class DeleteFnBMenu extends JFrame {
+public class ViewDeliveryMan extends JFrame {
     private JTable table;
     private DefaultTableModel model;
-    private FnBController fnbc;
+    private EmployeeController ec;
 
-    public DeleteFnBMenu() {
+    public ViewDeliveryMan() {
         initComponents();
         this.setVisible(true);
     }
 
     private void initComponents() {
         model = new DefaultTableModel();
-        fnbc = new FnBController();
+        ec = new EmployeeController();
 
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Edit F&B Menu");
+        this.setTitle("View Deliveryman");
 
-        JLabel title = new JLabel("Edit F&B Menu");
+        JLabel title = new JLabel("View Deliveryman");
         title.setBounds(490, 20, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBounds(100, 80, 1080, 600);
-
-        JLabel id = new JLabel("Insert FnB ID");
-        id.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
-        id.setBounds(200, 0, 220, 30);
-        panel.add(id);
-
-        JTextField idField = new JTextField(20);
-        idField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
-        idField.setBounds(410, 0, 220, 30);
-        panel.add(idField);
-
-        JButton submit = new JButton("Delete");
-        submit.setBounds(660, 0, 220, 30);
-        panel.add(submit);
-
-        submit.addActionListener(e -> {
-            // controller hapus data
-        });
 
         JButton back = new JButton("Back to Main Menu");
         back.setBounds(0, 0, 160, 30);
@@ -64,10 +46,10 @@ public class DeleteFnBMenu extends JFrame {
         });
 
         table = new JTable(model);
-        model.addColumn("Fnb ID");
+        model.addColumn("Employee ID");
         model.addColumn("Name");
-        model.addColumn("Stock");
-        model.addColumn("Price");
+        model.addColumn("Job desk");
+        model.addColumn("Status");
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(0, 60, 1080, 600);
@@ -82,14 +64,13 @@ public class DeleteFnBMenu extends JFrame {
     }
 
     private void loadDataToView() {
-        List<FoodAndBeverage> fnbList = fnbc.getAllFnb();
+        List<Deliveryman> empList = ec.getAllDeliveryMan();
 
         model.setRowCount(0);
 
-        for (FoodAndBeverage fnb : fnbList) {
-            Object[] rowData = { fnb.getId(), fnb.getName(), fnb.getStock(), fnb.getPrice() };
+        for (Deliveryman emp : empList) {
+            Object[] rowData = { emp.getId(), emp.getName(), emp.getJobdesk(), emp.getStatus() };
             model.addRow(rowData);
         }
     }
 }
-
