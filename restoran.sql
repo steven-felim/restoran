@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2024 at 09:19 AM
+-- Generation Time: Dec 19, 2024 at 02:33 PM
 -- Server version: 11.3.0-MariaDB
 -- PHP Version: 8.0.30
 
@@ -107,6 +107,42 @@ CREATE TABLE `fnb` (
                        `price` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data for table `fnb`
+--
+
+INSERT INTO `fnb` (`fnb_id`, `name`, `stock`, `price`) VALUES
+                                                           (1, 'Nasi Goreng', 60, 25000),
+                                                           (2, 'Nasi Goreng Kampung', 50, 27000),
+                                                           (3, 'Mie Goreng', 70, 22000),
+                                                           (4, 'Mie Aceh', 30, 35000),
+                                                           (5, 'Sate Ayam', 50, 35000),
+                                                           (6, 'Rendang', 30, 60000),
+                                                           (7, 'Ayam Penyet', 40, 27000),
+                                                           (8, 'Gado-Gado', 55, 20000),
+                                                           (9, 'Soto Ayam', 45, 28000),
+                                                           (10, 'Nasi Liwet', 50, 27000),
+                                                           (11, 'Nasi Campur', 60, 25000),
+                                                           (12, 'Kwetiau Siram', 30, 30000),
+                                                           (13, 'Pecel Lele', 50, 25000),
+                                                           (14, 'Tahu Tempe', 80, 12000),
+                                                           (15, 'Lontong Sayur', 60, 18000),
+                                                           (16, 'Ayam Goreng Kremes', 40, 28000),
+                                                           (17, 'Kare Ayam', 30, 32000),
+                                                           (18, 'Sop Buntut', 20, 65000),
+                                                           (19, 'Tahu Gejrot', 70, 15000),
+                                                           (20, 'Tahu Sumedang', 60, 10000),
+                                                           (21, 'Es Kelapa Muda', 80, 25000),
+                                                           (22, 'Es Campur', 90, 12000),
+                                                           (23, 'Es Teh Manis', 150, 10000),
+                                                           (24, 'Jus Alpukat', 80, 18000),
+                                                           (25, 'Jus Jeruk', 120, 13000),
+                                                           (26, 'Kopi Tubruk', 100, 12000),
+                                                           (27, 'Es Kelapa Muda', 80, 17000),
+                                                           (28, 'Teh Tarik', 90, 15000),
+                                                           (29, 'Jus Semangka', 100, 12000),
+                                                           (30, 'Air Mineral', 200, 5000);
+
 -- --------------------------------------------------------
 
 --
@@ -159,12 +195,26 @@ CREATE TABLE `user` (
                         `password` varchar(255) NOT NULL,
                         `cellphone` varchar(13) NOT NULL,
                         `role` enum('ADMIN','EMPLOYEE','MEMBER') NOT NULL,
-                        `wallet_balance` double(7,2) DEFAULT 0.00,
+                        `wallet_balance` double(10,2) DEFAULT 0.00,
                         `pin` char(6) DEFAULT NULL,
                         `point` int(11) DEFAULT 0,
                         `jobdesk` enum('CASHIER','CHEF','WAITER','DELIVERYMAN') DEFAULT NULL,
                         `deliveryman_status` enum('AVAILABLE','DELIVER') DEFAULT 'AVAILABLE'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `name`, `email`, `password`, `cellphone`, `role`, `wallet_balance`, `pin`, `point`, `jobdesk`, `deliveryman_status`) VALUES
+                                                                                                                                                        (1, 'Admin', 'admin@hbresto.id', '123456xyz', '', 'ADMIN', 0.00, NULL, 0, NULL, 'AVAILABLE'),
+                                                                                                                                                        (2, 'John Doe', 'johndoe@hbresto.id', '123456xyz', '', 'EMPLOYEE', 0.00, NULL, 0, 'CASHIER', 'AVAILABLE'),
+                                                                                                                                                        (3, 'Jemima', 'jemima@hbresto.id', '123456xyz', '', 'EMPLOYEE', 0.00, NULL, 0, 'CHEF', 'AVAILABLE'),
+                                                                                                                                                        (4, 'Nathan', 'nathan@hbresto.id', '123456xyz', '', 'EMPLOYEE', 0.00, NULL, 0, 'DELIVERYMAN', 'AVAILABLE'),
+                                                                                                                                                        (5, 'Tiara', 'tiara@hbresto.id', '123456xyz', '', 'EMPLOYEE', 0.00, NULL, 0, 'WAITER', 'AVAILABLE'),
+                                                                                                                                                        (6, 'Felim', 'felim@yahoo.com', 'hehe', '1123002', 'MEMBER', 0.00, '123002', 0, NULL, 'AVAILABLE'),
+                                                                                                                                                        (7, 'Jochal', 'jochal@ithb.com', 'josef', '1123021', 'MEMBER', 9999999.00, '123021', 0, NULL, 'AVAILABLE'),
+                                                                                                                                                        (8, 'Jesha', 'jesha@gmail.oom', 'alkeba', '1123044', 'MEMBER', 0.00, '123044', 0, NULL, 'AVAILABLE');
 
 -- --------------------------------------------------------
 
@@ -290,7 +340,7 @@ ALTER TABLE `discount`
 -- AUTO_INCREMENT for table `fnb`
 --
 ALTER TABLE `fnb`
-    MODIFY `fnb_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+    MODIFY `fnb_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `guest`
@@ -308,7 +358,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-    MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+    MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `voucher`

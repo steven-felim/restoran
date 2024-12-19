@@ -1,6 +1,9 @@
 package view.member;
 
 import javax.swing.*;
+
+import view.guest.Login;
+
 import java.awt.*;
 
 public class MemberMenu extends JFrame {
@@ -15,8 +18,8 @@ public class MemberMenu extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Guest Menu");
 
-        JLabel title = new JLabel("Welcome, Guest!");
-        title.setBounds(290, 50, 700, 60);
+        JLabel title = new JLabel("Welcome, Member!");
+        title.setBounds(500, 20, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel panel = new JPanel();
@@ -26,6 +29,12 @@ public class MemberMenu extends JFrame {
         JButton bookTableButton = new JButton("Book Table");
         bookTableButton.setBounds(180, 100, 440, 40);
         panel.add(bookTableButton);
+
+        bookTableButton.addActionListener(e -> {
+            this.dispose();
+            new BookTableForm();
+        });
+
 
         JButton rescheduleTableButton = new JButton("Reschedule Table");
         rescheduleTableButton.setBounds(180, 150, 440, 40);
@@ -38,6 +47,10 @@ public class MemberMenu extends JFrame {
         JButton walletButton = new JButton("Wallet");
         walletButton.setBounds(180, 250, 440, 40);
         panel.add(walletButton);
+
+        JButton profileButton = new JButton("Profile");
+        profileButton.setBounds(180, 300, 440, 40);
+        panel.add(profileButton);
 
         JButton viewTableOrder = new JButton("View Table Order");
         viewTableOrder.setBounds(660, 100, 440, 40);
@@ -58,6 +71,15 @@ public class MemberMenu extends JFrame {
         JButton viewPointButton = new JButton("View Point");
         viewPointButton.setBounds(660, 250, 440, 40);
         panel.add(viewPointButton);
+
+        JButton logout = new JButton("Logout");
+        logout.setBounds(660, 300, 440, 40);
+        panel.add(logout);
+
+        logout.addActionListener(e -> {
+            this.dispose();
+            new Login();
+        });
 
         add(title);
         add(panel);
