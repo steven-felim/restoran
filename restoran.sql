@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2024 at 02:38 PM
+-- Generation Time: Dec 19, 2024 at 09:19 AM
 -- Server version: 11.3.0-MariaDB
 -- PHP Version: 8.0.30
 
@@ -143,7 +143,7 @@ CREATE TABLE `transaction` (
                                `date` date DEFAULT NULL,
                                `status` enum('PENDING','SUCCESS') NOT NULL,
                                `discount_id` int(11) DEFAULT NULL,
-                               'discount_percent' decimal(5,2) DEFAULT NULL
+                               `discount_percent` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
@@ -347,15 +347,6 @@ ALTER TABLE `cart_items`
 --
 ALTER TABLE `delivery`
     ADD CONSTRAINT `delivery_ibfk_1` FOREIGN KEY (`deliveryman_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `transaction`
---
-ALTER TABLE `transaction`
-    ADD CONSTRAINT `fk_discount_id` FOREIGN KEY (`discount_id`) REFERENCES `discount` (`discount_id`),
-    ADD CONSTRAINT `fk_discount_percent` FOREIGN KEY (`discount_percent`) REFERENCES `discount` (`discount_percent`),
-    ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`voucher_id`) REFERENCES `voucher` (`voucher_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
