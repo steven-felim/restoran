@@ -4,7 +4,6 @@ import javax.swing.*;
 
 import view.guest.booktable.BookTable;
 import view.guest.booktable.ViewTableOrder;
-import view.guest.booktable.ViewCancelGuest;
 import view.guest.booktable.ViewCancelTableGuest;
 import view.guest.booktable.ViewOrderFAndBGuest;
 import view.guest.booktable.ViewRescheduleGuest;
@@ -56,7 +55,7 @@ public class GuestMenu extends JFrame {
 
         cancelTableButton.addActionListener(e ->  {
             this.dispose();
-            new ViewCancelGuest();
+            new ViewCancelTableGuest();
         });
 
         JButton viewTableOrder = new JButton("View Table Order");
