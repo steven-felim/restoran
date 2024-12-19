@@ -1,6 +1,14 @@
 package view.guest;
 
 import javax.swing.*;
+
+import view.guest.booktable.BookTable;
+import view.guest.booktable.ViewTableOrder;
+import view.guest.booktable.ViewCancelGuest;
+import view.guest.booktable.ViewCancelTableGuest;
+import view.guest.booktable.ViewOrderFAndBGuest;
+import view.guest.booktable.ViewRescheduleGuest;
+
 import java.awt.*;
 
 public class GuestMenu extends JFrame {
@@ -16,7 +24,7 @@ public class GuestMenu extends JFrame {
         this.setTitle("Guest Menu");
 
         JLabel title = new JLabel("Welcome, Guest!");
-        title.setBounds(290, 50, 700, 60);
+        title.setBounds(520, 40, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel panel = new JPanel();
@@ -27,25 +35,56 @@ public class GuestMenu extends JFrame {
         bookTableButton.setBounds(180, 100, 440, 40);
         panel.add(bookTableButton);
 
+        bookTableButton.addActionListener(e ->  {
+            this.dispose();
+            new BookTable();
+        });
+
         JButton rescheduleTableButton = new JButton("Reschedule Table");
         rescheduleTableButton.setBounds(180, 150, 440, 40);
         panel.add(rescheduleTableButton);
+
+        
+        rescheduleTableButton.addActionListener(e ->  {
+            this.dispose();
+            new ViewRescheduleGuest();
+        });
 
         JButton cancelTableButton = new JButton("Cancel Table");
         cancelTableButton.setBounds(180, 200, 440, 40);
         panel.add(cancelTableButton);
 
+        cancelTableButton.addActionListener(e ->  {
+            this.dispose();
+            new ViewCancelGuest();
+        });
+
         JButton viewTableOrder = new JButton("View Table Order");
         viewTableOrder.setBounds(660, 100, 440, 40);
         panel.add(viewTableOrder);
+
+        viewTableOrder.addActionListener(e ->  {
+            this.dispose();
+            new ViewTableOrder();
+        });
 
         JButton orderMenuButton = new JButton("Order F&B Menu");
         orderMenuButton.setBounds(660, 150, 440, 40);
         panel.add(orderMenuButton);
 
+        orderMenuButton.addActionListener(e ->  {
+            this.dispose();
+            new ViewOrderFAndBGuest();
+        });
+
         JButton viewCartButton = new JButton("Cart");
         viewCartButton.setBounds(660, 200, 440, 40);
         panel.add(viewCartButton);
+
+        viewCartButton.addActionListener(e ->  {
+            this.dispose();
+            new ViewCancelTableGuest();
+        });
 
         add(title);
         add(panel);
