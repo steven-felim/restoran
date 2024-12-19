@@ -1,17 +1,21 @@
-import java.util.Calendar;
+package model.classes;
+
+import model.enums.BookStatus;
+import java.util.Date;
 
 public class BookTable {
     private int bookID;
-    private Room room;
-    private User user;
+    private String tableID;
+    private int userID;
+    private int guestID;
     private Date date;
     private BookStatus status;
 
-    
-    public BookTable(int bookID, Room room, User user, Date date, BookStatus status) {
+    public BookTable(int bookID, String tableID, int userID, int guestID, Date date, BookStatus status) {
         this.bookID = bookID;
-        this.room = room;
-        this.user = user;
+        this.tableID = tableID;
+        this.userID = userID;
+        this.guestID = guestID;
         this.date = date;
         this.status = status;
     }
@@ -24,20 +28,28 @@ public class BookTable {
         this.bookID = bookID;
     }
 
-    public Room getRoom() {
-        return room;
+    public String getTableID() {
+        return tableID;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setTableID(String tableID) {
+        this.tableID = tableID;
     }
 
-    public User getUser() {
-        return user;
+    public int getGuestID() {
+        return guestID;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setGuestID(int guestID) {
+        this.guestID = guestID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public Date getDate() {
@@ -55,5 +67,4 @@ public class BookTable {
     public void setStatus(BookStatus status) {
         this.status = status;
     }
-
 }

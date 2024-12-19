@@ -1,5 +1,10 @@
 package view.employee;
 
+import view.employee.delivery.AcceptDeliveryOrder;
+import view.employee.fnb.ViewFnBStock;
+import view.employee.transaction.ViewOrder;
+import view.guest.Login;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -23,25 +28,41 @@ public class EmployeeMenu extends JFrame {
         panel.setLayout(null);
         panel.setBounds(100, 60, 1080, 600);
 
-        JButton confirmOrder = new JButton("Confirm Order");
-        confirmOrder.setBounds(180, 100, 440, 40);
-        panel.add(confirmOrder);
-
         JButton viewOrder = new JButton("View Order");
         viewOrder.setBounds(180, 150, 440, 40);
         panel.add(viewOrder);
+
+        viewOrder.addActionListener(e -> {
+            this.dispose();
+            new ViewOrder();
+        });
 
         JButton acceptDelivery = new JButton("Accept Delivery Order");
         acceptDelivery.setBounds(180, 200, 440, 40);
         panel.add(acceptDelivery);
 
+        acceptDelivery.addActionListener(e -> {
+            this.dispose();
+            new AcceptDeliveryOrder();
+        });
+
         JButton viewStock = new JButton("View F&B Stock");
-        viewStock.setBounds(660, 100, 440, 40);
+        viewStock.setBounds(660, 150, 440, 40);
         panel.add(viewStock);
 
-        JButton addStock = new JButton("Add F&B Stock");
-        addStock.setBounds(660, 150, 440, 40);
-        panel.add(addStock);
+        viewStock.addActionListener(e -> {
+            this.dispose();
+            new ViewFnBStock();
+        });
+
+        JButton logout = new JButton("Logout");
+        logout.setBounds(660, 200, 440, 40);
+        panel.add(logout);
+
+        logout.addActionListener(e -> {
+            this.dispose();
+            new Login();
+        });
 
         add(title);
         add(panel);
@@ -51,4 +72,3 @@ public class EmployeeMenu extends JFrame {
         new EmployeeMenu();
     }
 }
-
