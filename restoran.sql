@@ -69,6 +69,7 @@ CREATE TABLE `cart_items` (
 CREATE TABLE `delivery` (
                             `delivery_id` int(11) NOT NULL,
                             `delivery_status` enum('PENDING','CONFIRMED','DELIVERED') DEFAULT 'PENDING',
+                            `address` varchar(255) NOT NULL,
                             `transaction_id` int(11) DEFAULT NULL,
                             `deliveryman_id` int(11) DEFAULT -1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
