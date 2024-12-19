@@ -20,8 +20,7 @@ public class DeliveryController {
         conn.connect();
         try (
                 Statement stmt = conn.con.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT delivery_id, delivery_status, address, transaction_id, deliveryman_id" +
-                        "FROM delivery")) {
+                ResultSet rs = stmt.executeQuery("SELECT delivery_id, delivery_status, address, transaction_id, deliveryman_id FROM delivery")) {
 
             while (rs.next()) {
                 int id = rs.getInt("delivery_id");
