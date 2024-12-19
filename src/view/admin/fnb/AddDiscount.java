@@ -78,4 +78,8 @@ public class AddDiscount extends JFrame {
         this.add(title);
         this.add(panel);
     }
+
+    public static void main(String[] args) {
+        new AddDiscount();
+    }
 }
