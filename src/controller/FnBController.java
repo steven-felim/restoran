@@ -36,7 +36,7 @@ public class FnBController {
         return fnbList;
     }
 
-    public FoodAndBeverage getDataFromDB (String searchID) {
+    public FoodAndBeverage getDataFromDB (int searchID) {
         DatabaseHandler conn = new DatabaseHandler();
         conn.connect();
 

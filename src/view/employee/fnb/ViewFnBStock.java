@@ -1,20 +1,20 @@
-package view.admin.fnb;
+package view.employee.fnb;
 
 import controller.FnBController;
 import model.classes.FoodAndBeverage;
-import view.admin.AdminMenu;
+import view.employee.EmployeeMenu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class EditFnBMenu extends JFrame {
+public class ViewFnBStock extends JFrame {
     private JTable table;
     private DefaultTableModel model;
     private FnBController fnbc;
 
-    public EditFnBMenu() {
+    public ViewFnBStock() {
         initComponents();
         this.setVisible(true);
     }
@@ -26,9 +26,9 @@ public class EditFnBMenu extends JFrame {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Edit F&B Menu");
+        this.setTitle("View F&B Stock");
 
-        JLabel title = new JLabel("Edit F&B Menu");
+        JLabel title = new JLabel("View F&B Stock");
         title.setBounds(490, 20, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
@@ -46,13 +46,13 @@ public class EditFnBMenu extends JFrame {
         idField.setBounds(410, 0, 220, 30);
         panel.add(idField);
 
-        JButton submit = new JButton("Edit");
+        JButton submit = new JButton("Add Stock");
         submit.setBounds(660, 0, 220, 30);
         panel.add(submit);
 
         submit.addActionListener(e -> {
             this.dispose();
-            new EditFnBForm(Integer.parseInt(idField.getText()));
+            new EditFnBStock(Integer.parseInt(idField.getText()));
         });
 
         JButton back = new JButton("Back to Main Menu");
@@ -61,7 +61,7 @@ public class EditFnBMenu extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new AdminMenu();
+            new EmployeeMenu();
         });
 
         table = new JTable(model);

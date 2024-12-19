@@ -1,7 +1,7 @@
-package view.admin.transaction;
+package view.admin.employee;
 
-import controller.TransactionController;
-import model.classes.Transaction;
+import controller.EmployeeController;
+import model.classes.Deliveryman;
 import view.admin.AdminMenu;
 
 import javax.swing.*;
@@ -9,25 +9,26 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class ViewSalesReport extends JFrame {
+public class ViewDeliveryMan extends JFrame {
+    private JTable table;
     private DefaultTableModel model;
-    private TransactionController tc;
+    private EmployeeController ec;
 
-    public ViewSalesReport() {
+    public ViewDeliveryMan() {
         initComponents();
         this.setVisible(true);
     }
 
     private void initComponents() {
         model = new DefaultTableModel();
-        tc = new TransactionController();
+        ec = new EmployeeController();
 
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Sales Report");
+        this.setTitle("View Deliveryman");
 
-        JLabel title = new JLabel("Sales Report");
+        JLabel title = new JLabel("View Deliveryman");
         title.setBounds(490, 20, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
@@ -44,14 +45,11 @@ public class ViewSalesReport extends JFrame {
             new AdminMenu();
         });
 
-        JTable table = new JTable(model);
-        model.addColumn("Transaction ID");
-        model.addColumn("User ID");
-        model.addColumn("Guest ID");
-        model.addColumn("Cart ID");
-        model.addColumn("Purchase Date");
+        table = new JTable(model);
+        model.addColumn("Employee ID");
+        model.addColumn("Name");
+        model.addColumn("Job desk");
         model.addColumn("Status");
-        model.addColumn("Total Amount");
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(0, 60, 1080, 600);
@@ -66,12 +64,12 @@ public class ViewSalesReport extends JFrame {
     }
 
     private void loadDataToView() {
-        List<Transaction> transList = tc.getAllTransaction();
+        List<Deliveryman> empList = ec.getAllDeliveryMan();
 
         model.setRowCount(0);
 
-        for (Transaction t : transList) {
-            Object[] rowData = { t.getTransactionId(), t.getUserId(), t.getGuestId(), t.getDatePurchase() };
+        for (Deliveryman emp : empList) {
+            Object[] rowData = { emp.getId(), emp.getName(), emp.getJobdesk(), emp.getStatus() };
             model.addRow(rowData);
         }
     }

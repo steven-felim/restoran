@@ -1,19 +1,19 @@
-package view.admin.transaction;
+package view.employee.transaction;
 
 import controller.TransactionController;
 import model.classes.Transaction;
-import view.admin.AdminMenu;
+import view.employee.EmployeeMenu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class ViewSalesReport extends JFrame {
+public class ViewOrder extends JFrame {
     private DefaultTableModel model;
     private TransactionController tc;
 
-    public ViewSalesReport() {
+    public ViewOrder() {
         initComponents();
         this.setVisible(true);
     }
@@ -25,9 +25,9 @@ public class ViewSalesReport extends JFrame {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Sales Report");
+        this.setTitle("View Order");
 
-        JLabel title = new JLabel("Sales Report");
+        JLabel title = new JLabel("View Order");
         title.setBounds(490, 20, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
@@ -41,7 +41,25 @@ public class ViewSalesReport extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new AdminMenu();
+            new EmployeeMenu();
+        });
+
+        JLabel id = new JLabel("Insert Transaction ID");
+        id.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+        id.setBounds(200, 0, 220, 30);
+        panel.add(id);
+
+        JTextField idField = new JTextField(20);
+        idField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
+        idField.setBounds(410, 0, 220, 30);
+        panel.add(idField);
+
+        JButton submit = new JButton("Confirm");
+        submit.setBounds(660, 0, 220, 30);
+        panel.add(submit);
+
+        submit.addActionListener(e -> {
+            // controller, update status di tabel transaksi dari PENDING ke SUCCESS
         });
 
         JTable table = new JTable(model);

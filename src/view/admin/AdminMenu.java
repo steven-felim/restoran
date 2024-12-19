@@ -1,6 +1,6 @@
 package view.admin;
 
-import view.admin.employee.EditEmployee;
+import view.admin.employee.EditEmployeeMenu;
 import view.admin.employee.ViewDeliveryMan;
 import view.admin.fnb.AddDiscount;
 import view.admin.fnb.AddFnBMenu;
@@ -10,7 +10,6 @@ import view.admin.table.ApproveReschedule;
 import view.admin.table.ViewTableOrder;
 import view.admin.transaction.ViewSalesReport;
 import view.admin.transaction.ViewUserTransaction;
-import view.admin.users.ApproveUserDetails;
 import view.admin.voucher.AddVoucher;
 import view.guest.Login;
 
@@ -106,7 +105,7 @@ public class AdminMenu extends JFrame {
 
         editEmployee.addActionListener(e -> {
             this.dispose();
-            new EditEmployee();
+            new EditEmployeeMenu();
         });
 
         JButton viewDeliveryMan = new JButton("View Delivery Man");
@@ -118,17 +117,8 @@ public class AdminMenu extends JFrame {
             new ViewDeliveryMan();
         });
 
-        JButton approveUserDetail = new JButton("Approve User Details");
-        approveUserDetail.setBounds(660, 250, 440, 40);
-        panel.add(approveUserDetail);
-
-        approveUserDetail.addActionListener(e -> {
-            this.dispose();
-            new ApproveUserDetails();
-        });
-
         JButton addVoucher = new JButton("Add Voucher");
-        addVoucher.setBounds(660, 300, 440, 40);
+        addVoucher.setBounds(660, 250, 440, 40);
         panel.add(addVoucher);
 
         addVoucher.addActionListener(e -> {
@@ -137,7 +127,7 @@ public class AdminMenu extends JFrame {
         });
 
         JButton addDiscount = new JButton("Add Discount");
-        addDiscount.setBounds(660, 350, 440, 40);
+        addDiscount.setBounds(660, 300, 440, 40);
         panel.add(addDiscount);
 
         addDiscount.addActionListener(e -> {
@@ -146,7 +136,7 @@ public class AdminMenu extends JFrame {
         });
 
         JButton logout = new JButton("Logout");
-        logout.setBounds(180, 400, 440, 40);
+        logout.setBounds(660, 350, 440, 40);
         panel.add(logout);
 
         logout.addActionListener(e -> {
