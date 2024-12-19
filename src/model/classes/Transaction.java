@@ -2,23 +2,30 @@ package model.classes;
 
 import model.enums.TransactionStatus;
 
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 
 public class Transaction {
 	private Integer transactionId;
-	private Calendar datePurchase;
+	private Date datePurchase;
 	private TransactionStatus status;
-	private ArrayList<Table> listBookTable;
-	private ArrayList<FoodAndBeverage> listFnB;
+	private int userId;
+	private int guestId;
+	private int cartId;
+	private int voucherId;
+	private int total;
 
-	public Transaction(Integer transactionId, Calendar datePurchase, TransactionStatus status, ArrayList<Table> listBookTable, ArrayList<FoodAndBeverage> listFnB) {
+	public Transaction(Integer transactionId, int userId, int guestId, int cartId, int voucherId, Date datePurchase, TransactionStatus status, int total) {
 		this.transactionId = transactionId;
+		this.userId = userId;
+		this.guestId = guestId;
+		this.cartId = cartId;
+		this.voucherId = voucherId;
 		this.datePurchase = datePurchase;
 		this.status = status;
-		this.listBookTable = listBookTable;
-		this.listFnB = listFnB;
+		this.total = total;
 	}
+
+	public Transaction() {}
 
 	public Integer getTransactionId() {
 		return transactionId;
@@ -28,11 +35,27 @@ public class Transaction {
 		this.transactionId = transactionId;
 	}
 
-	public Calendar getDatePurchase() {
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int getGuestId() {
+		return guestId;
+	}
+
+	public void setGuestId(int guestId) {
+		this.guestId = guestId;
+	}
+
+	public Date getDatePurchase() {
 		return datePurchase;
 	}
 
-	public void setDatePurchase(Calendar datePurchase) {
+	public void setDatePurchase(Date datePurchase) {
 		this.datePurchase = datePurchase;
 	}
 
@@ -44,19 +67,27 @@ public class Transaction {
 		this.status = status;
 	}
 
-	public ArrayList<Table> getListBookTable() {
-		return listBookTable;
+	public int getCartId() {
+		return cartId;
 	}
 
-	public void setListBookTable(ArrayList<Table> listBookTable) {
-		this.listBookTable = listBookTable;
+	public void setCartId(int cartId) {
+		this.cartId = cartId;
 	}
 
-	public ArrayList<FoodAndBeverage> getListFnB() {
-		return listFnB;
+	public int getVoucherId() {
+		return voucherId;
 	}
 
-	public void setListFnB(ArrayList<FoodAndBeverage> listFnB) {
-		this.listFnB = listFnB;
+	public void setVoucherId(int voucherId) {
+		this.voucherId = voucherId;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
 	}
 }
