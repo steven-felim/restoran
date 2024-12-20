@@ -35,26 +35,7 @@ public class ViewProfile extends JFrame {
         String username = "";
         String email = "";
         String phone = "";
-        String walletBalance = "";
-
-        // Ambil data dari database
-        DatabaseHandler conn = new DatabaseHandler();
-        conn.connect();
-        String query = "SELECT username, email, phone, wallet_balance FROM user WHERE id = ?";
-        try (PreparedStatement stmt = conn.con.prepareStatement(query)) {
-            // stmt.setInt(1, Login.class);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                username = rs.getString("username");
-                email = rs.getString("email");
-                phone = rs.getString("phone");
-                walletBalance = String.valueOf(rs.getDouble("wallet_balance"));
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            conn.disconnect();
-        }
+        String walletBalance = "";      
 
         // Tambahkan data ke panel
         profilePanel.add(new JLabel("Username:"));
@@ -70,7 +51,7 @@ public class ViewProfile extends JFrame {
         profilePanel.add(phoneLabel);
 
         profilePanel.add(new JLabel("Wallet Balance:"));
-        JLabel walletLabel = new JLabel("$" + walletBalance);
+        JLabel walletLabel = new JLabel("Rp" + walletBalance);
         profilePanel.add(walletLabel);
 
         add(profilePanel, BorderLayout.CENTER);
@@ -79,7 +60,7 @@ public class ViewProfile extends JFrame {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         JButton changePasswordButton = new JButton("Change Password");
         JButton editProfileButton = new JButton("Edit Profile");
-        JButton logoutButton = new JButton("Logout");
+        JButton backButton = new JButton("Back");
 
         changePasswordButton.addActionListener(e -> {
             this.dispose();
@@ -88,18 +69,17 @@ public class ViewProfile extends JFrame {
 
         editProfileButton.addActionListener(e -> {
             this.dispose();
-            // new EditProfile(username, email, phone); 
+            new EditProfile(); 
         });
 
-        logoutButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "You have been logged out.");
+        backButton.addActionListener(e -> {
             this.dispose();
             new MemberMenu();
         });
 
         buttonPanel.add(changePasswordButton);
         buttonPanel.add(editProfileButton);
-        buttonPanel.add(logoutButton);
+        buttonPanel.add(backButton);
 
         add(buttonPanel, BorderLayout.SOUTH);
 
