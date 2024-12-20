@@ -21,16 +21,20 @@ public class ViewCancelTableGuest extends JFrame {
     private List<Table> bookedTables; 
 
     public ViewCancelTableGuest() {
+        initComponents();
+        this.setVisible(true);
+    }
+
+    private void initComponents() { 
         setTitle("Cancel Table Booking");
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         bookedTables = new ArrayList<>();
-        // contoh : tableID = 1, tableNo = 101
-        bookedTables.add(new Table(1, 1));  
-        bookedTables.add(new Table(2, 2)); 
-        bookedTables.add(new Table(3, 3)); 
+        bookedTables.add(new Table("Outdoor1", 1));  
+        bookedTables.add(new Table("VIP2", 2)); 
+        bookedTables.add(new Table("Regular3", 3)); 
 
         // Title label
         JLabel titleLabel = new JLabel("Cancel Table Booking");
@@ -53,7 +57,7 @@ public class ViewCancelTableGuest extends JFrame {
 
         JPanel buttonPanel = new JPanel();
         cancelButton = new JButton("Cancel Booking");
-        backButton = new JButton("Guest Menu");
+        backButton = new JButton("Back");
         viewTableOrderButton = new JButton("View Table Orders");
 
         buttonPanel.add(cancelButton);
@@ -93,7 +97,7 @@ public class ViewCancelTableGuest extends JFrame {
 
             Table tableToRemove = null;
             for (Table table : bookedTables) {
-                if (table.getTableID() == tableID) {
+                if (table.getTableID().equals(tableID)) {
                     tableToRemove = table;
                     break;
                 }
@@ -121,13 +125,7 @@ public class ViewCancelTableGuest extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                ViewCancelTableGuest viewCancelGuest = new ViewCancelTableGuest();
-                viewCancelGuest.setVisible(true);
-            }
-        });
+        new ViewCancelTableGuest();
     }
 }
 
