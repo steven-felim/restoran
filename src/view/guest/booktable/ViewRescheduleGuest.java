@@ -40,7 +40,9 @@ public class ViewRescheduleGuest extends JFrame {
         rescheduleButton.setBounds(900, 0, 140, 30);
         panel.add(rescheduleButton);
 
-        rescheduleButton.addActionListener(e -> handleReschedule());
+        rescheduleButton.addActionListener(e -> {
+            // sambungin ke controller
+        });
 
         JButton backButton = new JButton("Back to Main Menu");
         backButton.setBounds(0, 0, 160, 30);
@@ -57,7 +59,6 @@ public class ViewRescheduleGuest extends JFrame {
         model.addColumn("User ID");
         model.addColumn("Guest ID");
         model.addColumn("Date");
-        model.addColumn("Time");
         model.addColumn("Status");
 
         JScrollPane scrollPane = new JScrollPane(table);
@@ -72,6 +73,7 @@ public class ViewRescheduleGuest extends JFrame {
     }
 
     private void loadDataToView() {
+        //masih eror
         List<BookTable> bookList = bookingController.getGuestBookingHistory();
 
         model.setRowCount(0);
@@ -83,32 +85,13 @@ public class ViewRescheduleGuest extends JFrame {
                 t.getUserID(),
                 t.getGuestID(),
                 t.getDate(),
-                t.getTime(),
                 t.getStatus()
             };
             model.addRow(rowData);
         }
     }
 
-    private void handleReschedule() {
-        int selectedRow = table.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a booking to reschedule.");
-            return;
-        }
-
-        String bookID = model.getValueAt(selectedRow, 0).toString();
-
-        // Send reschedule request to admin
-        boolean success = bookingController.requestReschedule(bookID);
-
-        if (success) {
-            JOptionPane.showMessageDialog(this, "Reschedule request sent successfully.");
-        } else {
-            JOptionPane.showMessageDialog(this, "Failed to send reschedule request.");
-        }
-    }
-
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(ViewRescheduleGuest::new);
     }

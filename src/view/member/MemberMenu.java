@@ -3,6 +3,12 @@ package view.member;
 import javax.swing.*;
 
 import view.guest.Login;
+import view.guest.booktable.ViewCancelTableGuest;
+import view.member.menu_member.BookTableForm;
+import view.member.menu_member.EditProfile;
+import view.member.menu_member.RescheduleTable;
+import view.member.menu_member.ViewProfile;
+import view.member.menu_member.ViewTableOrder;
 
 import java.awt.*;
 
@@ -35,14 +41,23 @@ public class MemberMenu extends JFrame {
             new BookTableForm();
         });
 
-
         JButton rescheduleTableButton = new JButton("Reschedule Table");
         rescheduleTableButton.setBounds(180, 150, 440, 40);
         panel.add(rescheduleTableButton);
 
+        rescheduleTableButton.addActionListener(e -> {
+            this.dispose();
+            new RescheduleTable();
+        });
+
         JButton cancelTableButton = new JButton("Cancel Table");
         cancelTableButton.setBounds(180, 200, 440, 40);
         panel.add(cancelTableButton);
+
+        bookTableButton.addActionListener(e -> {
+            this.dispose();
+            new ViewCancelTableGuest();
+        });
 
         JButton walletButton = new JButton("Wallet");
         walletButton.setBounds(180, 250, 440, 40);
@@ -52,9 +67,19 @@ public class MemberMenu extends JFrame {
         profileButton.setBounds(180, 300, 440, 40);
         panel.add(profileButton);
 
+        profileButton.addActionListener(e -> {
+            this.dispose();
+            new ViewProfile();
+        });
+
         JButton viewTableOrder = new JButton("View Table Order");
         viewTableOrder.setBounds(660, 100, 440, 40);
         panel.add(viewTableOrder);
+
+        viewTableOrder.addActionListener(e -> {
+            this.dispose();
+            new ViewTableOrder();
+        });
 
         JButton orderMenuButton = new JButton("Order F&B Menu");
         orderMenuButton.setBounds(660, 150, 440, 40);
@@ -67,6 +92,11 @@ public class MemberMenu extends JFrame {
         JButton editProfile = new JButton("Edit Profile Details");
         editProfile.setBounds(660, 200, 440, 40);
         panel.add(editProfile);
+
+        editProfile.addActionListener(e -> {
+            this.dispose();
+            new EditProfile();
+        });
 
         JButton viewPointButton = new JButton("View Point");
         viewPointButton.setBounds(660, 250, 440, 40);

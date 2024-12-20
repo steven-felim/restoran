@@ -1,36 +1,35 @@
-package view.guest.booktable;
+package view.member.menu_member;
 
-import view.guest.GuestMenu;
+import view.member.MemberMenu;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
+
 import org.jdatepicker.impl.DateComponentFormatter;
 
 import javax.swing.*;
-import view.guest.GuestMenu;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Properties;
 
-public class BookTable extends JFrame {
+public class BookTableForm extends JFrame {
 
     private JComboBox<String> roomComboBox;
     private JComboBox<String> tableComboBox;
-    private JDatePickerImpl datePicker; 
+    private JDatePickerImpl datePicker;
     private JButton confirmButton;
+    private JButton cancelButton;
     private JButton backButton;
 
     private List<String> vipTables = Arrays.asList("VIP1", "VIP2", "VIP3");
     private List<String> indoorTables = Arrays.asList("Indoor1", "Indoor2", "Indoor3");
     private List<String> outdoorTables = Arrays.asList("Outdoor1", "Outdoor2", "Outdoor3");
 
-    public BookTable() {
+    public BookTableForm() {
         initComponents();
         this.setVisible(true);
     }
@@ -52,7 +51,6 @@ public class BookTable extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 10, 10, 10);
 
-        // Room selection
         gbc.gridx = 0;
         gbc.gridy = 0;
         mainPanel.add(new JLabel("Select Room:"), gbc);
@@ -62,7 +60,6 @@ public class BookTable extends JFrame {
         gbc.gridx = 1;
         mainPanel.add(roomComboBox, gbc);
 
-        // Table selection
         gbc.gridx = 0;
         gbc.gridy = 1;
         mainPanel.add(new JLabel("Select Table:"), gbc);
@@ -71,27 +68,21 @@ public class BookTable extends JFrame {
         gbc.gridx = 1;
         mainPanel.add(tableComboBox, gbc);
 
-        // Date selection (using JDatePickerImpl)
         gbc.gridx = 0;
         gbc.gridy = 2;
         mainPanel.add(new JLabel("Select Date:"), gbc);
 
-        // Initialize UtilDateModel for the date picker
         UtilDateModel model = new UtilDateModel();
         Properties p = new Properties();
         p.put("text.today", "Today");
         p.put("text.month", "Month");
         p.put("text.year", "Year");
 
-        // Create JDatePanelImpl
         JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-        // Initialize JDatePickerImpl
         datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
-        
         gbc.gridx = 1;
         mainPanel.add(datePicker, gbc);
 
-        // Button Panel
         JPanel buttonPanel = new JPanel();
         confirmButton = new JButton("Confirm");
         backButton = new JButton("Back");
@@ -100,22 +91,16 @@ public class BookTable extends JFrame {
         buttonPanel.add(backButton);
 
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridwidth = 2;
         mainPanel.add(buttonPanel, gbc);
 
         add(mainPanel);
 
-        confirmButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                handleConfirmation();
-            }
-        });
-
+        confirmButton.addActionListener(e -> handleConfirmation());
         backButton.addActionListener(e -> {
             this.dispose();
-            new GuestMenu();
+            new MemberMenu();
         });
 
         updateTableComboBox();
@@ -141,16 +126,17 @@ public class BookTable extends JFrame {
 
         JOptionPane.showMessageDialog(this, "Table successfully booked!\n" +
                 "Details:\nRoom: " + room + "\nTable: " + table + "\nDate: " + date);
+
         clearSelections();
     }
 
     private void clearSelections() {
         roomComboBox.setSelectedIndex(0);
-        tableComboBox.setSelectedIndex(0);
+        tableComboBox.removeAllItems();
         datePicker.getModel().setSelected(false);
     }
 
     public static void main(String[] args) {
-        new BookTable();
+        new BookTableForm();
     }
 }
