@@ -1,8 +1,8 @@
 package view.employee;
 
-import view.employee.delivery.AcceptDeliveryOrder;
-import view.employee.fnb.ViewFnBStock;
-import view.employee.transaction.ViewOrder;
+import view.employee.deliveryman.AcceptDeliveryOrder;
+import view.employee.chef.ViewFnBStock;
+import view.employee.cashier.ViewOrder;
 import view.guest.Login;
 
 import javax.swing.*;
