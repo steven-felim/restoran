@@ -106,4 +106,16 @@ public class BookingController  {
 
         return bookList;
     }
+
+    public List<BookTable> getGuestBookingHistory() {
+        List<BookTable> bookList = new ArrayList<>();
+        // logic select from db
+        return bookList;
+    }
+
+    public List<BookTable> getMemberBookTable() {
+        List<BookTable> bookList = new ArrayList<>();
+        // logic select from db
+        return bookList;
+    }
 }
