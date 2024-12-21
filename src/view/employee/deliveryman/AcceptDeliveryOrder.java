@@ -1,7 +1,7 @@
-package view.employee.transaction;
+package view.employee.deliveryman;
 
-import controller.TransactionController;
-import model.classes.Transaction;
+import controller.DeliveryController;
+import model.classes.Delivery;
 import view.employee.EmployeeMenu;
 
 import javax.swing.*;
@@ -9,25 +9,25 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class ViewOrder extends JFrame {
+public class AcceptDeliveryOrder extends JFrame {
     private DefaultTableModel model;
-    private TransactionController tc;
+    private DeliveryController dc;
 
-    public ViewOrder() {
+    public AcceptDeliveryOrder() {
         initComponents();
         this.setVisible(true);
     }
 
     private void initComponents() {
         model = new DefaultTableModel();
-        tc = new TransactionController();
+        dc = new DeliveryController();
 
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("View Order");
+        this.setTitle("Delivery Order");
 
-        JLabel title = new JLabel("View Order");
+        JLabel title = new JLabel("Delivery Order");
         title.setBounds(490, 20, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
@@ -44,7 +44,7 @@ public class ViewOrder extends JFrame {
             new EmployeeMenu();
         });
 
-        JLabel id = new JLabel("Insert Transaction ID");
+        JLabel id = new JLabel("Insert Delivery ID");
         id.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
         id.setBounds(200, 0, 220, 30);
         panel.add(id);
@@ -54,22 +54,26 @@ public class ViewOrder extends JFrame {
         idField.setBounds(410, 0, 220, 30);
         panel.add(idField);
 
-        JButton submit = new JButton("Confirm");
+        JButton submit = new JButton("Accept");
         submit.setBounds(660, 0, 220, 30);
         panel.add(submit);
 
         submit.addActionListener(e -> {
-            // controller, update status di tabel transaksi dari PENDING ke SUCCESS
+            try {
+                System.out.println(Integer.parseInt(idField.getText()));
+//            controller, update status di tabel transaksi dari PENDING ke SUCCESS
+//            this.dispose();
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Input Must Be Number!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         JTable table = new JTable(model);
+        model.addColumn("Delivery ID");
+        model.addColumn("Delivery Status");
+        model.addColumn("Address");
         model.addColumn("Transaction ID");
-        model.addColumn("User ID");
-        model.addColumn("Guest ID");
-        model.addColumn("Cart ID");
-        model.addColumn("Purchase Date");
-        model.addColumn("Status");
-        model.addColumn("Total Amount");
+        model.addColumn("Deliveryman ID");
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(0, 60, 1080, 600);
@@ -84,12 +88,12 @@ public class ViewOrder extends JFrame {
     }
 
     private void loadDataToView() {
-        List<Transaction> transList = tc.getAllTransaction();
+        List<Delivery> deliveryList = dc.getAllDelivery();
 
         model.setRowCount(0);
 
-        for (Transaction t : transList) {
-            Object[] rowData = { t.getTransactionId(), t.getUserId(), t.getGuestId(), t.getDatePurchase() };
+        for (Delivery d : deliveryList) {
+            Object[] rowData = { d.getDelivery_id(), d.getDeliveryStatus(), d.getAddress(), d.getTransaction_id(), d.getDeliveryman_id() };
             model.addRow(rowData);
         }
     }

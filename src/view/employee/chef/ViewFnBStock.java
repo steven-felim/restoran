@@ -1,4 +1,4 @@
-package view.employee.fnb;
+package view.employee.chef;
 
 import controller.FnBController;
 import model.classes.FoodAndBeverage;
@@ -51,8 +51,12 @@ public class ViewFnBStock extends JFrame {
         panel.add(submit);
 
         submit.addActionListener(e -> {
-            this.dispose();
-            new EditFnBStock(Integer.parseInt(idField.getText()));
+            try {
+                new EditFnBStock(Integer.parseInt(idField.getText()));
+                this.dispose();
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Input Must Be Number!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         JButton back = new JButton("Back to Main Menu");

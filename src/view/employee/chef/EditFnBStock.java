@@ -1,4 +1,4 @@
-package view.employee.fnb;
+package view.employee.chef;
 
 import controller.FnBController;
 import model.classes.FoodAndBeverage;
