@@ -51,8 +51,7 @@ public class DiscountController {
             int check = stmt.executeUpdate(query);
             conn.disconnect();
 
-            System.out.println("konek");
-            if(check==0){
+            if (check==0){
                 return (false);
             }
             return (true);
