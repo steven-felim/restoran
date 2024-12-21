@@ -199,7 +199,7 @@ CREATE TABLE `user` (
                         `pin` char(6) DEFAULT NULL,
                         `point` int(11) DEFAULT 0,
                         `jobdesk` enum('CASHIER','CHEF','WAITER','DELIVERYMAN') DEFAULT NULL,
-                        `deliveryman_status` enum('AVAILABLE','DELIVER') DEFAULT 'AVAILABLE'
+                        `deliveryman_status` enum('AVAILABLE','DELIVER') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
@@ -207,14 +207,14 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `name`, `email`, `password`, `cellphone`, `role`, `wallet_balance`, `pin`, `point`, `jobdesk`, `deliveryman_status`) VALUES
-                                                                                                                                                        (1, 'Admin', 'admin@hbresto.id', '123456xyz', '', 'ADMIN', 0.00, NULL, 0, NULL, 'AVAILABLE'),
-                                                                                                                                                        (2, 'John Doe', 'johndoe@hbresto.id', '123456xyz', '', 'EMPLOYEE', 0.00, NULL, 0, 'CASHIER', 'AVAILABLE'),
-                                                                                                                                                        (3, 'Jemima', 'jemima@hbresto.id', '123456xyz', '', 'EMPLOYEE', 0.00, NULL, 0, 'CHEF', 'AVAILABLE'),
-                                                                                                                                                        (4, 'Nathan', 'nathan@hbresto.id', '123456xyz', '', 'EMPLOYEE', 0.00, NULL, 0, 'DELIVERYMAN', 'AVAILABLE'),
-                                                                                                                                                        (5, 'Tiara', 'tiara@hbresto.id', '123456xyz', '', 'EMPLOYEE', 0.00, NULL, 0, 'WAITER', 'AVAILABLE'),
-                                                                                                                                                        (6, 'Felim', 'felim@yahoo.com', 'hehe', '1123002', 'MEMBER', 0.00, '123002', 0, NULL, 'AVAILABLE'),
-                                                                                                                                                        (7, 'Jochal', 'jochal@ithb.com', 'josef', '1123021', 'MEMBER', 9999999.00, '123021', 0, NULL, 'AVAILABLE'),
-                                                                                                                                                        (8, 'Jesha', 'jesha@gmail.oom', 'alkeba', '1123044', 'MEMBER', 0.00, '123044', 0, NULL, 'AVAILABLE');
+                                                        (1, 'Admin', 'admin@hbresto.id', '123456xyz', '', 'ADMIN', 0.00, NULL, 0, NULL, NULL),
+                                                        (2, 'John Doe', 'johndoe@hbresto.id', '123456xyz', '', 'EMPLOYEE', 0.00, NULL, 0, 'CASHIER', NULL),
+                                                        (3, 'Jemima', 'jemima@hbresto.id', '123456xyz', '', 'EMPLOYEE', 0.00, NULL, 0, 'CHEF', NULL),
+                                                        (4, 'Nathan', 'nathan@hbresto.id', '123456xyz', '', 'EMPLOYEE', 0.00, NULL, 0, 'DELIVERYMAN', 'AVAILABLE'),
+                                                        (5, 'Tiara', 'tiara@hbresto.id', '123456xyz', '', 'EMPLOYEE', 0.00, NULL, 0, 'WAITER', NULL),
+                                                        (6, 'Felim', 'felim@yahoo.com', 'hehe', '1123002', 'MEMBER', 0.00, '123002', 0, NULL, NULL),
+                                                        (7, 'Jochal', 'jochal@ithb.com', 'josef', '1123021', 'MEMBER', 9999999.00, '123021', 0, NULL, NULL),
+                                                        (8, 'Jesha', 'jesha@gmail.oom', 'alkeba', '1123044', 'MEMBER', 0.00, '123044', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
