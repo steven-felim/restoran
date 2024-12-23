@@ -1,6 +1,5 @@
 package controller;
 
-import model.classes.DatabaseHandler;
 import model.classes.FoodAndBeverage;
 
 import java.util.ArrayList;

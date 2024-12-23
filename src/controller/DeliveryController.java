@@ -1,6 +1,5 @@
 package controller;
 
-import model.classes.DatabaseHandler;
 import model.classes.Delivery;
 import model.enums.DeliveryStatus;
 import model.enums.TransactionStatus;
