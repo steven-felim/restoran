@@ -69,7 +69,7 @@ public class AddFnBMenu extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new AdminMenu();
+            new FnBMenu();
         });
 
         this.add(title);
