@@ -1,4 +1,4 @@
-package view.admin.fnb;
+package view.admin.discount;
 
 import controller.AuthenticationController;
 import controller.DiscountController;

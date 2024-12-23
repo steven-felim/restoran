@@ -3,7 +3,6 @@ package view.admin.employee;
 import controller.AuthenticationController;
 import controller.EmployeeController;
 import model.classes.Deliveryman;
-import view.admin.AdminMenu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -47,7 +46,7 @@ public class ViewDeliveryMan extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new AdminMenu();
+            new EmployeeMenu();
         });
 
         table = new JTable(model);

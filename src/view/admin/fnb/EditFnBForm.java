@@ -82,7 +82,7 @@ public class EditFnBForm extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new AdminMenu();
+            new FnBMenu();
         });
 
         this.add(title);

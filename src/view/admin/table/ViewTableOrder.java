@@ -3,8 +3,6 @@ package view.admin.table;
 import controller.AuthenticationController;
 import controller.BookingController;
 import model.classes.BookTable;
-import view.admin.AdminMenu;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -46,7 +44,7 @@ public class ViewTableOrder extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new AdminMenu();
+            new TableMenu();
         });
 
         JTable table = new JTable(model);

@@ -1,36 +1,27 @@
 package view.admin.employee;
 
-import controller.AuthenticationController;
 import controller.EmployeeController;
-import model.classes.Employee;
 import model.enums.Jobdesk;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class EditEmployeeForm extends JFrame {
-    private Employee temp;
+public class AddEmployee extends JFrame {
     private EmployeeController ec;
 
-    public EditEmployeeForm(int id) {
+    public AddEmployee() {
         ec = new EmployeeController();
-        temp = ec.getDataFromDB(id);
-
         initComponents();
-        if (!new AuthenticationController().checkUser()) {
-            this.dispose();
-        } else {
-            this.setVisible(true);
-        }
+        this.setVisible(true);
     }
 
     private void initComponents() {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Edit Employee");
+        this.setTitle("Add Employee");
 
-        JLabel title = new JLabel("Edit Employee");
+        JLabel title = new JLabel("Add Employee");
         title.setBounds(490, 20, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
@@ -43,7 +34,7 @@ public class EditEmployeeForm extends JFrame {
         empName.setBounds(200, 110, 220, 30);
         panel.add(empName);
 
-        JTextField empNameField = new JTextField(temp.getName(), 20);
+        JTextField empNameField = new JTextField(20);
         empNameField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
         empNameField.setBounds(510, 110, 220, 30);
         panel.add(empNameField);
@@ -53,7 +44,7 @@ public class EditEmployeeForm extends JFrame {
         email.setBounds(200, 160, 220, 30);
         panel.add(email);
 
-        JTextField emailField = new JTextField(String.valueOf(temp.getEmail()), 20);
+        JTextField emailField = new JTextField(20);
         emailField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
         emailField.setBounds(510, 160, 220, 30);
         panel.add(emailField);
@@ -63,7 +54,7 @@ public class EditEmployeeForm extends JFrame {
         cellPhone.setBounds(200, 210, 220, 30);
         panel.add(cellPhone);
 
-        JTextField cellPhoneField = new JTextField(String.valueOf(temp.getCellphone()), 20);
+        JTextField cellPhoneField = new JTextField(20);
         cellPhoneField.setEnabled(false);
         cellPhoneField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
         cellPhoneField.setBounds(510, 210, 220, 30);
@@ -82,17 +73,6 @@ public class EditEmployeeForm extends JFrame {
         waiter.setBounds(810, 260, 100, 30);
         JRadioButton deliveryman = new JRadioButton(String.valueOf(Jobdesk.DELIVERYMAN));
         deliveryman.setBounds(960, 260, 150, 30);
-
-        switch(temp.getJobdesk()) {
-            case CASHIER:
-                cashier.setSelected(true);
-            case CHEF:
-                chef.setSelected(true);
-            case WAITER:
-                waiter.setSelected(true);
-            case DELIVERYMAN:
-                deliveryman.setSelected(true);
-        }
 
         ButtonGroup job = new ButtonGroup();
         job.add(cashier);
@@ -119,7 +99,7 @@ public class EditEmployeeForm extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new EditEmployeeMenu();
+            new EmployeeMenu();
         });
 
         this.add(title);
