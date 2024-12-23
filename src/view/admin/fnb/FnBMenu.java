@@ -9,12 +9,12 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class DeleteFnBMenu extends JFrame {
+public class FnBMenu extends JFrame {
     private JTable table;
     private DefaultTableModel model;
     private FnBController fnbc;
 
-    public DeleteFnBMenu() {
+    public FnBMenu() {
         initComponents();
         this.setVisible(true);
     }
@@ -26,9 +26,9 @@ public class DeleteFnBMenu extends JFrame {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Edit F&B Menu");
+        this.setTitle("F&B Menu");
 
-        JLabel title = new JLabel("Edit F&B Menu");
+        JLabel title = new JLabel("F&B Menu");
         title.setBounds(490, 20, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
@@ -46,11 +46,29 @@ public class DeleteFnBMenu extends JFrame {
         idField.setBounds(410, 0, 220, 30);
         panel.add(idField);
 
-        JButton submit = new JButton("Delete");
-        submit.setBounds(660, 0, 220, 30);
-        panel.add(submit);
+        JButton add = new JButton("Add");
+        add.setBounds(660, 0, 100, 30);
+        panel.add(add);
 
-        submit.addActionListener(e -> {
+        add.addActionListener(e -> {
+            this.dispose();
+            new AddFnBMenu();
+        });
+
+        JButton edit = new JButton("Edit");
+        edit.setBounds(780, 0, 100, 30);
+        panel.add(edit);
+
+        edit.addActionListener(e -> {
+            this.dispose();
+            new EditFnBForm(Integer.parseInt(idField.getText()));
+        });
+
+        JButton delete = new JButton("Delete");
+        delete.setBounds(900, 0, 100, 30);
+        panel.add(delete);
+
+        delete.addActionListener(e -> {
             // controller hapus data
         });
 
@@ -70,7 +88,7 @@ public class DeleteFnBMenu extends JFrame {
         model.addColumn("Price");
 
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(0, 60, 1080, 600);
+        scrollPane.setBounds(0, 60, 1080, 900);
 
         panel.add(scrollPane);
 
@@ -92,4 +110,3 @@ public class DeleteFnBMenu extends JFrame {
         }
     }
 }
-

@@ -2,7 +2,6 @@ package view.admin.table;
 
 import controller.BookingController;
 import model.classes.BookTable;
-import view.admin.AdminMenu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -28,7 +27,7 @@ public class ApproveReschedule extends JFrame {
         this.setTitle("Approve Table Reschedule");
 
         JLabel title = new JLabel("Approve Table Reschedule");
-        title.setBounds(490, 20, 700, 60);
+        title.setBounds(450, 20, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel panel = new JPanel();
@@ -67,7 +66,7 @@ public class ApproveReschedule extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new AdminMenu();
+            new TableMenu();
         });
 
         JTable table = new JTable(model);
