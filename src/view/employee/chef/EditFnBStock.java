@@ -1,5 +1,6 @@
 package view.employee.chef;
 
+import controller.AuthenticationController;
 import controller.FnBController;
 import model.classes.FoodAndBeverage;
 
@@ -15,7 +16,11 @@ public class EditFnBStock extends JFrame {
         temp = fnbc.getDataFromDB(id);
 
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
 
     private void initComponents() {

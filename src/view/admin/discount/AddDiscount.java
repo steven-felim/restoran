@@ -1,5 +1,6 @@
 package view.admin.discount;
 
+import controller.AuthenticationController;
 import controller.DiscountController;
 import model.classes.Discount;
 import view.admin.AdminMenu;
@@ -17,7 +18,11 @@ public class AddDiscount extends JFrame {
         guest = dc.getGuestDisc();
 
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
 
     private void initComponents() {

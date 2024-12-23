@@ -1,5 +1,6 @@
 package view.employee.cashier;
 
+import controller.AuthenticationController;
 import view.guest.Login;
 import view.ViewProfile;
 
@@ -9,7 +10,11 @@ import java.awt.*;
 public class CashierMenu extends JFrame{
     public CashierMenu() {
         initComponents();
-        setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            setVisible(true);
+        }
     }
 
     private void initComponents() {

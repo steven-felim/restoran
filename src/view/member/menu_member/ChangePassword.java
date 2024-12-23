@@ -1,5 +1,6 @@
 package view.member.menu_member;
 
+import controller.AuthenticationController;
 import view.ViewProfile;
 
 import javax.swing.*;
@@ -9,7 +10,11 @@ public class ChangePassword extends JFrame {
 
     public ChangePassword() {
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
 
     private void initComponents() {
