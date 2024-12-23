@@ -1,11 +1,7 @@
 package view.admin.voucher;
 
-import controller.AuthenticationController;
-import view.admin.AdminMenu;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class AddVoucher extends JFrame {
     public AddVoucher() {
@@ -51,8 +47,28 @@ public class AddVoucher extends JFrame {
         voucherDiscField.setBounds(510, 160, 220, 30);
         panel.add(voucherDiscField);
 
+        JLabel voucherNominal = new JLabel("Voucher Nominal");
+        voucherNominal.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+        voucherNominal.setBounds(200, 210, 220, 30);
+        panel.add(voucherNominal);
+
+        JTextField voucherNominalField = new JTextField(20);
+        voucherNominalField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
+        voucherNominalField.setBounds(510, 210, 220, 30);
+        panel.add(voucherNominalField);
+
+        JLabel point = new JLabel("Point");
+        point.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+        point.setBounds(200, 260, 220, 30);
+        panel.add(point);
+
+        JTextField pointField = new JTextField(20);
+        pointField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
+        pointField.setBounds(510, 260, 220, 30);
+        panel.add(pointField);
+
         JButton submit = new JButton("Add Voucher");
-        submit.setBounds(440, 250, 440, 40);
+        submit.setBounds(440, 350, 440, 40);
         panel.add(submit);
 
         submit.addActionListener(e ->  {
@@ -60,12 +76,12 @@ public class AddVoucher extends JFrame {
         });
 
         JButton back = new JButton("Back to Main Menu");
-        back.setBounds(440, 300, 440, 40);
+        back.setBounds(440, 400, 440, 40);
         panel.add(back);
 
         back.addActionListener(e ->  {
             this.dispose();
-            new AdminMenu();
+            new VoucherMenu();
         });
 
         this.add(title);

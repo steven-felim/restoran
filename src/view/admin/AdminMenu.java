@@ -6,7 +6,7 @@ import view.admin.employee.EmployeeMenu;
 import view.admin.fnb.FnBMenu;
 import view.admin.table.TableMenu;
 import view.admin.transaction.TransactionMenu;
-import view.admin.voucher.AddVoucher;
+import view.admin.voucher.VoucherMenu;
 import view.guest.Login;
 
 import javax.swing.*;
@@ -74,13 +74,13 @@ public class AdminMenu extends JFrame {
             new EmployeeMenu();
         });
 
-        JButton addVoucher = new JButton("Add Voucher");
-        addVoucher.setBounds(0, 200, 300, 40);
-        panel.add(addVoucher);
+        JButton voucher = new JButton("Voucher");
+        voucher.setBounds(0, 200, 300, 40);
+        panel.add(voucher);
 
-        addVoucher.addActionListener(e -> {
+        voucher.addActionListener(e -> {
             this.dispose();
-            new AddVoucher();
+            new VoucherMenu();
         });
 
         JButton addDiscount = new JButton("Add Discount");
