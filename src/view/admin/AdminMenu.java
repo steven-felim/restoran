@@ -1,11 +1,12 @@
 package view.admin;
 
-import view.admin.employee.EmployeeMenu;
+import controller.AuthenticationController;
 import view.admin.discount.AddDiscount;
+import view.admin.employee.EmployeeMenu;
 import view.admin.fnb.FnBMenu;
 import view.admin.table.TableMenu;
 import view.admin.transaction.TransactionMenu;
-import view.admin.voucher.AddVoucher;
+import view.admin.voucher.VoucherMenu;
 import view.guest.Login;
 
 import javax.swing.*;
@@ -14,7 +15,11 @@ import java.awt.*;
 public class AdminMenu extends JFrame {
     public AdminMenu() {
         initComponents();
-        setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            setVisible(true);
+        }
     }
 
     private void initComponents() {
@@ -69,13 +74,13 @@ public class AdminMenu extends JFrame {
             new EmployeeMenu();
         });
 
-        JButton addVoucher = new JButton("Add Voucher");
-        addVoucher.setBounds(0, 200, 300, 40);
-        panel.add(addVoucher);
+        JButton voucher = new JButton("Voucher");
+        voucher.setBounds(0, 200, 300, 40);
+        panel.add(voucher);
 
-        addVoucher.addActionListener(e -> {
+        voucher.addActionListener(e -> {
             this.dispose();
-            new AddVoucher();
+            new VoucherMenu();
         });
 
         JButton addDiscount = new JButton("Add Discount");
