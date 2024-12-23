@@ -2,7 +2,6 @@ package view.admin.transaction;
 
 import controller.TransactionController;
 import model.classes.Transaction;
-import view.admin.AdminMenu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -41,7 +40,7 @@ public class ViewUserTransaction extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new AdminMenu();
+            new TransactionMenu();
         });
 
         JLabel id = new JLabel("Insert Member/Guest ID");
