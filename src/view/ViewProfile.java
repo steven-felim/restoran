@@ -1,15 +1,9 @@
-package view.member.menu_member;
-
-import model.classes.DatabaseHandler;
-import view.guest.Login;
-import view.member.MemberMenu;
+package view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.*;
 
 public class ViewProfile extends JFrame {
-
 
     public ViewProfile() {
         initComponents();
@@ -69,12 +63,11 @@ public class ViewProfile extends JFrame {
 
         editProfileButton.addActionListener(e -> {
             this.dispose();
-            new EditProfile(); 
+            new EditProfile();
         });
 
         backButton.addActionListener(e -> {
-            this.dispose();
-            new MemberMenu();
+            // logic cari file sebelumnya
         });
 
         buttonPanel.add(changePasswordButton);

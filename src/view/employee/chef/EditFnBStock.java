@@ -2,7 +2,6 @@ package view.employee.chef;
 
 import controller.FnBController;
 import model.classes.FoodAndBeverage;
-import view.employee.EmployeeMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -79,7 +78,7 @@ public class EditFnBStock extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new EmployeeMenu();
+            new ChefMenu();
         });
 
         this.add(title);

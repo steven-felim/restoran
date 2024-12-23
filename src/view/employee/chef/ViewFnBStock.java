@@ -2,7 +2,6 @@ package view.employee.chef;
 
 import controller.FnBController;
 import model.classes.FoodAndBeverage;
-import view.employee.EmployeeMenu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -65,7 +64,7 @@ public class ViewFnBStock extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new EmployeeMenu();
+            new ChefMenu();
         });
 
         table = new JTable(model);

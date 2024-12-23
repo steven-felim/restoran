@@ -1,12 +1,9 @@
 package view.member.menu_member;
 
-import model.classes.DatabaseHandler;
+import view.ViewProfile;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class ChangePassword extends JFrame {
 
@@ -110,7 +107,7 @@ public class ChangePassword extends JFrame {
     }
 
     public static void main(String[] args) {
-        new BookTableForm();
+        new ChangePassword();
     }
 }
 

@@ -71,7 +71,7 @@ public class EditFnBMenu extends JFrame {
         model.addColumn("Price");
 
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(0, 60, 1080, 600);
+        scrollPane.setBounds(0, 60, 1080, 900);
 
         panel.add(scrollPane);
 
