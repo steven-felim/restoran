@@ -2,7 +2,6 @@ package view.employee.cashier;
 
 import controller.TransactionController;
 import model.classes.Transaction;
-import view.employee.EmployeeMenu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -41,7 +40,7 @@ public class ViewOrder extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new EmployeeMenu();
+            new CashierMenu();
         });
 
         JLabel id = new JLabel("Insert Transaction ID");

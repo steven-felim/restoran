@@ -2,7 +2,6 @@ package view.employee.deliveryman;
 
 import controller.DeliveryController;
 import model.classes.Delivery;
-import view.employee.EmployeeMenu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -41,7 +40,7 @@ public class AcceptDeliveryOrder extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new EmployeeMenu();
+            new DeliverymanMenu();
         });
 
         JLabel id = new JLabel("Insert Delivery ID");
