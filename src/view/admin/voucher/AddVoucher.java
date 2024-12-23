@@ -1,5 +1,7 @@
 package view.admin.voucher;
 
+import controller.AuthenticationController;
+
 import javax.swing.*;
 import java.awt.*;
 
