@@ -256,7 +256,9 @@ INSERT INTO `user` (`user_id`, `name`, `email`, `password`, `cellphone`, `role`,
 CREATE TABLE `voucher` (
   `voucher_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `discount` double(2,2) DEFAULT NULL
+  `discount` double(2,2) DEFAULT NULL,
+  `nominal` int(6) DEFAULT 0,
+  `point` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
