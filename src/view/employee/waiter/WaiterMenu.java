@@ -1,5 +1,6 @@
 package view.employee.waiter;
 
+import controller.AuthenticationController;
 import view.ViewProfile;
 import view.guest.Login;
 
@@ -9,7 +10,11 @@ import java.awt.*;
 public class WaiterMenu extends JFrame {
     public WaiterMenu() {
         initComponents();
-        setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            setVisible(true);
+        }
     }
 
     private void initComponents() {

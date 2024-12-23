@@ -1,5 +1,6 @@
 package view.admin;
 
+import controller.AuthenticationController;
 import view.admin.employee.EditEmployeeMenu;
 import view.admin.employee.ViewDeliveryMan;
 import view.admin.fnb.AddDiscount;
@@ -19,7 +20,11 @@ import java.awt.*;
 public class AdminMenu extends JFrame {
     public AdminMenu() {
         initComponents();
-        setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            setVisible(true);
+        }
     }
 
     private void initComponents() {

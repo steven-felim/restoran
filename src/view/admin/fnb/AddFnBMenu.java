@@ -1,5 +1,6 @@
 package view.admin.fnb;
 
+import controller.AuthenticationController;
 import view.admin.AdminMenu;
 
 import javax.swing.*;
@@ -8,7 +9,11 @@ import java.awt.*;
 public class AddFnBMenu extends JFrame {
     public AddFnBMenu() {
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
 
     private void initComponents() {

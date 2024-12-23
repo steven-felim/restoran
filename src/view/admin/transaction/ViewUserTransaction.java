@@ -1,5 +1,6 @@
 package view.admin.transaction;
 
+import controller.AuthenticationController;
 import controller.TransactionController;
 import model.classes.Transaction;
 import view.admin.AdminMenu;
@@ -15,7 +16,11 @@ public class ViewUserTransaction extends JFrame {
 
     public ViewUserTransaction() {
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
 
     private void initComponents() {

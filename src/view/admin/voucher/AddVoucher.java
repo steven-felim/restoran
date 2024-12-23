@@ -1,5 +1,6 @@
 package view.admin.voucher;
 
+import controller.AuthenticationController;
 import view.admin.AdminMenu;
 
 import javax.swing.*;
@@ -9,7 +10,11 @@ import java.awt.event.ActionListener;
 public class AddVoucher extends JFrame {
     public AddVoucher() {
         initComponents();
-        setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            setVisible(true);
+        }
     }
 
     private void initComponents() {

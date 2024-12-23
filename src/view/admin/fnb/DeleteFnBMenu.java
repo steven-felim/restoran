@@ -1,5 +1,6 @@
 package view.admin.fnb;
 
+import controller.AuthenticationController;
 import controller.FnBController;
 import model.classes.FoodAndBeverage;
 import view.admin.AdminMenu;
@@ -16,7 +17,11 @@ public class DeleteFnBMenu extends JFrame {
 
     public DeleteFnBMenu() {
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
 
     private void initComponents() {

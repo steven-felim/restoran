@@ -1,5 +1,6 @@
 package view.admin.employee;
 
+import controller.AuthenticationController;
 import controller.EmployeeController;
 import model.classes.Employee;
 import model.enums.Jobdesk;
@@ -17,7 +18,11 @@ public class EditEmployeeForm extends JFrame {
         temp = ec.getDataFromDB(id);
 
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
 
     private void initComponents() {
