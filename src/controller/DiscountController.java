@@ -1,6 +1,5 @@
 package controller;
 
-import model.classes.DatabaseHandler;
 import model.classes.Discount;
 
 import java.sql.ResultSet;

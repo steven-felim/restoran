@@ -1,7 +1,6 @@
 package controller;
 
 import model.classes.BookTable;
-import model.classes.DatabaseHandler;
 import model.classes.FoodAndBeverage;
 import model.enums.BookStatus;
 

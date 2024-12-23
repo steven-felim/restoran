@@ -1,12 +1,17 @@
 package view.guest;
 
-import model.classes.DatabaseHandler;
+import controller.AuthenticationController;
+import controller.AuthenticationHelper;
+import controller.DatabaseHandler;
 import view.admin.AdminMenu;
+import view.employee.cashier.CashierMenu;
+import view.employee.chef.ChefMenu;
+import view.employee.deliveryman.DeliverymanMenu;
+import view.employee.waiter.WaiterMenu;
 import view.member.MemberMenu;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,8 +24,6 @@ public class Login extends JFrame {
 	}
 
 	private void initComponents() {
-
-
 		this.setSize(400, 600);
 		this.setResizable(false);
 		this.setLayout(null);
@@ -65,25 +68,38 @@ public class Login extends JFrame {
 		buttonPanel.add(loginButton);
 
 		loginButton.addActionListener(e -> {
-			DatabaseHandler conn = new DatabaseHandler();
-			conn.connect();
-			String query = "SELECT role FROM user WHERE email = '" + profileField.getText() + "' AND password = '" + passwordField.getText() + "'";
-			try {
-				Statement stmt = conn.con.createStatement();
-				ResultSet rs = stmt.executeQuery(query);
-				switch (rs.getString("role")) {
-					case "ADMIN":
-						new AdminMenu();
-						this.dispose();
-					case "MEMBER":
-						new MemberMenu();
-						this.dispose();
-				}
-				//return true;
-			} catch (SQLException e2) {
-				e2.printStackTrace();
-				conn.disconnect();
-				//return (false);
+			String userProfile = profileField.getText();
+			String password = passwordField.getText();
+			int results = new AuthenticationController().login(userProfile, password);
+			if (results != 0) {
+				this.dispose();
+			}
+			switch (results) {
+				case 0:
+					JOptionPane.showMessageDialog(
+							null,
+							"Username/Email/Password Anda salah",
+							"Input yang Benar",
+							JOptionPane.INFORMATION_MESSAGE
+					);
+					break;
+				case 1:
+					new AdminMenu();
+					break;
+				case 2:
+					new MemberMenu();
+					break;
+				case 3:
+					new CashierMenu();
+					break;
+				case 4:
+					new ChefMenu();
+					break;
+				case 5:
+					new DeliverymanMenu();
+					break;
+				case 6:
+					new WaiterMenu();
 			}
 		});
 

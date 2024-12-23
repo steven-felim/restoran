@@ -2,12 +2,13 @@ package view.member;
 
 import javax.swing.*;
 
-import view.guest.Login;
+import controller.AuthenticationController;
+import controller.AuthenticationHelper;
+import view.EditProfile;
+import view.ViewProfile;
 import view.guest.booktable.ViewCancelTableGuest;
 import view.member.menu_member.BookTableForm;
-import view.member.menu_member.EditProfile;
 import view.member.menu_member.RescheduleTable;
-import view.member.menu_member.ViewProfile;
 import view.member.menu_member.ViewTableOrder;
 
 import java.awt.*;
@@ -15,7 +16,11 @@ import java.awt.*;
 public class MemberMenu extends JFrame {
     public MemberMenu() {
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
 
     private void initComponents() {
@@ -108,7 +113,7 @@ public class MemberMenu extends JFrame {
 
         logout.addActionListener(e -> {
             this.dispose();
-            new Login();
+            new AuthenticationController().logout();
         });
 
         add(title);
