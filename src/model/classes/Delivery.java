@@ -7,10 +7,12 @@ public class Delivery {
     private DeliveryStatus deliveryStatus;
     private int transaction_id;
     private int deliveryman_id;
+    private String address;
 
-    public Delivery(int delivery_id, DeliveryStatus deliveryStatus, int transaction_id, int deliveryman_id) {
+    public Delivery(int delivery_id, DeliveryStatus deliveryStatus, String address, int transaction_id, int deliveryman_id) {
         this.delivery_id = delivery_id;
         this.deliveryStatus = deliveryStatus;
+        this.address = address;
         this.transaction_id = transaction_id;
         this.deliveryman_id = deliveryman_id;
     }
@@ -29,6 +31,14 @@ public class Delivery {
 
     public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
         this.deliveryStatus = deliveryStatus;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getTransaction_id() {

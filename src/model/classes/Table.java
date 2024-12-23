@@ -1,19 +1,19 @@
 package model.classes;
 
 public class Table {
-    int tableID;
+    String tableID;
     int tableNo;
 
-    public Table(int tableID, int tableNo) {
+    public Table(String tableID, int tableNo) {
         this.tableID = tableID;
         this.tableNo = tableNo;
     }
 
-    public int getTableID() {
+    public String getTableID() {
         return tableID;
     }
 
-    public void setTableID(int tableID) {
+    public void setTableID(String tableID) {
         this.tableID = tableID;
     }
 
