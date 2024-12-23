@@ -1,5 +1,6 @@
 package view.member.menu_member;
 
+import controller.AuthenticationController;
 import view.member.MemberMenu;
 
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -31,7 +32,11 @@ public class BookTableForm extends JFrame {
 
     public BookTableForm() {
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
 
     private void initComponents() {

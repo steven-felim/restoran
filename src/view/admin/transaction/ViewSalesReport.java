@@ -1,5 +1,6 @@
 package view.admin.transaction;
 
+import controller.AuthenticationController;
 import controller.TransactionController;
 import model.classes.Transaction;
 
@@ -14,7 +15,11 @@ public class ViewSalesReport extends JFrame {
 
     public ViewSalesReport() {
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
 
     private void initComponents() {

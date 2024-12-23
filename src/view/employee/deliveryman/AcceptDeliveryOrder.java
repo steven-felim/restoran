@@ -1,5 +1,6 @@
 package view.employee.deliveryman;
 
+import controller.AuthenticationController;
 import controller.DeliveryController;
 import model.classes.Delivery;
 
@@ -14,7 +15,11 @@ public class AcceptDeliveryOrder extends JFrame {
 
     public AcceptDeliveryOrder() {
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
 
     private void initComponents() {

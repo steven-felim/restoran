@@ -1,5 +1,6 @@
 package view.employee.chef;
 
+import controller.AuthenticationController;
 import view.ViewProfile;
 import view.guest.Login;
 
@@ -9,7 +10,11 @@ import java.awt.*;
 public class ChefMenu extends JFrame {
     public ChefMenu() {
         initComponents();
-        setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            setVisible(true);
+        }
     }
 
     private void initComponents() {

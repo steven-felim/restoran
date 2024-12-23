@@ -1,5 +1,7 @@
 package view;
 
+import controller.AuthenticationController;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,7 +9,11 @@ public class EditProfile extends JFrame {
 
     public EditProfile() {
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
 
     private void initComponents() {
