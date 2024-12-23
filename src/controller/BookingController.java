@@ -9,112 +9,115 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class BookingController  {
+public class BookingController {
+	public void bookTable(int tableId, int userId, Date date) {
+		DatabaseHandler.getInstance().connect();
+		String query = "INSERT INTO booktable (table_id, user_id, date, status) VALUES (?, ?, ?, 'BOOKED')";
 
-    //@Override
-    public void bookTable(int tableId, int userId, Date date) {
-        String query = "INSERT INTO booktable (table_id, user_id, date, status) VALUES (?, ?, ?, 'BOOKED')";
+		try {
+			PreparedStatement pstmt = DatabaseHandler.getInstance().con.prepareStatement(query);
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/restoran", "root", "password");
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+			pstmt.setInt(1, tableId);
+			pstmt.setInt(2, userId);
+			pstmt.setDate(3, new java.sql.Date(date.getTime()));
+			pstmt.executeUpdate();
 
-            pstmt.setInt(1, tableId);
-            pstmt.setInt(2, userId);
-            pstmt.setDate(3, new java.sql.Date(date.getTime()));
-            pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DatabaseHandler.getInstance().disconnect();
+		}
+	}
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+	public void cancelBooking(int bookId) {
+		String query = "UPDATE booktable SET status = 'AVAILABLE' WHERE book_id = ?";
 
-    //@Override
-    public void cancelBooking(int bookId) {
-        String query = "UPDATE booktable SET status = 'AVAILABLE' WHERE book_id = ?";
+		try {
+			PreparedStatement pstmt = DatabaseHandler.getInstance().con.prepareStatement(query);
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/restoran", "root", "password");
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+			pstmt.setInt(1, bookId);
+			pstmt.executeUpdate();
 
-            pstmt.setInt(1, bookId);
-            pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DatabaseHandler.getInstance().disconnect();
+		}
+	}
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+	public List<BookTable> getAllRescheduledBookTable() {
+		DatabaseHandler.getInstance().connect();
+		List<BookTable> bookList = new ArrayList<>();
+		String rescheduleBookTableQuery = "SELECT book_id, table_id, user_id, guest_id, date, status FROM booktable WHERE status = 'PENDING' OR date IN (SELECT date FROM booktable WHERE status = 'PENDING')";
 
-    public List<BookTable> getAllRescheduledBookTable() {
-        List<BookTable> bookList = new ArrayList<>();
+		try {
+			PreparedStatement stmt = DatabaseHandler.getInstance().con.prepareStatement(rescheduleBookTableQuery);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				int book_id = rs.getInt("book_id");
+				String table_id = rs.getString("table_id");
+				int user_id = rs.getInt("user_id");
+				int guest_id = rs.getInt("guest_id");
+				Date date = rs.getDate("date");
+				BookStatus status = BookStatus.valueOf(rs.getString("status"));
 
-        DatabaseHandler conn = new DatabaseHandler();
-        conn.connect();
-        try (
-                Statement stmt = conn.con.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT book_id, table_id, user_id, guest_id, date, status " +
-                        "FROM booktable WHERE status = 'PENDING' OR date IN (SELECT date FROM booktable WHERE status = 'PENDING')")) {
+				bookList.add(new BookTable(book_id, table_id, user_id, guest_id, date, status));
+			}
 
-            while (rs.next()) {
-                int book_id = rs.getInt("book_id");
-                String table_id = rs.getString("table_id");
-                int user_id = rs.getInt("user_id");
-                int guest_id = rs.getInt("guest_id");
-                Date date = rs.getDate("date");
-                BookStatus status = BookStatus.valueOf(rs.getString("status"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DatabaseHandler.getInstance().disconnect();
+		}
 
-                bookList.add(new BookTable(book_id, table_id, user_id, guest_id, date, status));
-            }
+		return bookList;
+	}
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+	public List<BookTable> getAllBookTable() {
+		DatabaseHandler.getInstance().connect();
+		List<BookTable> bookList = new ArrayList<>();
+		String getBookTableQuery = "SELECT book_id, table_id, user_id, guest_id, date, status FROM booktable";
 
-        return bookList;
-    }
+		try {
+			PreparedStatement stmt = DatabaseHandler.getInstance().con.prepareStatement(getBookTableQuery);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				int book_id = rs.getInt("book_id");
+				String table_id = rs.getString("table_id");
+				int user_id = rs.getInt("user_id");
+				int guest_id = rs.getInt("guest_id");
+				Date date = rs.getDate("date");
+				BookStatus status = null;
+				switch (rs.getString("status")) {
+					case "PENDING":
+						status = BookStatus.PENDING;
+						break;
+					case "BOOKED":
+						status = BookStatus.BOOKED;
+						break;
+				}
 
-    public List<BookTable> getAllBookTable() {
-        List<BookTable> bookList = new ArrayList<>();
+				bookList.add(new BookTable(book_id, table_id, user_id, guest_id, date, status));
+			}
 
-        DatabaseHandler conn = new DatabaseHandler();
-        conn.connect();
-        try (
-                Statement stmt = conn.con.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT book_id, table_id, user_id, guest_id, date, status FROM booktable")) {
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DatabaseHandler.getInstance().disconnect();
+		}
 
-            while (rs.next()) {
-                int book_id = rs.getInt("book_id");
-                String table_id = rs.getString("table_id");
-                int user_id = rs.getInt("user_id");
-                int guest_id = rs.getInt("guest_id");
-                Date date = rs.getDate("date");
-                BookStatus status = null;
-                switch (rs.getString("status")) {
-                    case "PENDING":
-                        status = BookStatus.PENDING;
-                        break;
-                    case "BOOKED":
-                        status = BookStatus.BOOKED;
-                        break;
-                }
+		return bookList;
+	}
 
-                bookList.add(new BookTable(book_id, table_id, user_id, guest_id, date, status));
-            }
+	public List<BookTable> getGuestBookingHistory() {
+		List<BookTable> bookList = new ArrayList<>();
+		// logic select from db
+		return bookList;
+	}
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return bookList;
-    }
-
-    public List<BookTable> getGuestBookingHistory() {
-        List<BookTable> bookList = new ArrayList<>();
-        // logic select from db
-        return bookList;
-    }
-
-    public List<BookTable> getMemberBookTable() {
-        List<BookTable> bookList = new ArrayList<>();
-        // logic select from db
-        return bookList;
-    }
+	public List<BookTable> getMemberBookTable() {
+		List<BookTable> bookList = new ArrayList<>();
+		// logic select from db
+		return bookList;
+	}
 }
