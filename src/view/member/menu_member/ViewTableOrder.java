@@ -3,6 +3,7 @@ package view.member.menu_member;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import controller.AuthenticationController;
 import controller.BookingController;
 import model.classes.BookTable;
 import view.member.MemberMenu;
@@ -16,7 +17,11 @@ public class ViewTableOrder extends JFrame {
 
     public ViewTableOrder() {
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
 
     private void initComponents() {

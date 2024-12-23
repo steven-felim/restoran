@@ -6,7 +6,11 @@ import java.awt.*;
 public class AddVoucher extends JFrame {
     public AddVoucher() {
         initComponents();
-        setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            setVisible(true);
+        }
     }
 
     private void initComponents() {

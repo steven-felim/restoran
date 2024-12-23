@@ -1,5 +1,7 @@
 package view;
 
+import controller.AuthenticationController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,7 +10,11 @@ import java.awt.event.ActionListener;
 public class ChangePassword extends JFrame {
     public ChangePassword() {
         initComponents();
-        setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            setVisible(true);
+        }
     }
 
     private void initComponents() {
