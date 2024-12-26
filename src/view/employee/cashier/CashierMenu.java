@@ -47,6 +47,8 @@ public class CashierMenu extends JFrame{
         buttonPanel.add(orderFnB);
 
         orderFnB.addActionListener(e -> {
+            new OrderFnBCashier();
+            this.dispose();
         });
 
         JButton acceptDelivery = new JButton("View Profile");

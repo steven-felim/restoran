@@ -85,7 +85,7 @@ public class AddEmployee extends JFrame {
         panel.add(waiter);
         panel.add(deliveryman);
 
-        JButton submit = new JButton("Edit");
+        JButton submit = new JButton("Add");
         submit.setBounds(440, 310, 440, 40);
         panel.add(submit);
 
