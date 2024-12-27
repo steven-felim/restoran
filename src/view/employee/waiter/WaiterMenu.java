@@ -33,13 +33,13 @@ public class WaiterMenu extends JFrame {
         buttonPanel.setLayout(null);
         buttonPanel.setBounds(44, 100, 300, 200);
 
-        JButton viewStock = new JButton("NULL");
+        JButton viewStock = new JButton("Book Table Manually");
         viewStock.setBounds(0, 0, 300, 40);
         buttonPanel.add(viewStock);
 
         viewStock.addActionListener(e -> {
-            //this.dispose();
-            // blom kepikiran buat waiter
+            this.dispose();
+            new BookTableWaiter();
         });
 
         JButton acceptDelivery = new JButton("View Profile");
