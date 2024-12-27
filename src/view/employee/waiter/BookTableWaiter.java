@@ -1,21 +1,19 @@
-package view.guest.booktable;
+package view.employee.waiter;
 
+import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
-import org.jdatepicker.impl.DateComponentFormatter;
 
 import javax.swing.*;
-import view.guest.GuestMenu;
-
 import java.awt.*;
 import java.util.Properties;
 
-public class BookTable extends JFrame {
+public class BookTableWaiter extends JFrame {
     private JComboBox<String> roomComboBox;
     private JComboBox<String> tableComboBox;
 
-    public BookTable() {
+    public BookTableWaiter() {
         initComponents();
         this.setVisible(true);
     }
@@ -38,6 +36,14 @@ public class BookTable extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 0;
+        mainPanel.add(new JLabel("Insert Name:"), gbc);
+
+        JTextField nameField = new JTextField();
+        gbc.gridx = 1;
+        mainPanel.add(nameField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
         mainPanel.add(new JLabel("Select Room:"), gbc);
 
         roomComboBox = new JComboBox<>(new String[]{"VIP", "Indoor", "Outdoor"});
@@ -46,7 +52,7 @@ public class BookTable extends JFrame {
         mainPanel.add(roomComboBox, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         mainPanel.add(new JLabel("Select Table:"), gbc);
 
         tableComboBox = new JComboBox<>();
@@ -54,7 +60,7 @@ public class BookTable extends JFrame {
         mainPanel.add(tableComboBox, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         mainPanel.add(new JLabel("Select Date:"), gbc);
 
         UtilDateModel model = new UtilDateModel();
@@ -74,19 +80,25 @@ public class BookTable extends JFrame {
         buttonPanel.add(backButton);
 
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridwidth = 2;
         mainPanel.add(buttonPanel, gbc);
 
         add(mainPanel);
 
         confirmButton.addActionListener(e -> {
-            // input ke DB
+//            input ke DB
+//            id table = "room" + "nomor meja"
+//            check nama ada di DB/ngga
+//            if ada
+//                pakai id guest/member
+//            else
+//                bikin guest baru
         });
 
         backButton.addActionListener(e -> {
             this.dispose();
-            new GuestMenu();
+            new WaiterMenu();
         });
 
         updateTableComboBox();
@@ -105,9 +117,5 @@ public class BookTable extends JFrame {
                 tableComboBox.addItem(String.valueOf(i));
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new BookTable();
     }
 }
