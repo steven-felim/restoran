@@ -1,6 +1,7 @@
-package view.guest;
+package view.guest.login;
 
 import javax.swing.*;
+
 import java.awt.*;
 
 public class Register extends JFrame {

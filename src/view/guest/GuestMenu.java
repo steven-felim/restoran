@@ -2,11 +2,11 @@ package view.guest;
 
 import javax.swing.*;
 
-import view.guest.booktable.BookTable;
-import view.guest.booktable.ViewTableOrder;
-import view.guest.booktable.ViewCancelTableGuest;
-import view.guest.booktable.ViewOrderFAndBGuest;
-import view.guest.booktable.ViewRescheduleGuest;
+import view.guest.fnb.ViewOrderFAndBGuest;
+import view.guest.rescheduleGuest.ViewHistoryGuest;
+import view.guest.table.BookTable;
+import view.guest.table.ViewCancelTableGuest;
+import view.guest.table.ViewTableCart;
 
 import java.awt.*;
 
@@ -46,7 +46,7 @@ public class GuestMenu extends JFrame {
         
         rescheduleTableButton.addActionListener(e ->  {
             this.dispose();
-            new ViewRescheduleGuest();
+            new ViewHistoryGuest();
         });
 
         JButton cancelTableButton = new JButton("Cancel Table");
@@ -64,7 +64,7 @@ public class GuestMenu extends JFrame {
 
         viewTableOrder.addActionListener(e ->  {
             this.dispose();
-            new ViewTableOrder();
+            new ViewTableCart();
         });
 
         JButton orderMenuButton = new JButton("Order F&B Menu");

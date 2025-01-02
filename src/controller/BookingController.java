@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 public class BookingController {
+	
 	public void bookTable(int tableId, int userId, Date date) {
 		DatabaseHandler.getInstance().connect();
 		String query = "INSERT INTO booktable (table_id, user_id, date, status) VALUES (?, ?, ?, 'BOOKED')";

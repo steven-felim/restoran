@@ -1,4 +1,4 @@
-package view.guest.booktable;
+package view.member.menu_member.table_member;
 
 import model.classes.Table;
 import view.guest.GuestMenu;
@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewCancelTableGuest extends JFrame {
+public class CancelTableMember extends JFrame {
 
     private JList<String> tableList; 
     private DefaultListModel<String> tableListModel;
@@ -20,7 +20,7 @@ public class ViewCancelTableGuest extends JFrame {
 
     private List<Table> bookedTables; 
 
-    public ViewCancelTableGuest() {
+    public CancelTableMember() {
         initComponents();
         this.setVisible(true);
     }
@@ -121,11 +121,11 @@ public class ViewCancelTableGuest extends JFrame {
 
     private void handleViewTableOrder() {
         this.dispose();
-        new ViewTableOrder();
+        new TableCart();
     }
 
     public static void main(String[] args) {
-        new ViewCancelTableGuest();
+        new CancelTableMember();
     }
 }
 

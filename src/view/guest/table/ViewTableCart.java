@@ -1,4 +1,4 @@
-package view.guest.booktable;
+package view.guest.table;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -10,11 +10,11 @@ import view.guest.GuestMenu;
 
 import java.awt.*;
 
-public class ViewTableOrder extends JFrame {
+public class ViewTableCart extends JFrame {
     private DefaultTableModel model;
     private BookingController bc;
 
-    public ViewTableOrder() {
+    public ViewTableCart() {
         initComponents();
         this.setVisible(true);
     }
