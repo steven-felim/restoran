@@ -1,4 +1,4 @@
-package view.guest;
+package view.guest.login;
 
 import controller.AuthenticationController;
 import controller.AuthenticationHelper;
@@ -8,6 +8,7 @@ import view.employee.cashier.CashierMenu;
 import view.employee.chef.ChefMenu;
 import view.employee.deliveryman.DeliverymanMenu;
 import view.employee.waiter.WaiterMenu;
+import view.guest.GuestMenu;
 import view.member.MemberMenu;
 
 import javax.swing.*;

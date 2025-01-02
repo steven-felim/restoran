@@ -1,4 +1,4 @@
-package view.guest.booktable;
+package view.guest.fnb;
 
 public class ViewOrderFAndBGuest {
     

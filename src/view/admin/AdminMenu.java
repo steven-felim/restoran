@@ -7,7 +7,7 @@ import view.admin.fnb.FnBMenu;
 import view.admin.table.TableMenu;
 import view.admin.transaction.TransactionMenu;
 import view.admin.voucher.VoucherMenu;
-import view.guest.Login;
+import view.guest.login.Login;
 
 import javax.swing.*;
 import java.awt.*;

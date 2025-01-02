@@ -1,12 +1,16 @@
-package view.guest.booktable;
+package view.guest.table;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
+
+import controller.BookingController;
+
 import org.jdatepicker.impl.DateComponentFormatter;
 
 import javax.swing.*;
 import view.guest.GuestMenu;
+import view.guest.rescheduleGuest.ViewHistoryGuest;
 
 import java.awt.*;
 import java.util.Properties;
@@ -81,8 +85,20 @@ public class BookTable extends JFrame {
         add(mainPanel);
 
         confirmButton.addActionListener(e -> {
-            // input ke DB
-        });
+        // // Get selected data
+        // String selectedRoom = (String) roomComboBox.getSelectedItem();
+        // String selectedTable = (String) tableComboBox.getSelectedItem();
+        // String selectedDate = datePicker.getJFormattedTextField().getText(); 
+
+        // // Save booking data
+        // BookingController bookingController = new BookingController();
+        // bookingController.saveBooking(new BookTableData(selectedRoom, selectedTable, selectedDate));
+
+        // // Transition to ViewHistoryGuest
+        // this.dispose();
+        // new ViewHistoryGuest();
+    });
+
 
         backButton.addActionListener(e -> {
             this.dispose();

@@ -1,27 +1,27 @@
-package view.guest.booktable;
+package view.guest.rescheduleGuest;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import controller.BookingController;
 import model.classes.BookTable;
 import view.guest.GuestMenu;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class ViewRescheduleGuest extends JFrame {
+public class ViewHistoryGuest extends JFrame {
     private DefaultTableModel model;
-    private BookingController bookingController;
     private JTable table;
+    private BookingController bookingController;
 
-    public ViewRescheduleGuest() {
+    public ViewHistoryGuest() {
         initComponents();
         this.setVisible(true);
     }
 
     private void initComponents() {
-        model = new DefaultTableModel();
         bookingController = new BookingController();
+        model = new DefaultTableModel();
 
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
@@ -41,7 +41,13 @@ public class ViewRescheduleGuest extends JFrame {
         panel.add(rescheduleButton);
 
         rescheduleButton.addActionListener(e -> {
-            // sambungin ke controller
+            // int selectedRow = table.getSelectedRow();
+            // if (selectedRow != -1) {
+            //     String bookID = model.getValueAt(selectedRow, 0).toString();
+            //     new Reschedule(bookID);
+            // } else {
+            //     JOptionPane.showMessageDialog(this, "Please select a booking to reschedule.");
+            // }
         });
 
         JButton backButton = new JButton("Back to Main Menu");
@@ -73,7 +79,6 @@ public class ViewRescheduleGuest extends JFrame {
     }
 
     private void loadDataToView() {
-        //masih eror
         List<BookTable> bookList = bookingController.getGuestBookingHistory();
 
         model.setRowCount(0);
@@ -91,8 +96,7 @@ public class ViewRescheduleGuest extends JFrame {
         }
     }
 
-    
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(ViewRescheduleGuest::new);
+        new ViewHistoryGuest();
     }
 }
