@@ -1,6 +1,5 @@
 package controller;
 
-import model.classes.DatabaseHandler;
 import model.classes.Deliveryman;
 import model.classes.Employee;
 import model.enums.DeliverymanStatus;
@@ -76,7 +75,7 @@ public class EmployeeController {
         conn.connect();
         try (
                 Statement stmt = conn.con.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT user_id, name, email, cellphone, jobdesk, deliveryman_status FROM user WHERE role = 'EMPLOYEE'")) {
+                ResultSet rs = stmt.executeQuery("SELECT user_id, name, email, cellphone, jobdesk, deliveryman_status FROM user WHERE jobdesk = 'DELIVERYMAN'")) {
             while (rs.next()) {
                 int id = rs.getInt("user_id");
                 String name = rs.getString("name");

@@ -1,9 +1,9 @@
 package view.admin.employee;
 
+import controller.AuthenticationController;
 import controller.EmployeeController;
 import model.classes.Employee;
 import model.enums.Jobdesk;
-import view.admin.AdminMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,16 +17,20 @@ public class EditEmployeeForm extends JFrame {
         temp = ec.getDataFromDB(id);
 
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
 
     private void initComponents() {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Edit F&B Menu");
+        this.setTitle("Edit Employee");
 
-        JLabel title = new JLabel("Edit Employee Menu");
+        JLabel title = new JLabel("Edit Employee");
         title.setBounds(490, 20, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
@@ -50,7 +54,6 @@ public class EditEmployeeForm extends JFrame {
         panel.add(email);
 
         JTextField emailField = new JTextField(String.valueOf(temp.getEmail()), 20);
-        emailField.setEnabled(false);
         emailField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
         emailField.setBounds(510, 160, 220, 30);
         panel.add(emailField);
@@ -116,7 +119,7 @@ public class EditEmployeeForm extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new AdminMenu();
+            new EditEmployeeMenu();
         });
 
         this.add(title);

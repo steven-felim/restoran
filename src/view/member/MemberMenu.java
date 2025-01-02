@@ -2,20 +2,25 @@ package view.member;
 
 import javax.swing.*;
 
-import view.guest.Login;
-import view.guest.booktable.ViewCancelTableGuest;
-import view.member.menu_member.BookTableForm;
-import view.member.menu_member.EditProfile;
-import view.member.menu_member.RescheduleTable;
-import view.member.menu_member.ViewProfile;
-import view.member.menu_member.ViewTableOrder;
+import controller.AuthenticationController;
+import controller.AuthenticationHelper;
+import view.guest.table.ViewCancelTableGuest;
+import view.member.menu_member.profile.EditProfile;
+import view.member.menu_member.profile.ViewProfile;
+import view.member.menu_member.table_member.BookTableForm;
+import view.member.menu_member.table_member.RescheduleTable;
+import view.member.menu_member.table_member.TableCart;
 
 import java.awt.*;
 
 public class MemberMenu extends JFrame {
     public MemberMenu() {
         initComponents();
-        this.setVisible(true);
+        // if (!new AuthenticationController().checkUser()) {
+        //     this.dispose();
+        // } else {
+            this.setVisible(true);
+        // }
     }
 
     private void initComponents() {
@@ -78,7 +83,7 @@ public class MemberMenu extends JFrame {
 
         viewTableOrder.addActionListener(e -> {
             this.dispose();
-            new ViewTableOrder();
+            new TableCart();
         });
 
         JButton orderMenuButton = new JButton("Order F&B Menu");
@@ -102,13 +107,14 @@ public class MemberMenu extends JFrame {
         viewPointButton.setBounds(660, 250, 440, 40);
         panel.add(viewPointButton);
 
+
         JButton logout = new JButton("Logout");
         logout.setBounds(660, 300, 440, 40);
         panel.add(logout);
 
         logout.addActionListener(e -> {
             this.dispose();
-            new Login();
+            new AuthenticationController().logout();
         });
 
         add(title);

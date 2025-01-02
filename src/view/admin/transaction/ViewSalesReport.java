@@ -1,8 +1,8 @@
 package view.admin.transaction;
 
+import controller.AuthenticationController;
 import controller.TransactionController;
 import model.classes.Transaction;
-import view.admin.AdminMenu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -15,7 +15,11 @@ public class ViewSalesReport extends JFrame {
 
     public ViewSalesReport() {
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
 
     private void initComponents() {
@@ -41,7 +45,7 @@ public class ViewSalesReport extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new AdminMenu();
+            new TransactionMenu();
         });
 
         JTable table = new JTable(model);

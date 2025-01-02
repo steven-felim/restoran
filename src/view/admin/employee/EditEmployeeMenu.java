@@ -1,5 +1,6 @@
 package view.admin.employee;
 
+import controller.AuthenticationController;
 import controller.EmployeeController;
 import model.classes.Employee;
 import view.admin.AdminMenu;
@@ -16,7 +17,11 @@ public class EditEmployeeMenu extends JFrame {
 
     public EditEmployeeMenu() {
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
 
     private void initComponents() {
@@ -51,8 +56,14 @@ public class EditEmployeeMenu extends JFrame {
         panel.add(submit);
 
         submit.addActionListener(e -> {
-            this.dispose();
-            new EditEmployeeForm(Integer.parseInt(idField.getText()));
+            try {
+                new EditEmployeeForm(Integer.parseInt(idField.getText()));
+                this.dispose();
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Input Must Be Number!", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (NullPointerException ex) {
+                JOptionPane.showMessageDialog(null, "Null!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         JButton back = new JButton("Back to Main Menu");
@@ -61,7 +72,7 @@ public class EditEmployeeMenu extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new AdminMenu();
+            new EmployeeMenu();
         });
 
         table = new JTable(model);
