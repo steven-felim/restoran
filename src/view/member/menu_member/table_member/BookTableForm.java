@@ -1,4 +1,4 @@
-package view.member.menu_member;
+package view.member.menu_member.table_member;
 
 import controller.AuthenticationController;
 import view.member.MemberMenu;

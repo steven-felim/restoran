@@ -1,4 +1,4 @@
-package view.member.menu_member;
+package view.member.menu_member.table_member;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -11,11 +11,11 @@ import java.util.List;
 
 import java.awt.*;
 
-public class ViewTableOrder extends JFrame {
+public class TableCart extends JFrame {
     private DefaultTableModel model;
     private BookingController bc;
 
-    public ViewTableOrder() {
+    public TableCart() {
         initComponents();
         if (!new AuthenticationController().checkUser()) {
             this.dispose();
