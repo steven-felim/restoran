@@ -3,42 +3,42 @@ package view.member;
 import javax.swing.*;
 
 import controller.AuthenticationController;
-import controller.AuthenticationHelper;
-import view.guest.table.ViewCancelTableGuest;
-import view.member.menu_member.profile.EditProfile;
-import view.member.menu_member.profile.ViewProfile;
-import view.member.menu_member.table_member.BookTableForm;
-import view.member.menu_member.table_member.RescheduleTable;
-import view.member.menu_member.table_member.TableCart;
+import view.member.fnb.OrderFnB;
+import view.member.table_member.ViewTableMember;
+import view.member.transaction_member.AddWallet;
+import view.profile.ViewProfile;
+import view.member.table_member.BookTableForm;
 
 import java.awt.*;
 
 public class MemberMenu extends JFrame {
     public MemberMenu() {
         initComponents();
-        // if (!new AuthenticationController().checkUser()) {
-        //     this.dispose();
-        // } else {
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
             this.setVisible(true);
-        // }
+        }
     }
 
     private void initComponents() {
-        this.setSize(1280, 720);
+        this.setSize(400, 560);
+        this.setLayout(null);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Guest Menu");
+        this.setTitle("Member Menu");
 
         JLabel title = new JLabel("Welcome, Member!");
-        title.setBounds(500, 20, 700, 60);
+        title.setBounds(50, 30, 350, 40);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        panel.setBounds(100, 60, 1080, 600);
+        panel.setBounds(44, 80, 300, 400);
 
         JButton bookTableButton = new JButton("Book Table");
-        bookTableButton.setBounds(180, 100, 440, 40);
+        bookTableButton.setBounds(0, 0, 300, 40);
         panel.add(bookTableButton);
 
         bookTableButton.addActionListener(e -> {
@@ -46,30 +46,26 @@ public class MemberMenu extends JFrame {
             new BookTableForm();
         });
 
-        JButton rescheduleTableButton = new JButton("Reschedule Table");
-        rescheduleTableButton.setBounds(180, 150, 440, 40);
+        JButton rescheduleTableButton = new JButton("View Book Table");
+        rescheduleTableButton.setBounds(0, 50, 300, 40);
         panel.add(rescheduleTableButton);
 
         rescheduleTableButton.addActionListener(e -> {
             this.dispose();
-            new RescheduleTable();
-        });
-
-        JButton cancelTableButton = new JButton("Cancel Table");
-        cancelTableButton.setBounds(180, 200, 440, 40);
-        panel.add(cancelTableButton);
-
-        bookTableButton.addActionListener(e -> {
-            this.dispose();
-            new ViewCancelTableGuest();
+            new ViewTableMember();
         });
 
         JButton walletButton = new JButton("Wallet");
-        walletButton.setBounds(180, 250, 440, 40);
+        walletButton.setBounds(0, 100, 300, 40);
         panel.add(walletButton);
 
+        walletButton.addActionListener(e -> {
+            new AddWallet();
+            this.dispose();
+        });
+
         JButton profileButton = new JButton("Profile");
-        profileButton.setBounds(180, 300, 440, 40);
+        profileButton.setBounds(0, 150, 300, 40);
         panel.add(profileButton);
 
         profileButton.addActionListener(e -> {
@@ -77,39 +73,25 @@ public class MemberMenu extends JFrame {
             new ViewProfile();
         });
 
-        JButton viewTableOrder = new JButton("View Table Order");
-        viewTableOrder.setBounds(660, 100, 440, 40);
-        panel.add(viewTableOrder);
-
-        viewTableOrder.addActionListener(e -> {
-            this.dispose();
-            new TableCart();
-        });
-
         JButton orderMenuButton = new JButton("Order F&B Menu");
-        orderMenuButton.setBounds(660, 150, 440, 40);
+        orderMenuButton.setBounds(0, 200, 300, 40);
         panel.add(orderMenuButton);
 
-        JButton viewCartButton = new JButton("Cart");
-        viewCartButton.setBounds(660, 200, 440, 40);
-        panel.add(viewCartButton);
-
-        JButton editProfile = new JButton("Edit Profile Details");
-        editProfile.setBounds(660, 200, 440, 40);
-        panel.add(editProfile);
-
-        editProfile.addActionListener(e -> {
+        orderMenuButton.addActionListener(e -> {
             this.dispose();
-            new EditProfile();
+            new OrderFnB();
         });
 
+        JButton viewCartButton = new JButton("Cart");
+        viewCartButton.setBounds(0, 250, 300, 40);
+        panel.add(viewCartButton);
+
         JButton viewPointButton = new JButton("View Point");
-        viewPointButton.setBounds(660, 250, 440, 40);
+        viewPointButton.setBounds(0, 300, 300, 40);
         panel.add(viewPointButton);
 
-
         JButton logout = new JButton("Logout");
-        logout.setBounds(660, 300, 440, 40);
+        logout.setBounds(0, 350, 300, 40);
         panel.add(logout);
 
         logout.addActionListener(e -> {

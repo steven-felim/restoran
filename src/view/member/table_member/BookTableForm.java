@@ -1,34 +1,20 @@
-package view.member.menu_member.table_member;
+package view.member.table_member;
 
 import controller.AuthenticationController;
-import view.member.MemberMenu;
-
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
-
 import org.jdatepicker.impl.DateComponentFormatter;
+import view.member.MemberMenu;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.List;
 
 public class BookTableForm extends JFrame {
 
     private JComboBox<String> roomComboBox;
     private JComboBox<String> tableComboBox;
-    private JDatePickerImpl datePicker;
-    private JButton confirmButton;
-    private JButton cancelButton;
-    private JButton backButton;
-
-    private List<String> vipTables = Arrays.asList("VIP1", "VIP2", "VIP3");
-    private List<String> indoorTables = Arrays.asList("Indoor1", "Indoor2", "Indoor3");
-    private List<String> outdoorTables = Arrays.asList("Outdoor1", "Outdoor2", "Outdoor3");
 
     public BookTableForm() {
         initComponents();
@@ -50,7 +36,6 @@ public class BookTableForm extends JFrame {
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
         add(title);
 
-        // Main panel with GridBagLayout
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -60,7 +45,7 @@ public class BookTableForm extends JFrame {
         gbc.gridy = 0;
         mainPanel.add(new JLabel("Select Room:"), gbc);
 
-        roomComboBox = new JComboBox<>(new String[]{"VIP Room", "Indoor Room", "Outdoor Room"});
+        roomComboBox = new JComboBox<>(new String[]{"VIP", "Indoor", "Outdoor"});
         roomComboBox.addActionListener(e -> updateTableComboBox());
         gbc.gridx = 1;
         mainPanel.add(roomComboBox, gbc);
@@ -79,30 +64,32 @@ public class BookTableForm extends JFrame {
 
         UtilDateModel model = new UtilDateModel();
         Properties p = new Properties();
-        p.put("text.today", "Today");
-        p.put("text.month", "Month");
-        p.put("text.year", "Year");
 
         JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-        datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
+        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
+
         gbc.gridx = 1;
         mainPanel.add(datePicker, gbc);
 
         JPanel buttonPanel = new JPanel();
-        confirmButton = new JButton("Confirm");
-        backButton = new JButton("Back");
+        JButton confirmButton = new JButton("Confirm");
+        JButton backButton = new JButton("Back");
 
         buttonPanel.add(confirmButton);
         buttonPanel.add(backButton);
 
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 3;
         gbc.gridwidth = 2;
         mainPanel.add(buttonPanel, gbc);
 
         add(mainPanel);
 
-        confirmButton.addActionListener(e -> handleConfirmation());
+        confirmButton.addActionListener(e -> {
+//            input ke DB
+//            id table = "room" + "nomor meja"
+        });
+
         backButton.addActionListener(e -> {
             this.dispose();
             new MemberMenu();
@@ -115,30 +102,15 @@ public class BookTableForm extends JFrame {
         String selectedRoom = (String) roomComboBox.getSelectedItem();
         tableComboBox.removeAllItems();
 
-        if ("VIP Room".equals(selectedRoom)) {
-            vipTables.forEach(tableComboBox::addItem);
-        } else if ("Indoor Room".equals(selectedRoom)) {
-            indoorTables.forEach(tableComboBox::addItem);
-        } else if ("Outdoor Room".equals(selectedRoom)) {
-            outdoorTables.forEach(tableComboBox::addItem);
+        if (selectedRoom.equals("VIP")) {
+            for (int i = 1; i <= 5; i++) {
+                tableComboBox.addItem(String.valueOf(i));
+            }
+        } else if (selectedRoom.equals("Indoor") || selectedRoom.equals("Outdoor")) {
+            for (int i = 1; i <= 10; i++) {
+                tableComboBox.addItem(String.valueOf(i));
+            }
         }
-    }
-
-    private void handleConfirmation() {
-        String room = (String) roomComboBox.getSelectedItem();
-        String table = (String) tableComboBox.getSelectedItem();
-        String date = datePicker.getModel().getValue() != null ? new SimpleDateFormat("yyyy-MM-dd").format(datePicker.getModel().getValue()) : "Not selected";
-
-        JOptionPane.showMessageDialog(this, "Table successfully booked!\n" +
-                "Details:\nRoom: " + room + "\nTable: " + table + "\nDate: " + date);
-
-        clearSelections();
-    }
-
-    private void clearSelections() {
-        roomComboBox.setSelectedIndex(0);
-        tableComboBox.removeAllItems();
-        datePicker.getModel().setSelected(false);
     }
 
     public static void main(String[] args) {
