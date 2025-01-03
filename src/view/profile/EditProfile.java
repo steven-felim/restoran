@@ -1,4 +1,4 @@
-package view.member.menu_member.profile;
+package view.profile;
 
 import controller.AuthenticationController;
 

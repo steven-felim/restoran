@@ -2,7 +2,7 @@ package view.employee.cashier;
 
 import controller.AuthenticationController;
 import view.guest.login.Login;
-import view.member.menu_member.profile.ViewProfile;
+import view.profile.ViewProfile;
 
 import javax.swing.*;
 import java.awt.*;

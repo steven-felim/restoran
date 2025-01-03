@@ -1,4 +1,4 @@
-package view.member.menu_member.fnb_member;
+package view.member.fnb;
 
 import controller.FnBController;
 import model.classes.FoodAndBeverage;
@@ -8,8 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class OrderFnBMember extends JFrame {
-    public OrderFnBMember() {
+public class OrderFnB extends JFrame {
+    public OrderFnB() {
         initComponents();
         this.setVisible(true);
     }
@@ -108,13 +108,7 @@ public class OrderFnBMember extends JFrame {
 
         JButton buyButton = new JButton("Beli");
         buyButton.addActionListener(e -> {
-            JOptionPane.showInputDialog("Input nama pembeli: ");
-        //    if (nama pembeli ada di tabel guest) {
-        //        langsung input ke cart & transaksi
-        //    } else {
-        //        input dulu ke tabel guest, karena baru pertama beli
-        //        baru input ke cart & transaksi
-        //    }
+            // input pesanan ke db
             JOptionPane.showMessageDialog(this, "Pemesanan berhasil!");
         });
 
@@ -122,7 +116,7 @@ public class OrderFnBMember extends JFrame {
         cancelButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Pemesanan dibatalkan.");
 //            input ke cart
-            });
+        });
 
         bottomPanel.add(buyButton);
         bottomPanel.add(cancelButton);

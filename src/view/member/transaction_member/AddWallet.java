@@ -1,16 +1,14 @@
-package view.member.menu_member.transaction_member;
+package view.member.transaction_member;
 
-import model.classes.Wallet;
+import view.member.MemberMenu;
+
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AddWallet extends JFrame {
     private JTextField amountField;
     private JPasswordField pinField;
-    private JButton addButton;
+    private JButton addButton, backButton;
     private JLabel balanceLabel;
-    private AddWallet wallet;
 
     public AddWallet() {
         initComponents();
@@ -23,12 +21,13 @@ public class AddWallet extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
+        // Create panel and layout
         JPanel panel = new JPanel();
         add(panel);
         panel.setLayout(null);
 
         // Balance Label
-        balanceLabel = new JLabel("Current Balance: $" + wallet);
+        balanceLabel = new JLabel("Current Balance: Rp"); // tampilkan saldo melalui controller
         balanceLabel.setBounds(10, 20, 250, 25);
         panel.add(balanceLabel);
         
@@ -49,9 +48,17 @@ public class AddWallet extends JFrame {
         panel.add(pinField);
         
         addButton = new JButton("Add Balance");
-        addButton.setBounds(10, 110, 150, 25);
+        addButton.setBounds(15, 110, 120, 25);
         panel.add(addButton);
 
+        backButton = new JButton("Back");
+        backButton.setBounds(150, 110, 120, 25);
+        panel.add(backButton);
+
+        backButton.addActionListener(e -> {
+            new MemberMenu();
+            this.dispose();
+        });
     }
 
     public static void main(String[] args) {
