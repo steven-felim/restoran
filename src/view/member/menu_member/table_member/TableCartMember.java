@@ -1,10 +1,8 @@
-package view.guest.table;
+package view.member.menu_member.table_member;
 
 import model.classes.BookTable;
 import view.guest.GuestMenu;
-import view.guest.rescheduleGuest.Reschedule;
 import view.member.MemberMenu;
-import view.member.menu_member.table_member.CancelTableMember;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,12 +10,12 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewTableCart extends JFrame {
+public class TableCartMember extends JFrame {
     private JTable table;
     private DefaultTableModel model;
     private List<BookTable> bookings;
 
-    public ViewTableCart(List<BookTable> bookings) {
+    public TableCartMember(List<BookTable> bookings) {
         this.bookings = bookings != null ? bookings : new ArrayList<>();
         initComponents();
         this.setVisible(true);
@@ -57,7 +55,7 @@ public class ViewTableCart extends JFrame {
 
         cancelButton.addActionListener(e -> {
             this.dispose();
-            new ViewCancelTableGuest();
+            new CancelTableMember();
         });
 
         JButton RescheduleButton = new JButton("Reschedule");
@@ -66,7 +64,7 @@ public class ViewTableCart extends JFrame {
 
         RescheduleButton.addActionListener(e -> {
             this.dispose();
-            new Reschedule();
+            new RescheduleTableMember();
         });
 
         JButton backButton = new JButton("back");
@@ -75,7 +73,7 @@ public class ViewTableCart extends JFrame {
 
         backButton.addActionListener(e -> {
             this.dispose();
-            new GuestMenu();
+            new MemberMenu();
         });
 
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
@@ -106,6 +104,6 @@ public class ViewTableCart extends JFrame {
 
     public static void main(String[] args) {
         List<BookTable> dummyBookings = new ArrayList<>();
-        new ViewTableCart(dummyBookings);
+        new TableCartMember(dummyBookings);
     }
 }

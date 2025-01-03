@@ -121,7 +121,7 @@ public class CancelTableMember extends JFrame {
 
     private void handleViewTableOrder() {
         this.dispose();
-        new TableCart();
+        new TableCartMember(null);
     }
 
     public static void main(String[] args) {

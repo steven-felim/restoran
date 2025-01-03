@@ -2,6 +2,7 @@ package view.guest;
 
 import javax.swing.*;
 
+import view.guest.fnb.ViewCart;
 import view.guest.fnb.ViewOrderFAndBGuest;
 import view.guest.rescheduleGuest.ViewHistoryGuest;
 import view.guest.table.BookTable;
@@ -64,7 +65,7 @@ public class GuestMenu extends JFrame {
 
         viewTableOrder.addActionListener(e ->  {
             this.dispose();
-            new ViewTableCart();
+            new ViewTableCart(null);
         });
 
         JButton orderMenuButton = new JButton("Order F&B Menu");
@@ -82,7 +83,7 @@ public class GuestMenu extends JFrame {
 
         viewCartButton.addActionListener(e ->  {
             this.dispose();
-            new ViewCancelTableGuest();
+            new ViewCart();
         });
 
         add(title);

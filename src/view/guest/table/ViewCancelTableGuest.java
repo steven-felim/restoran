@@ -121,7 +121,7 @@ public class ViewCancelTableGuest extends JFrame {
 
     private void handleViewTableOrder() {
         this.dispose();
-        new ViewTableCart();
+        new ViewTableCart(null);
     }
 
     public static void main(String[] args) {
