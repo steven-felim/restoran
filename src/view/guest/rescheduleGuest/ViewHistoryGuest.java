@@ -23,33 +23,39 @@ public class ViewHistoryGuest extends JFrame {
         bookingController = new BookingController();
         model = new DefaultTableModel();
 
+        // Frame settings
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("View and Reschedule Booking History");
 
+        // Title
         JLabel title = new JLabel("Booking History and Reschedule");
         title.setBounds(400, 20, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
+        // Panel setup
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBounds(100, 80, 1080, 600);
 
+        // Reschedule Button
         JButton rescheduleButton = new JButton("Reschedule");
         rescheduleButton.setBounds(900, 0, 140, 30);
         panel.add(rescheduleButton);
 
         rescheduleButton.addActionListener(e -> {
-            // int selectedRow = table.getSelectedRow();
-            // if (selectedRow != -1) {
-            //     String bookID = model.getValueAt(selectedRow, 0).toString();
-            //     new Reschedule(bookID);
-            // } else {
-            //     JOptionPane.showMessageDialog(this, "Please select a booking to reschedule.");
-            // }
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow != -1) {
+                String bookID = model.getValueAt(selectedRow, 0).toString();
+                this.dispose();
+                new Reschedule();
+            } else {
+                JOptionPane.showMessageDialog(this, "Please select a booking to reschedule.", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
         });
 
+        // Back Button
         JButton backButton = new JButton("Back to Main Menu");
         backButton.setBounds(0, 0, 160, 30);
         panel.add(backButton);
@@ -59,6 +65,7 @@ public class ViewHistoryGuest extends JFrame {
             new GuestMenu();
         });
 
+        // Table setup
         table = new JTable(model);
         model.addColumn("Book ID");
         model.addColumn("Table ID");
@@ -70,11 +77,11 @@ public class ViewHistoryGuest extends JFrame {
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(0, 60, 1080, 600);
         panel.add(scrollPane);
-
         this.setLayout(null);
         this.add(title);
         this.add(panel);
 
+        // Load data into the table
         loadDataToView();
     }
 

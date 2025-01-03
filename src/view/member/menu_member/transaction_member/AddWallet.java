@@ -1,21 +1,20 @@
 package view.member.menu_member.transaction_member;
 
 import model.classes.Wallet;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Wallet extends JFrame {
+public class AddWallet extends JFrame {
     private JTextField amountField;
     private JPasswordField pinField;
     private JButton addButton;
     private JLabel balanceLabel;
-    private Wallet wallet;
+    private AddWallet wallet;
 
-    public Wallet(Wallet wallet) {
-        this.wallet = wallet;
+    public AddWallet() {
         initComponents();
+        this.setVisible(true);
     }
 
     private void initComponents() {
@@ -24,7 +23,6 @@ public class Wallet extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
-        // Create panel and layout
         JPanel panel = new JPanel();
         add(panel);
         panel.setLayout(null);
@@ -57,7 +55,7 @@ public class Wallet extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Wallet();
+        new AddWallet();
     }
 }
 

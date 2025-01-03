@@ -6,7 +6,7 @@ import org.jdatepicker.impl.*;
 import java.awt.*;
 import java.util.Properties;
 
-public class RescheduleTable {
+public class RescheduleTableMember {
 
     private JTable table;
     private DefaultTableModel model;
@@ -15,12 +15,17 @@ public class RescheduleTable {
     private JDatePickerImpl datePicker;
     private JButton rescheduleButton;
 
-    public RescheduleTable() {
+    public RescheduleTableMember() {
         initComponents();
         this.setVisible(true);
     }
         
-            private void initComponents() {
+    private void setVisible(boolean b) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setVisible'");
+    }
+        
+    private void initComponents() {
         JFrame frame = new JFrame("Reschedule Table");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
@@ -109,6 +114,7 @@ public class RescheduleTable {
     }
 
     public static void main(String[] args) {
-        new RescheduleTable();
+        new RescheduleTableMember();
     }
 }
+
