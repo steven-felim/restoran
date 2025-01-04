@@ -1,4 +1,4 @@
-package view.member.menu_member.fnb_member;
+package view.member.fnb_member;
 
 import controller.FnBController;
 import model.classes.FoodAndBeverage;

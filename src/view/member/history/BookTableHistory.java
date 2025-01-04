@@ -1,10 +1,8 @@
-package view.member.menu_member.history;
+package view.member.history;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import model.classes.BookTable;
 import view.member.MemberMenu;

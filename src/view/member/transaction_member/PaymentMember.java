@@ -1,15 +1,11 @@
-package view.member.menu_member.transaction_member;
+package view.member.transaction_member;
 
 import model.classes.Cart;
 import model.classes.Wallet;
-import model.classes.Transaction;
-import model.enums.TransactionStatus;
 import view.member.MemberMenu;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Date;
-import java.sql.*;
 
 public class PaymentMember extends JFrame {
     private Wallet wallet;

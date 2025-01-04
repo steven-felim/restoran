@@ -1,4 +1,4 @@
-package view.member.menu_member.table_member;
+package view.member.table_member;
 
 import model.classes.Table;
 import view.member.MemberMenu;

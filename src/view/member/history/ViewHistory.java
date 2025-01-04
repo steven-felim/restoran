@@ -1,4 +1,4 @@
-package view.member.menu_member.history;
+package view.member.history;
 
 import javax.swing.*;
 

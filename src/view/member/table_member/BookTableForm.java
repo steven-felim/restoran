@@ -1,27 +1,37 @@
-package view.member.menu_member.table_member;
+package view.member.table_member;
+
+import controller.AuthenticationController;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+import org.jdatepicker.impl.DateComponentFormatter;
+import view.member.MemberMenu;
 
 import javax.swing.*;
-import org.jdatepicker.impl.*;
-
 import java.awt.*;
-import java.util.Properties;
+import java.util.*;
 
-public class RescheduleTable extends JFrame {
+public class BookTableForm extends JFrame {
+
     private JComboBox<String> roomComboBox;
     private JComboBox<String> tableComboBox;
 
-    public RescheduleTable() {
+    public BookTableForm() {
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
-        
+
     private void initComponents() {
-        setTitle("Reschedule Table");
+        setTitle("Book Table");
         setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JLabel title = new JLabel("Reschedule Table");
+        JLabel title = new JLabel("Book Table");
         title.setBounds(330, 40, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
         add(title);
@@ -78,19 +88,11 @@ public class RescheduleTable extends JFrame {
         confirmButton.addActionListener(e -> {
 //            input ke DB
 //            id table = "room" + "nomor meja"
-//            if reschedule <= 2 kali
-//                otomatis reschedule
-//            else
-//                tunggu admin acc
-//                if admin acc
-//                    ok, reschedule
-//                else
-//                    balik ke semula
         });
 
         backButton.addActionListener(e -> {
             this.dispose();
-            new ViewTableMember();
+            new MemberMenu();
         });
 
         updateTableComboBox();
@@ -112,6 +114,6 @@ public class RescheduleTable extends JFrame {
     }
 
     public static void main(String[] args) {
-        new RescheduleTable();
+        new BookTableForm();
     }
 }

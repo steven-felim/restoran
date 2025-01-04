@@ -3,13 +3,13 @@ package view.member;
 import javax.swing.*;
 
 import controller.AuthenticationController;
-import view.member.menu_member.fnb_member.OrderFnBMember;
-import view.member.menu_member.fnb_member.ViewCartMember;
+import view.member.fnb_member.OrderFnBMember;
+import view.member.fnb_member.ViewCartMember;
 import view.profile.ViewProfile;
-import view.member.menu_member.table_member.BookTableForm;
-import view.member.menu_member.table_member.ViewTableMember;
-import view.member.menu_member.transaction_member.AddWallet;
-import view.member.menu_member.transaction_member.VoucherPoint;
+import view.member.table_member.BookTableForm;
+import view.member.table_member.ViewTableMember;
+import view.member.transaction_member.AddWallet;
+import view.member.transaction_member.VoucherPoint;
 
 import java.awt.*;
 

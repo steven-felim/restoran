@@ -1,13 +1,11 @@
-package view.member.menu_member.fnb_member;
+package view.member.fnb_member;
 
 import model.classes.Cart;
-import model.classes.FoodAndBeverage;
 import view.member.MemberMenu;
-import view.member.menu_member.transaction_member.DeliveryMember;
+import view.member.transaction_member.DeliveryMember;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Map;
 
 public class ViewCartMember extends JFrame {
     private Cart cart;
