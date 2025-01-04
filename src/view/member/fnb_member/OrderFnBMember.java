@@ -108,21 +108,19 @@ public class OrderFnBMember extends JFrame {
 
         JButton buyButton = new JButton("Checkout");
         buyButton.addActionListener(e -> {
-            JOptionPane.showInputDialog("Input nama pembeli: ");
-        //    if (nama pembeli ada di tabel guest) {
-        //        langsung input ke cart & transaksi
-        //    } else {
-        //        input dulu ke tabel guest, karena baru pertama beli
-        //        baru input ke cart & transaksi
-        //    }
+            // input ke cart
             JOptionPane.showMessageDialog(this, "Pemesanan berhasil!");
+            new ConfirmFnBOrderMember(); // konfirmasi ulang
+            this.dispose();
         });
 
         JButton cancelButton = new JButton("Add to Cart");
         cancelButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Pemesanan dibatalkan.");
-//            input ke cart
-            });
+            JOptionPane.showMessageDialog(this, "Pemesanan dimasukkan ke keranjang.");
+            // input ke cart
+            new MemberMenu();
+            this.dispose();
+        });
 
         bottomPanel.add(buyButton);
         bottomPanel.add(cancelButton);

@@ -108,15 +108,23 @@ public class OrderFnBGuest extends JFrame {
 
         JButton buyButton = new JButton("Checkout");
         buyButton.addActionListener(e -> {
-            // input pesanan ke db
+            // if (nama pembeli ada di tabel guest) {
+            //        langsung input ke cart & transaksi
+            //    } else {
+            //        input dulu ke tabel guest, karena baru pertama beli
+            //        baru input ke cart & transaksi
+            //    }
             JOptionPane.showMessageDialog(this, "Pemesanan berhasil!");
             new ConfirmFnBOrder(); // konfirmasi ulang
+            this.dispose();
         });
 
         JButton cancelButton = new JButton("Add to Cart");
         cancelButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Pemesanan dimasukkan ke keranjang.");
-//            input ke cart
+            // input ke cart
+            new GuestMenu();
+            this.dispose();
         });
 
         bottomPanel.add(buyButton);

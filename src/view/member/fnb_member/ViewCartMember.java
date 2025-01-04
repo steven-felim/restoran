@@ -1,14 +1,18 @@
 package view.member.fnb_member;
 
+import controller.FnBController;
 import model.classes.Cart;
+import model.classes.FoodAndBeverage;
 import view.member.MemberMenu;
-import view.member.transaction_member.DeliveryMember;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class ViewCartMember extends JFrame {
     private Cart cart;
+    private FnBController fnbc;
+    // FnBController hanya untuk contoh gambaran program, nanti pakai data fnb di cart
 
     public ViewCartMember() {
         initComponents();
@@ -16,6 +20,8 @@ public class ViewCartMember extends JFrame {
     }
 
     private void initComponents() {
+        fnbc = new FnBController();
+
         this.setTitle("View Cart");
         this.setSize(600, 400);
         this.setLocationRelativeTo(null);
@@ -34,7 +40,7 @@ public class ViewCartMember extends JFrame {
             new MemberMenu(); 
         });
 
-        JLabel title = new JLabel("Your Cart");
+        JLabel title = new JLabel("Your FnB Order");
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
         title.setBounds(200, 10, 300, 30);
 
@@ -43,56 +49,64 @@ public class ViewCartMember extends JFrame {
 
         this.add(topPanel, BorderLayout.NORTH);
 
-        // Cart details panel
-        JPanel cartPanel = new JPanel();
-        cartPanel.setLayout(new BoxLayout(cartPanel, BoxLayout.Y_AXIS));
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        // Display the cart items
-        // Map<FoodAndBeverage, Integer> items = cart.getItems();
-        // if (items.isEmpty()) {
-        //     cartPanel.add(new JLabel("Your cart is empty."));
-        // } else {
-        //     for (Map.Entry<FoodAndBeverage, Integer> entry : items.entrySet()) {
-        //         FoodAndBeverage item = entry.getKey();
-        //         int quantity = entry.getValue();
-        //         JPanel itemPanel = new JPanel();
-        //         itemPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        List<FoodAndBeverage> menuItems = fnbc.getAllFnb();
 
-        //         JLabel itemNameLabel = new JLabel(item.getName() + " - " + quantity + " pcs - Rp " + (item.getPrice() * quantity));
-        //         itemPanel.add(itemNameLabel);
+        for (FoodAndBeverage item : menuItems) {
+            JPanel itemPanel = new JPanel();
+            itemPanel.setLayout(new GridBagLayout());
 
-        //         cartPanel.add(itemPanel);
-        //     }
-        // }
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.insets = new Insets(5, 5, 5, 5);
 
-        JScrollPane cartScrollPane = new JScrollPane(cartPanel);
-        this.add(cartScrollPane, BorderLayout.CENTER);
+            JLabel itemNameLabel = new JLabel(item.getName() + " - Rp " + item.getPrice());
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.weightx = 1.0;
+            itemPanel.add(itemNameLabel, gbc);
 
-        // Bottom panel with Proceed to Checkout button
+            JPanel quantityPanel = new JPanel();
+            quantityPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+            JTextField quantityField = new JTextField(5);
+            quantityPanel.add(quantityField);
+            // jumlah yg dipesan menyesuaikan cart & otomatis terisi di text field
+
+            JButton removeButton = new JButton("Delete");
+            quantityPanel.add(removeButton);
+
+            gbc.gridx = 2;
+            gbc.weightx = 0.0;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            itemPanel.add(quantityPanel, gbc);
+
+            removeButton.addActionListener(e -> {
+                // hapus dari cart
+            });
+
+            mainPanel.add(itemPanel);
+        }
+        JLabel totalLabel = new JLabel("Total Price:    Rp"); // tambahkan total harga cart melalui controller
+        mainPanel.add(totalLabel);
+
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        this.add(scrollPane, BorderLayout.CENTER);
+
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        JButton proceedButton = new JButton("Proceed to Checkout");
-        proceedButton.addActionListener(e -> {
-            this.dispose();
-            new DeliveryMember();  
+        JButton buyButton = new JButton("Checkout");
+        buyButton.addActionListener(e -> {
+            // input pesanan ke db
+            JOptionPane.showMessageDialog(this, "Pemesanan berhasil!");
         });
 
-        JButton cancelButton = new JButton("Cancel");
-        cancelButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Order cancelled.");
-            // cart.clearCart(); 
-            this.dispose();
-        });
-
-        bottomPanel.add(proceedButton);
-        bottomPanel.add(cancelButton);
+        bottomPanel.add(buyButton);
 
         this.add(bottomPanel, BorderLayout.SOUTH);
-    }
-
-    public static void main(String[] args) {
-        new ViewCartMember();
     }
 }
 
