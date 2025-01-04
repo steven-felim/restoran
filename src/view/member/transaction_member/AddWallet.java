@@ -1,12 +1,8 @@
-package view.member.menu_member.transaction_member;
+package view.member.transaction_member;
 
-import model.classes.Wallet;
 import view.member.MemberMenu;
-import view.profile.ViewProfile;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AddWallet extends JFrame {
     private JTextField amountField;

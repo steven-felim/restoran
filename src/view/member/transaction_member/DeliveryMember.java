@@ -1,9 +1,7 @@
-package view.member.menu_member.transaction_member;
+package view.member.transaction_member;
 
 import model.classes.Cart;
-import model.classes.Transaction;
-import view.member.menu_member.fnb_member.ViewCartMember;
-import view.member.menu_member.transaction_member.PaymentMember;
+import view.member.fnb_member.ViewCartMember;
 
 import javax.swing.*;
 import java.awt.*;

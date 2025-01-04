@@ -1,15 +1,11 @@
-package view.member.menu_member.history;
+package view.member.history;
 
-import model.classes.Transaction;
 import view.member.MemberMenu;
 import view.profile.ViewProfile;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TransactionHistory extends JFrame {
     private JTable historyTable;

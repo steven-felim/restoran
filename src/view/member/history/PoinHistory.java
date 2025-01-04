@@ -1,15 +1,12 @@
-package view.member.menu_member.history;
+package view.member.history;
 
 import javax.swing.*;
 import java.awt.*;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import model.classes.Transaction;
-import model.enums.TransactionStatus;
 import view.member.MemberMenu;
 import view.profile.ViewProfile;
 
-import java.sql.*;
 import java.util.List;
 
 public class PoinHistory extends JFrame {

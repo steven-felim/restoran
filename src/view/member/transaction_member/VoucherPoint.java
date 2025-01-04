@@ -1,16 +1,12 @@
-package view.member.menu_member.transaction_member;
+package view.member.transaction_member;
 
 import javax.swing.*;
 
-import model.classes.Transaction;
-import model.classes.Voucher;
-import model.classes.Wallet;
 import view.member.MemberMenu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Member;
-import java.util.ArrayList;
 
 public class VoucherPoint extends JFrame {
     private JButton btnRedeem;
