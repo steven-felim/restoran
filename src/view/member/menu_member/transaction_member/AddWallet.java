@@ -1,6 +1,9 @@
 package view.member.menu_member.transaction_member;
 
 import model.classes.Wallet;
+import view.member.MemberMenu;
+import view.profile.ViewProfile;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +22,7 @@ public class AddWallet extends JFrame {
 
     private void initComponents() {
         setTitle("Wallet Management");
-        setSize(300, 200);
+        setSize(400, 420);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
@@ -49,8 +52,17 @@ public class AddWallet extends JFrame {
         panel.add(pinField);
         
         addButton = new JButton("Add Balance");
-        addButton.setBounds(10, 110, 150, 25);
+        addButton.setBounds(10, 140, 150, 25);
         panel.add(addButton);
+
+        JButton profileButton = new JButton("Back");
+        profileButton.setBounds(200, 140, 150, 25);
+        panel.add(profileButton);
+
+        profileButton.addActionListener(e -> {
+            this.dispose();
+            new MemberMenu();
+        });
 
     }
 
