@@ -3,6 +3,7 @@ package view.guest;
 import javax.swing.*;
 
 import view.guest.fnb.OrderFnBGuest;
+import view.guest.fnb.ViewCart;
 import view.guest.login.Register;
 import view.guest.table.BookTable;
 import view.guest.table.ViewTableGuest;
@@ -64,7 +65,7 @@ public class GuestMenu extends JFrame {
 
         viewCartButton.addActionListener(e ->  {
             this.dispose();
-
+            new ViewCart();
         });
 
         JButton registerButton = new JButton("Register");

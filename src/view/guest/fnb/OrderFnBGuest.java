@@ -110,11 +110,12 @@ public class OrderFnBGuest extends JFrame {
         buyButton.addActionListener(e -> {
             // input pesanan ke db
             JOptionPane.showMessageDialog(this, "Pemesanan berhasil!");
+            new ConfirmFnBOrder(); // konfirmasi ulang
         });
 
         JButton cancelButton = new JButton("Add to Cart");
         cancelButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Pemesanan dibatalkan.");
+            JOptionPane.showMessageDialog(this, "Pemesanan dimasukkan ke keranjang.");
 //            input ke cart
         });
 

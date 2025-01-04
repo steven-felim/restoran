@@ -2,6 +2,8 @@ package view.guest.fnb;
 
 import model.classes.Cart;
 import model.classes.Transaction;
+import view.guest.GuestMenu;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -28,7 +30,7 @@ public class DeliveryMenu extends JFrame {
         backButton.setBounds(25, 10, 150, 30);
         backButton.addActionListener(e -> {
             this.dispose();
-            new ViewCart(); 
+            new ConfirmFnBOrder();
         });
 
         JLabel title = new JLabel("Delivery Order");
@@ -74,6 +76,7 @@ public class DeliveryMenu extends JFrame {
                 // Clear cart after order is placed
                 // cart.clearCart();
                 this.dispose();
+                new GuestMenu();
             }
         });
 
@@ -81,6 +84,7 @@ public class DeliveryMenu extends JFrame {
         cancelButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Order cancelled.");
             this.dispose();
+            new GuestMenu();
         });
 
         bottomPanel.add(placeOrderButton);
