@@ -1,15 +1,15 @@
-package view.member.fnb;
+package view.guest.fnb;
 
 import controller.FnBController;
 import model.classes.FoodAndBeverage;
-import view.member.MemberMenu;
+import view.guest.GuestMenu;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class OrderFnB extends JFrame {
-    public OrderFnB() {
+public class OrderFnBGuest extends JFrame {
+    public OrderFnBGuest() {
         initComponents();
         this.setVisible(true);
     }
@@ -32,7 +32,7 @@ public class OrderFnB extends JFrame {
 
         backButton.addActionListener(e -> {
             this.dispose();
-            new MemberMenu();
+            new GuestMenu();
         });
 
         JLabel title = new JLabel("Order Menu");

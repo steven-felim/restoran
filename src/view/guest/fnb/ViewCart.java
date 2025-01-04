@@ -24,7 +24,7 @@ public class ViewCart extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Cart Summary");
 
-        JLabel title = new JLabel("Order Summary");
+        JLabel title = new JLabel("Your FnB Order");
         title.setBounds(500, 0, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
@@ -69,13 +69,13 @@ public class ViewCart extends JFrame {
         // Button Actions
         deliveryButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "You have chosen delivery. Please enter your address.");
-            new DeliveryMenu(); 
+            new DeliveryMenu();
             this.dispose();
         });
 
         pickUpButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "You have chosen pick-up. A receipt will be generated.");
-            generateReceipt();  
+            generateReceipt();
             this.dispose();
             new ViewCart();
         });
@@ -84,7 +84,7 @@ public class ViewCart extends JFrame {
         orderButton.setBounds(1050, 10, 100, 30);
         orderButton.addActionListener(e -> {
             this.dispose();
-            new ViewOrderFAndBGuest(); 
+            new OrderFnBGuest();
         });
         panel.add(orderButton);
 
@@ -92,7 +92,7 @@ public class ViewCart extends JFrame {
         backButton.setBounds(10, 10, 100, 30);
         backButton.addActionListener(e -> {
             this.dispose();
-            new GuestMenu(); 
+            new GuestMenu();
         });
         panel.add(backButton);
 
@@ -127,4 +127,3 @@ public class ViewCart extends JFrame {
         new ViewCart();
     }
 }
-
