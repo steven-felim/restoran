@@ -88,7 +88,7 @@ public class MemberMenu extends JFrame {
         viewCartButton.setBounds(0, 250, 300, 40);
         panel.add(viewCartButton);
 
-        orderMenuButton.addActionListener(e -> {
+        viewCartButton.addActionListener(e -> {
             this.dispose();
             new ViewCartMember();
         });
@@ -97,7 +97,7 @@ public class MemberMenu extends JFrame {
         viewPointButton.setBounds(0, 300, 300, 40);
         panel.add(viewPointButton);
 
-        orderMenuButton.addActionListener(e -> {
+        viewPointButton.addActionListener(e -> {
             this.dispose();
             new VoucherPoint();
         });
