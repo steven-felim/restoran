@@ -7,6 +7,7 @@ import view.member.menu_member.fnb_member.OrderFnBMember;
 import view.member.menu_member.fnb_member.ViewCartMember;
 import view.profile.ViewProfile;
 import view.member.menu_member.table_member.BookTableForm;
+import view.member.menu_member.table_member.ViewTableMember;
 import view.member.menu_member.transaction_member.AddWallet;
 import view.member.menu_member.transaction_member.VoucherPoint;
 
@@ -53,7 +54,7 @@ public class MemberMenu extends JFrame {
 
         rescheduleTableButton.addActionListener(e -> {
             this.dispose();
-            new BookTableForm();
+            new ViewTableMember();
         });
 
         JButton walletButton = new JButton("Wallet");
@@ -61,8 +62,8 @@ public class MemberMenu extends JFrame {
         panel.add(walletButton);
 
         walletButton.addActionListener(e -> {
-            new AddWallet();
             this.dispose();
+            new AddWallet();
         });
 
         JButton profileButton = new JButton("Profile");
