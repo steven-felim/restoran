@@ -6,7 +6,6 @@ import view.guest.fnb.ViewOrderFAndBGuest;
 import view.guest.rescheduleGuest.ViewHistoryGuest;
 import view.guest.table.BookTable;
 import view.guest.table.ViewCancelTableGuest;
-import view.guest.table.ViewTableCart;
 
 import java.awt.*;
 
@@ -64,7 +63,7 @@ public class GuestMenu extends JFrame {
 
         viewTableOrder.addActionListener(e ->  {
             this.dispose();
-            new ViewTableCart();
+            new ();
         });
 
         JButton orderMenuButton = new JButton("Order F&B Menu");

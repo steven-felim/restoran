@@ -24,7 +24,7 @@ public class ViewCart extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Cart Summary");
 
-        JLabel title = new JLabel("Order Summary");
+        JLabel title = new JLabel("Your FnB Order");
         title.setBounds(500, 0, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
