@@ -1,31 +1,30 @@
 package view.guest.table;
 
+import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
-import org.jdatepicker.impl.DateComponentFormatter;
 
 import javax.swing.*;
-import view.guest.GuestMenu;
 import java.awt.*;
 import java.util.Properties;
 
-public class BookTable extends JFrame {
+public class RescheduleTable  extends JFrame {
     private JComboBox<String> roomComboBox;
     private JComboBox<String> tableComboBox;
 
-    public BookTable() {
+    public RescheduleTable() {
         initComponents();
         this.setVisible(true);
     }
 
     private void initComponents() {
-        setTitle("Book Table");
+        setTitle("Reschedule Table");
         setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JLabel title = new JLabel("Book Table");
+        JLabel title = new JLabel("Reschedule Table");
         title.setBounds(330, 40, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
         add(title);
@@ -80,24 +79,21 @@ public class BookTable extends JFrame {
         add(mainPanel);
 
         confirmButton.addActionListener(e -> {
-        // // Get selected data
-        // String selectedRoom = (String) roomComboBox.getSelectedItem();
-        // String selectedTable = (String) tableComboBox.getSelectedItem();
-        // String selectedDate = datePicker.getJFormattedTextField().getText(); 
-
-        // // Save booking data
-        // BookingController bookingController = new BookingController();
-        // bookingController.saveBooking(new BookTableData(selectedRoom, selectedTable, selectedDate));
-
-        // // Transition to ViewHistoryGuest
-        // this.dispose();
-        // new ViewHistoryGuest();
-    });
-
+//            input ke DB
+//            id table = "room" + "nomor meja"
+//            if reschedule <= 2 kali
+//                otomatis reschedule
+//            else
+//                tunggu admin acc
+//                if admin acc
+//                    ok, reschedule
+//                else
+//                    balik ke semula
+        });
 
         backButton.addActionListener(e -> {
             this.dispose();
-            new GuestMenu();
+            new ViewTableGuest();
         });
 
         updateTableComboBox();
@@ -119,6 +115,6 @@ public class BookTable extends JFrame {
     }
 
     public static void main(String[] args) {
-        new BookTable();
+        new view.member.table_member.RescheduleTable();
     }
 }
