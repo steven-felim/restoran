@@ -12,6 +12,7 @@ import java.util.List;
 public class ViewCart extends JFrame {
     private Cart cart;
     private FnBController fnbc;
+    // FnBController hanya untuk contoh gambaran program, nanti pakai data fnb di cart
 
     public ViewCart() {
         initComponents();
@@ -19,108 +20,92 @@ public class ViewCart extends JFrame {
     }
 
     private void initComponents() {
-        this.setSize(1280, 720);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        fnbc = new FnBController();
+
         this.setTitle("Cart Summary");
+        this.setSize(600, 400);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        JLabel title = new JLabel("Your FnB Order");
-        title.setBounds(500, 0, 700, 60);
-        title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(null);
+        topPanel.setPreferredSize(new Dimension(600, 75));
 
-        JPanel panel = new JPanel();
-        panel.setLayout(null);
-        panel.setBounds(0, 100, 880, 700);
+        JButton backButton = new JButton("Back to Main Menu");
+        backButton.setBounds(25, 10, 150, 30);
 
-        // Show cart details and total price
-        JTextArea cartDetails = new JTextArea();
-        cartDetails.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
-        cartDetails.setBounds(10, 50, 1245, 300);
-        cartDetails.setEditable(false);
-
-        StringBuilder cartContent = new StringBuilder();
-        double totalPrice = 0;
-
-        // for (FoodAndBeverage fnb : cart.getItems()) {
-        //     cartContent.append(fnb.getName()).append(" x").append(fnb.getQuantity())
-        //             .append(" - ").append(fnb.getPrice()).append("\n");
-        //     totalPrice += fnb.getPrice() * fnb.getQuantity();
-        // }
-
-        cartContent.append("\nTotal Price: ").append(totalPrice);
-        cartDetails.setText(cartContent.toString());
-
-        panel.add(cartDetails);
-
-        // Choose Delivery or Pick-up
-        JLabel methodLabel = new JLabel("Choose a method to collect your order:");
-        methodLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
-        methodLabel.setBounds(200, 360, 600, 30);
-        panel.add(methodLabel);
-
-        JButton deliveryButton = new JButton("Delivery");
-        deliveryButton.setBounds(200, 400, 200, 40);
-        panel.add(deliveryButton);
-
-        JButton pickUpButton = new JButton("Pick Up at Restaurant");
-        pickUpButton.setBounds(450, 400, 250, 40);
-        panel.add(pickUpButton);
-
-        // Button Actions
-        deliveryButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "You have chosen delivery. Please enter your address.");
-            new DeliveryMenu();
-            this.dispose();
-        });
-
-        pickUpButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "You have chosen pick-up. A receipt will be generated.");
-            generateReceipt();
-            this.dispose();
-            new ViewCart();
-        });
-
-        JButton orderButton = new JButton("order menu");
-        orderButton.setBounds(1050, 10, 100, 30);
-        orderButton.addActionListener(e -> {
-            this.dispose();
-            new OrderFnBGuest();
-        });
-        panel.add(orderButton);
-
-        JButton backButton = new JButton("Back");
-        backButton.setBounds(10, 10, 100, 30);
         backButton.addActionListener(e -> {
             this.dispose();
             new GuestMenu();
         });
-        panel.add(backButton);
 
-        this.add(title);
-        this.add(panel);
-    }
+        JLabel title = new JLabel("Your FnB Order");
+        title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
+        title.setBounds(200, 10, 300, 30);
 
-    //Method to generate receipt for pick-up option
-    private void generateReceipt() {
-        StringBuilder receiptContent = new StringBuilder();
-        double totalPrice = 0;
+        topPanel.add(backButton);
+        topPanel.add(title);
 
-        // receiptContent.append("Restaurant Receipt\n\n");
-        // for (FoodAndBeverage fnb : cart.getItems()) {
-        //     receiptContent.append(fnb.getName()).append(" x").append(fnb.getQuantity())
-        //             .append(" - ").append(fnb.getPrice()).append("\n");
-        //     totalPrice += fnb.getPrice() * fnb.getQuantity();
-        // }
+        this.add(topPanel, BorderLayout.NORTH);
 
-        receiptContent.append("\nTotal Price: ").append(totalPrice);
-        receiptContent.append("\n\nThank you for your order! Please pick up your food at the restaurant.");
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        JTextArea receiptTextArea = new JTextArea();
-        receiptTextArea.setText(receiptContent.toString());
-        receiptTextArea.setEditable(false);
-        receiptTextArea.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
+        List<FoodAndBeverage> menuItems = fnbc.getAllFnb();
 
-        JOptionPane.showMessageDialog(this, new JScrollPane(receiptTextArea), "Receipt", JOptionPane.INFORMATION_MESSAGE);
+        for (FoodAndBeverage item : menuItems) {
+            JPanel itemPanel = new JPanel();
+            itemPanel.setLayout(new GridBagLayout());
+
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.insets = new Insets(5, 5, 5, 5);
+
+            JLabel itemNameLabel = new JLabel(item.getName() + " - Rp " + item.getPrice());
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.weightx = 1.0;
+            itemPanel.add(itemNameLabel, gbc);
+
+            JPanel quantityPanel = new JPanel();
+            quantityPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+            JTextField quantityField = new JTextField(5);
+            quantityPanel.add(quantityField);
+            // jumlah yg dipesan menyesuaikan cart & otomatis terisi di text field
+
+            JButton removeButton = new JButton("Delete");
+            quantityPanel.add(removeButton);
+
+            gbc.gridx = 2;
+            gbc.weightx = 0.0;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            itemPanel.add(quantityPanel, gbc);
+
+            removeButton.addActionListener(e -> {
+                // hapus dari cart
+            });
+
+            mainPanel.add(itemPanel);
+        }
+        JLabel totalLabel = new JLabel("Total Price:    Rp"); // tambahkan total harga cart melalui controller
+        mainPanel.add(totalLabel);
+
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        this.add(scrollPane, BorderLayout.CENTER);
+
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        JButton buyButton = new JButton("Checkout");
+        buyButton.addActionListener(e -> {
+            // input pesanan ke db
+            JOptionPane.showMessageDialog(this, "Pemesanan berhasil!");
+        });
+
+        bottomPanel.add(buyButton);
+        this.add(bottomPanel, BorderLayout.SOUTH);
     }
 
     public static void main(String[] args) {
