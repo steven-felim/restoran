@@ -1,6 +1,7 @@
 package view.profile;
 
 import controller.AuthenticationController;
+import controller.PasswordToggleCommand;
 
 import javax.swing.*;
 import java.awt.*;
@@ -82,19 +83,12 @@ public class ChangePassword extends JFrame {
         showButton.setBounds(100, 0, 100, 40);
         buttonPanel.add(showButton);
 
-        showButton.addActionListener(new ActionListener() {
-            private boolean isPasswordVisible = false;
+        PasswordToggleCommand command = new PasswordToggleCommand(showButton, new JPasswordField[]{oldPassField, newPassField, confirmPassField});
 
+        showButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (isPasswordVisible) {
-                    confirmPassField.setEchoChar('*');
-                    showButton.setText("Show Pass");
-                } else {
-                    confirmPassField.setEchoChar((char) 0);
-                    showButton.setText("Hide Pass");
-                }
-                isPasswordVisible = !isPasswordVisible;
+                command.execute();
             }
         });
 
