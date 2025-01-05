@@ -46,7 +46,6 @@ public class TransactionHistory extends JFrame {
         add(bottomPanel, BorderLayout.SOUTH);
     }
 
-    
     public static void main(String[] args) {
         new TransactionHistory();
     }
