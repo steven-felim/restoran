@@ -1,18 +1,13 @@
 package view.member.history;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-
-import model.classes.Transaction;
 import view.member.MemberMenu;
-import view.profile.ViewProfile;
-
-import java.util.List;
 
 public class PoinHistory extends JFrame {
-
-    private JTextArea historyTextArea;
-    private List<Transaction> transactionHistory;
+    private JTable historyTable;
+    private DefaultTableModel tableModel;
 
     public PoinHistory() {
         initComponents();
@@ -22,63 +17,35 @@ public class PoinHistory extends JFrame {
     private void initComponents() {
         setTitle("History Penukaran Poin");
         setSize(500, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-
+        JPanel panel = new JPanel(new BorderLayout());
         JLabel titleLabel = new JLabel("History Penukaran Poin", JLabel.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        titleLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
         panel.add(titleLabel, BorderLayout.NORTH);
 
-        historyTextArea = new JTextArea();
-        historyTextArea.setEditable(false); 
-        panel.add(new JScrollPane(historyTextArea), BorderLayout.CENTER);
+        // Table setup
+        tableModel = new DefaultTableModel();
+        tableModel.addColumn("Date");
+        tableModel.addColumn("Voucher Name");
+        tableModel.addColumn("Point");
 
-        // loadHistory();
+        historyTable = new JTable(tableModel);
 
-        // private void loadHistory() {
-        //     StringBuilder historyContent = new StringBuilder();
-        //     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    
-        //     if (transactionHistory.isEmpty()) {
-        //         historyContent.append("Tidak ada transaksi penukaran poin.");
-        //     } else {
-        //         for (Transaction transaction : transactionHistory) {
-        //             // Format each transaction to display
-        //             historyContent.append("Voucher ID: ").append(transaction.getVoucherId())
-        //                            .append("\nTanggal Pembelian: ").append(dateFormat.format(transaction.getDatePurchase()))
-        //                            .append("\nTotal Poin yang Digunakan: ").append(transaction.getTotal())
-        //                            .append("\nStatus: ").append(transaction.getStatus())
-        //                            .append("\n-----------------------------\n");
-        //         }
-        //     }
-        //     historyTextArea.setText(historyContent.toString());
-        // }
+        JScrollPane scrollPane = new JScrollPane(historyTable);
+        panel.add(scrollPane, BorderLayout.CENTER);
+        panel.add(scrollPane, BorderLayout.CENTER);
 
-        JPanel panelButton = new JPanel();
-        panelButton.setLayout(null);
-        panelButton.setBounds(0, 30, 500, 500);
-
+        JPanel buttonPanel = new JPanel();
         JButton backButton = new JButton("Back Home");
-        backButton.setBounds(10, 320, 100, 30);
         backButton.addActionListener(e -> {
             this.dispose();
             new MemberMenu();
         });
-        panelButton.add(backButton);
-
-        JButton profilButton = new JButton("View Profile");
-        profilButton.setBounds(350, 320, 120, 30);
-        profilButton.addActionListener(e -> {
-            this.dispose();
-            new ViewProfile();
-        });
-        panelButton.add(profilButton);
-
+        buttonPanel.add(backButton);
+        panel.add(buttonPanel, BorderLayout.SOUTH);
         add(panel);
-        add(panelButton);
     }
 
 

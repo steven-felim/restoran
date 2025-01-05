@@ -1,7 +1,6 @@
 package view.member.history;
 
 import view.member.MemberMenu;
-import view.profile.ViewProfile;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -41,17 +40,9 @@ public class TransactionHistory extends JFrame {
         JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> {
             this.dispose();
-            new MemberMenu();
+            new ViewHistory();
         });
         bottomPanel.add(backButton);
-
-        JButton ViewProfileButton = new JButton("ViewProfile");
-        ViewProfileButton.addActionListener(e -> {
-            this.dispose();
-            new ViewProfile();
-        });
-        bottomPanel.add(ViewProfileButton);
-
         add(bottomPanel, BorderLayout.SOUTH);
     }
 

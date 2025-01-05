@@ -5,6 +5,7 @@ import javax.swing.*;
 import controller.AuthenticationController;
 import view.member.fnb_member.OrderFnBMember;
 import view.member.fnb_member.ViewCartMember;
+import view.member.history.ViewHistory;
 import view.profile.ViewProfile;
 import view.member.table_member.BookTableForm;
 import view.member.table_member.ViewTableMember;
@@ -24,7 +25,7 @@ public class MemberMenu extends JFrame {
     }
 
     private void initComponents() {
-        this.setSize(400, 560);
+        this.setSize(400, 610);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -37,7 +38,7 @@ public class MemberMenu extends JFrame {
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        panel.setBounds(44, 80, 300, 400);
+        panel.setBounds(44, 80, 300, 450);
 
         JButton bookTableButton = new JButton("Book Table");
         bookTableButton.setBounds(0, 0, 300, 40);
@@ -88,7 +89,7 @@ public class MemberMenu extends JFrame {
         viewCartButton.setBounds(0, 250, 300, 40);
         panel.add(viewCartButton);
 
-        orderMenuButton.addActionListener(e -> {
+        viewCartButton.addActionListener(e -> {
             this.dispose();
             new ViewCartMember();
         });
@@ -97,13 +98,22 @@ public class MemberMenu extends JFrame {
         viewPointButton.setBounds(0, 300, 300, 40);
         panel.add(viewPointButton);
 
-        orderMenuButton.addActionListener(e -> {
+        viewPointButton.addActionListener(e -> {
             this.dispose();
             new VoucherPoint();
         });
 
+        JButton history = new JButton("View History");
+        history.setBounds(0, 350, 300, 40);
+        panel.add(history);
+
+        history.addActionListener(e -> {
+            this.dispose();
+            new ViewHistory();
+        });
+
         JButton logout = new JButton("Logout");
-        logout.setBounds(0, 350, 300, 40);
+        logout.setBounds(0, 400, 300, 40);
         panel.add(logout);
 
         logout.addActionListener(e -> {
