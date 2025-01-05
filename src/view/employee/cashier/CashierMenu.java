@@ -47,8 +47,8 @@ public class CashierMenu extends JFrame{
         buttonPanel.add(orderFnB);
 
         orderFnB.addActionListener(e -> {
-            new OrderFnBCashier();
             this.dispose();
+            new OrderFnBCashier();
         });
 
         JButton acceptDelivery = new JButton("View Profile");
@@ -57,7 +57,7 @@ public class CashierMenu extends JFrame{
 
         acceptDelivery.addActionListener(e -> {
             this.dispose();
-            new ViewProfile();
+            new ViewProfile("Cashier");
         });
 
         JButton logout = new JButton("Logout");

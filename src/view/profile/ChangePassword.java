@@ -9,7 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ChangePassword extends JFrame {
-    public ChangePassword() {
+    private String originClass; // simpan origin dengan Design Pattern Memento
+
+    public ChangePassword(String originClass) {
+        this.originClass = originClass;
         initComponents();
         if (!new AuthenticationController().checkUser()) {
             this.dispose();
@@ -98,7 +101,7 @@ public class ChangePassword extends JFrame {
 
         cancelButton.addActionListener(e -> {
             this.dispose();
-            new ViewProfile();
+            new ViewProfile(originClass);
         });
 
         add(title);

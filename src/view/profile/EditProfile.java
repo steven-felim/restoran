@@ -6,8 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class EditProfile extends JFrame {
+    private String originClass; // simpan origin dengan Design Pattern Memento
 
-    public EditProfile() {
+    public EditProfile(String originClass) {
+        this.originClass = originClass;
         initComponents();
         if (!new AuthenticationController().checkUser()) {
             this.dispose();
@@ -80,7 +82,7 @@ public class EditProfile extends JFrame {
 
         cancelButton.addActionListener(e -> {
             this.dispose();
-            new ViewProfile();
+            new ViewProfile(originClass);
         });
 
         buttonPanel.add(saveButton);

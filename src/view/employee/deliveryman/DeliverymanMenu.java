@@ -48,7 +48,7 @@ public class DeliverymanMenu extends JFrame {
 
         acceptDelivery.addActionListener(e -> {
             this.dispose();
-            new ViewProfile();
+            new ViewProfile("Deliveryman");
         });
 
         JButton logout = new JButton("Logout");

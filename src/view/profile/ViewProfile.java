@@ -1,13 +1,20 @@
 package view.profile;
 
 import controller.AuthenticationController;
+import view.employee.cashier.CashierMenu;
+import view.employee.chef.ChefMenu;
+import view.employee.deliveryman.DeliverymanMenu;
+import view.employee.waiter.WaiterMenu;
+import view.member.MemberMenu;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ViewProfile extends JFrame {
+    private String originClass; // simpan origin dengan Design Pattern Memento
 
-    public ViewProfile() {
+    public ViewProfile(String originClass) {
+        this.originClass = originClass;
         initComponents();
         if (!new AuthenticationController().checkUser()) {
             this.dispose();
@@ -27,7 +34,6 @@ public class ViewProfile extends JFrame {
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
         add(title, BorderLayout.NORTH);
 
-        // Panel untuk menampilkan informasi profil
         JPanel profilePanel = new JPanel();
         profilePanel.setLayout(new GridLayout(5, 2, 10, 10));
         profilePanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -50,13 +56,14 @@ public class ViewProfile extends JFrame {
         JLabel phoneLabel = new JLabel(phone);
         profilePanel.add(phoneLabel);
 
-        profilePanel.add(new JLabel("Wallet Balance:"));
-        JLabel walletLabel = new JLabel("Rp" + walletBalance);
-        profilePanel.add(walletLabel);
+        if ("Member".equals(originClass)) {
+            profilePanel.add(new JLabel("Wallet Balance:"));
+            JLabel walletLabel = new JLabel("Rp" + walletBalance);
+            profilePanel.add(walletLabel);
+        }
 
         add(profilePanel, BorderLayout.CENTER);
 
-        // Tombol Action
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         JButton changePasswordButton = new JButton("Change Password");
         JButton editProfileButton = new JButton("Edit Profile");
@@ -64,16 +71,31 @@ public class ViewProfile extends JFrame {
 
         changePasswordButton.addActionListener(e -> {
             this.dispose();
-            new ChangePassword();
+            new ChangePassword(originClass);
         });
 
         editProfileButton.addActionListener(e -> {
             this.dispose();
-            new EditProfile();
+            new EditProfile(originClass);
         });
 
         backButton.addActionListener(e -> {
-            // logic cari file sebelumnya
+            if ("Member".equalsIgnoreCase(originClass)) {
+                this.dispose();
+                new MemberMenu();
+            } else if ("Cashier".equalsIgnoreCase(originClass)) {
+                this.dispose();
+                new CashierMenu();
+            } else if ("Chef".equalsIgnoreCase(originClass)) {
+                this.dispose();
+                new ChefMenu();
+            } else if ("Deliveryman".equalsIgnoreCase(originClass)) {
+                this.dispose();
+                new DeliverymanMenu();
+            } else if ("Waiter".equalsIgnoreCase(originClass)) {
+                this.dispose();
+                new WaiterMenu();
+            }
         });
 
         buttonPanel.add(changePasswordButton);
@@ -83,9 +105,5 @@ public class ViewProfile extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
 
         setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        new ViewProfile();
     }
 }
