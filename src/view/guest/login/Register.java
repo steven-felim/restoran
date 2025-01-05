@@ -1,8 +1,12 @@
 package view.guest.login;
 
+import controller.PasswordToggleCommand;
+
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Register extends JFrame {
     public Register() {
@@ -51,10 +55,22 @@ public class Register extends JFrame {
         passwordUser.setBounds(5, 140, 130, 30);
         formLogin.add(passwordUser);
 
-        JTextField passwordField = new JTextField(255);
+        JPasswordField passwordField = new JPasswordField(255);
         passwordField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
-        passwordField.setBounds(0, 170, 296, 30);
+        passwordField.setBounds(0, 170, 246, 30);
         formLogin.add(passwordField);
+
+        JButton showPass = new JButton("-");
+        showPass.setBounds(246, 170, 50, 30);
+        formLogin.add(showPass);
+
+        PasswordToggleCommand passCommand = new PasswordToggleCommand(showPass, new JPasswordField[]{passwordField});
+        showPass.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                passCommand.execute();
+            }
+        });
 
         JLabel phoneUser = new JLabel("Phone:");
         phoneUser.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 17));
@@ -71,10 +87,22 @@ public class Register extends JFrame {
         walletPinUser.setBounds(5, 280, 130, 30);
         formLogin.add(walletPinUser);
 
-        JTextField pinField = new JTextField(10);
+        JPasswordField pinField = new JPasswordField(10);
         pinField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
-        pinField.setBounds(0, 310, 296, 30);
+        pinField.setBounds(0, 310, 246, 30);
         formLogin.add(pinField);
+
+        JButton showPIN = new JButton("-");
+        showPIN.setBounds(246, 310, 50, 30);
+        formLogin.add(showPIN);
+
+        PasswordToggleCommand pinCommand = new PasswordToggleCommand(showPass, new JPasswordField[]{passwordField});
+        showPIN.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pinCommand.execute();
+            }
+        });
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(null);
