@@ -48,7 +48,7 @@ public class WaiterMenu extends JFrame {
 
         acceptDelivery.addActionListener(e -> {
             this.dispose();
-            new ViewProfile();
+            new ViewProfile("Waiter");
         });
 
         JButton logout = new JButton("Logout");

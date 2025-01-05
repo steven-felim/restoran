@@ -48,7 +48,7 @@ public class ChefMenu extends JFrame {
 
         acceptDelivery.addActionListener(e -> {
             this.dispose();
-            new ViewProfile();
+            new ViewProfile("Chef");
         });
 
         JButton logout = new JButton("Logout");
