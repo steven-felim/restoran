@@ -1,9 +1,7 @@
 package view.member.history;
 
 import javax.swing.*;
-
-import view.profile.ViewProfile;
-
+import view.member.MemberMenu;
 import java.awt.*;
     
 public class ViewHistory extends JFrame {
@@ -60,7 +58,7 @@ public class ViewHistory extends JFrame {
 
         backButton.addActionListener(e -> {
             this.dispose();
-            new ViewProfile();
+            new MemberMenu();
         });
 
     add(title);

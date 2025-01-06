@@ -73,7 +73,7 @@ public class MemberMenu extends JFrame {
 
         profileButton.addActionListener(e -> {
             this.dispose();
-            new ViewProfile();
+            new ViewProfile("Member");
         });
 
         JButton orderMenuButton = new JButton("Order F&B Menu");
