@@ -35,6 +35,7 @@ public class ViewProfile extends JFrame {
         add(title, BorderLayout.NORTH);
 
         JPanel profilePanel = new JPanel();
+        profilePanel.setBackground(Color.WHITE);
         profilePanel.setLayout(new GridLayout(5, 2, 10, 10));
         profilePanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 

@@ -29,9 +29,9 @@ public class ViewHistory extends JFrame {
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel panel = new JPanel();
+        title.setBackground(Color.WHITE);
         panel.setLayout(null);
         panel.setBounds(44, 100, 300, 200);
-
 
         JButton bookTableHistoryButton = new JButton("Book Table History");
         bookTableHistoryButton.setBounds(0, 0, 300, 40);

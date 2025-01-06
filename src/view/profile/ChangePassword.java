@@ -34,6 +34,7 @@ public class ChangePassword extends JFrame {
         title.setBounds(50, 22, 300, 51);
 
         JPanel formPass = new JPanel();
+        formPass.setBackground(Color.WHITE);
         formPass.setLayout(null);
         formPass.setBounds(44, 111, 300, 250);
 
@@ -110,6 +111,7 @@ public class ChangePassword extends JFrame {
         });
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setLayout(null);
         buttonPanel.setBounds(43, 400, 350, 100);
 

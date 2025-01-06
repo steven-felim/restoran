@@ -33,6 +33,7 @@ public class ConfirmFnBOrder extends JFrame {
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel topPanel = new JPanel();
+        topPanel.setBackground(Color.WHITE);
         topPanel.setLayout(null);
         topPanel.setPreferredSize(new Dimension(600, 75));
 
