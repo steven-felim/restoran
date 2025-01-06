@@ -3,7 +3,6 @@ package view.member.history;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import view.member.MemberMenu;
 
 public class BookTableHistory extends JFrame {
 
@@ -43,16 +42,12 @@ public class BookTableHistory extends JFrame {
         JButton backButton = new JButton("Back Home");
         backButton.addActionListener(e -> {
             this.dispose();
-            new MemberMenu();
+            new ViewHistory();
         });
         buttonPanel.add(backButton);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         add(mainPanel);
-    }
-
-    public static void main(String[] args) {
-        new BookTableHistory();
     }
 }
 
