@@ -36,6 +36,7 @@ public class ViewOrder extends JFrame {
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
         panel.setLayout(null);
         panel.setBounds(100, 80, 1080, 600);
 
