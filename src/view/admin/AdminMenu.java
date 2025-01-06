@@ -35,6 +35,7 @@ public class AdminMenu extends JFrame {
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
         panel.setLayout(null);
         panel.setBounds(44, 80, 300, 400);
 
