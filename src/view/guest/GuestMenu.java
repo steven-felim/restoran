@@ -80,8 +80,4 @@ public class GuestMenu extends JFrame {
         add(title);
         add(panel);
     }
-
-    public static void main(String[] args) {
-        new GuestMenu();
-    }
 }

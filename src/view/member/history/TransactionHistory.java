@@ -1,7 +1,5 @@
 package view.member.history;
 
-import view.member.MemberMenu;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;

@@ -1,32 +1,40 @@
 package view.member.history;
 
 import javax.swing.*;
+
+import controller.AuthenticationController;
 import view.member.MemberMenu;
 import java.awt.*;
     
 public class ViewHistory extends JFrame {
     public ViewHistory() {
         initComponents();
-        setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            setVisible(true);
+        }
     }
 
     private void initComponents() {
-        this.setSize(500, 620);
+        this.setSize(400, 360);
+        this.setLayout(null);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("History");
 
         JLabel title = new JLabel("Your History");
-        title.setBounds(150, 20, 700, 60);
+        title.setBounds(100, 22, 300, 51);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        panel.setBounds(100, 60, 400, 600);
+        panel.setBounds(44, 100, 300, 200);
 
 
         JButton bookTableHistoryButton = new JButton("Book Table History");
-        bookTableHistoryButton.setBounds(110, 100, 250, 50);
+        bookTableHistoryButton.setBounds(0, 0, 300, 40);
         panel.add(bookTableHistoryButton);
         
         bookTableHistoryButton.addActionListener(e -> {
@@ -35,7 +43,7 @@ public class ViewHistory extends JFrame {
         });
 
         JButton voucherPoinHistory = new JButton("Voucher Poin History");
-        voucherPoinHistory.setBounds(110, 200, 250, 50);
+        voucherPoinHistory.setBounds(0, 50, 300, 40);
 
         panel.add(voucherPoinHistory);
         voucherPoinHistory.addActionListener(e -> {
@@ -44,7 +52,7 @@ public class ViewHistory extends JFrame {
         });
 
         JButton transactionHistory = new JButton("Transaction History");
-        transactionHistory.setBounds(110, 300, 250, 50);
+        transactionHistory.setBounds(0, 100, 300, 40);
         panel.add(transactionHistory);
 
         transactionHistory.addActionListener(e -> {
@@ -53,7 +61,7 @@ public class ViewHistory extends JFrame {
         });
 
         JButton backButton = new JButton("Back");
-        backButton.setBounds(110, 300, 250, 50);
+        backButton.setBounds(0, 150, 300, 40);
         panel.add(backButton);
 
         backButton.addActionListener(e -> {
