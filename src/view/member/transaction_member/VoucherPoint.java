@@ -29,19 +29,9 @@ public class VoucherPoint extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
-        JPanel panel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g;
-                int width = getWidth();
-                int height = getHeight();
-                g2d.setPaint(new GradientPaint(0, 0, Color.cyan, 0, height, Color.WHITE));
-                g2d.fillRect(0, 0, width, height);
-            }
-        };
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
         add(panel);
-        
         panel.setLayout(null);
         
         JLabel label = new JLabel("Pilih Voucher untuk ditukar:");
