@@ -1,19 +1,22 @@
-package view.guest.fnb;
+package view.fnb;
 
 import controller.FnBController;
 import model.classes.Cart;
 import model.classes.FoodAndBeverage;
+import view.employee.cashier.CashierMenu;
 import view.guest.GuestMenu;
-
+import view.member.MemberMenu;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
 public class ConfirmFnBOrder extends JFrame {
+    private String origin;
     private Cart cart;
     private FnBController fnbc;
 
-    public ConfirmFnBOrder() {
+    public ConfirmFnBOrder(String origin) {
+        this.origin = origin;
         initComponents();
         this.setVisible(true);
     }
@@ -37,8 +40,16 @@ public class ConfirmFnBOrder extends JFrame {
         backButton.setBounds(25, 10, 150, 30);
 
         backButton.addActionListener(e -> {
-            this.dispose();
-            new GuestMenu();
+            if ("Member".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new MemberMenu();
+            } else if ("Guest".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new GuestMenu();
+            } else if ("Cashier".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new CashierMenu();
+            }
         });
 
         topPanel.add(backButton);
@@ -93,34 +104,51 @@ public class ConfirmFnBOrder extends JFrame {
         methodLabel.setBounds(200, 360, 600, 30);
         bottomPanel.add(methodLabel);
 
-        JButton deliveryButton = new JButton("Delivery");
-        bottomPanel.add(deliveryButton);
+        if (!"Cashier".equalsIgnoreCase(origin)) {
+            JButton deliveryButton = new JButton("Delivery");
+            bottomPanel.add(deliveryButton);
+
+            deliveryButton.addActionListener(e -> {
+                JOptionPane.showMessageDialog(this, "You have chosen delivery. Please enter your address.");
+                new DeliveryMenu(origin);
+                this.dispose();
+            });
+        }
 
         JButton takeAwayButton = new JButton("Take Away");
         bottomPanel.add(takeAwayButton);
 
-        JButton dineInButton = new JButton("Dine In");
-        bottomPanel.add(dineInButton);
-
-        // Button Actions
-        deliveryButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "You have chosen delivery. Please enter your address.");
-            new DeliveryMenu();
-            this.dispose();
-        });
-
         takeAwayButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "You have chosen take away. A receipt will be generated.");
             generateReceipt();
-            this.dispose();
-            new GuestMenu();
+            if ("Member".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new MemberMenu();
+            } else if ("Guest".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new GuestMenu();
+            } else if ("Cashier".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new CashierMenu();
+            }
         });
+
+        JButton dineInButton = new JButton("Dine In");
+        bottomPanel.add(dineInButton);
 
         dineInButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "You have chosen dine in.");
             generateReceipt();
-            this.dispose();
-            new GuestMenu();
+            if ("Member".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new MemberMenu();
+            } else if ("Guest".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new GuestMenu();
+            } else if ("Cashier".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new CashierMenu();
+            }
         });
 
         this.add(bottomPanel, BorderLayout.SOUTH);
@@ -147,9 +175,5 @@ public class ConfirmFnBOrder extends JFrame {
         receiptTextArea.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
 
         JOptionPane.showMessageDialog(this, new JScrollPane(receiptTextArea), "Receipt", JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    public static void main(String[] args) {
-        new ConfirmFnBOrder();
     }
 }
