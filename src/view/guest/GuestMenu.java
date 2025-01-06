@@ -2,11 +2,12 @@ package view.guest;
 
 import javax.swing.*;
 
-import view.guest.fnb.OrderFnBGuest;
-import view.guest.fnb.ViewCart;
+import view.bookTable.ViewTable;
+import view.fnb.OrderFnB;
+import view.fnb.ViewCart;
+import view.guest.login.Login;
 import view.guest.login.Register;
-import view.guest.table.BookTable;
-import view.guest.table.ViewTableGuest;
+import view.bookTable.BookTableForm;
 
 import java.awt.*;
 
@@ -17,7 +18,7 @@ public class GuestMenu extends JFrame {
     }
 
     private void initComponents() {
-        this.setSize(400, 410);
+        this.setSize(400, 460);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -30,7 +31,7 @@ public class GuestMenu extends JFrame {
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        panel.setBounds(44, 80, 300, 250);
+        panel.setBounds(44, 80, 300, 300);
 
         JButton bookTableButton = new JButton("Book Table");
         bookTableButton.setBounds(0, 0, 300, 40);
@@ -38,7 +39,7 @@ public class GuestMenu extends JFrame {
 
         bookTableButton.addActionListener(e ->  {
             this.dispose();
-            new BookTable();
+            new BookTableForm("Guest");
         });
 
         JButton cancelTableButton = new JButton("View Table");
@@ -47,7 +48,7 @@ public class GuestMenu extends JFrame {
 
         cancelTableButton.addActionListener(e ->  {
             this.dispose();
-            new ViewTableGuest();
+            new ViewTable("Guest");
         });
 
         JButton orderMenuButton = new JButton("Order F&B Menu");
@@ -56,7 +57,7 @@ public class GuestMenu extends JFrame {
 
         orderMenuButton.addActionListener(e ->  {
             this.dispose();
-            new OrderFnBGuest();
+            new OrderFnB("Guest");
         });
 
         JButton viewCartButton = new JButton("Cart");
@@ -65,7 +66,7 @@ public class GuestMenu extends JFrame {
 
         viewCartButton.addActionListener(e ->  {
             this.dispose();
-            new ViewCart();
+            new ViewCart("Guest");
         });
 
         JButton registerButton = new JButton("Register");
@@ -75,6 +76,15 @@ public class GuestMenu extends JFrame {
         registerButton.addActionListener(e ->  {
             this.dispose();
             new Register();
+        });
+
+        JButton loginButton = new JButton("Login");
+        loginButton.setBounds(0, 250, 300, 40);
+        panel.add(loginButton);
+
+        loginButton.addActionListener(e ->  {
+            this.dispose();
+            new Login();
         });
 
         add(title);

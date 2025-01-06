@@ -1,6 +1,7 @@
 package view.employee.cashier;
 
 import controller.AuthenticationController;
+import view.fnb.OrderFnB;
 import view.guest.login.Login;
 import view.profile.ViewProfile;
 
@@ -48,7 +49,7 @@ public class CashierMenu extends JFrame{
 
         orderFnB.addActionListener(e -> {
             this.dispose();
-            new OrderFnBCashier();
+            new OrderFnB("Cashier");
         });
 
         JButton acceptDelivery = new JButton("View Profile");
