@@ -1,24 +1,24 @@
-package view.member.table_member;
+package view.bookTable;
 
 import model.classes.Table;
+import view.guest.GuestMenu;
 import view.member.MemberMenu;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewTableMember extends JFrame {
-
+public class ViewTable extends JFrame {
     private JList<String> tableList; 
     private DefaultListModel<String> tableListModel;
     private JButton cancelButton;
     private JButton backButton;
     private JButton rescheduleButton;
+    private List<Table> bookedTables;
+    private String origin;
 
-    private List<Table> bookedTables; 
-
-    public ViewTableMember() {
+    public ViewTable(String origin) {
+        this.origin = origin;
         initComponents();
         this.setVisible(true);
     }
@@ -35,13 +35,13 @@ public class ViewTableMember extends JFrame {
         bookedTables.add(new Table("VIP2", 2)); 
         bookedTables.add(new Table("Regular3", 3)); 
 
-        // Title label
         JLabel titleLabel = new JLabel("Table Booking");
         titleLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(titleLabel, BorderLayout.NORTH);
 
         JPanel mainPanel = new JPanel();
+        mainPanel.setBackground(Color.WHITE);
         mainPanel.setLayout(new BorderLayout());
 
         tableListModel = new DefaultListModel<>();
@@ -64,22 +64,23 @@ public class ViewTableMember extends JFrame {
         buttonPanel.add(backButton);
 
         rescheduleButton.addActionListener(e -> {
-            new RescheduleTable();
+            new RescheduleTable(origin);
             this.dispose();
         });
 
         backButton.addActionListener(e -> {
-            new MemberMenu();
-            this.dispose();
+            if ("Member".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new MemberMenu();
+            } else if ("Guest".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new GuestMenu();
+            }
         });
 
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         add(mainPanel);
-    }
-
-    public static void main(String[] args) {
-        new ViewTableMember();
     }
 }
 

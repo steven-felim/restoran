@@ -1,23 +1,22 @@
-package view.guest.table;
-
-import org.jdatepicker.impl.DateComponentFormatter;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
+package view.bookTable;
 
 import javax.swing.*;
+import org.jdatepicker.impl.*;
+
 import java.awt.*;
 import java.util.Properties;
 
-public class RescheduleTable  extends JFrame {
+public class RescheduleTable extends JFrame {
     private JComboBox<String> roomComboBox;
     private JComboBox<String> tableComboBox;
+    private String origin;
 
-    public RescheduleTable() {
+    public RescheduleTable(String origin) {
+        this.origin = origin;
         initComponents();
         this.setVisible(true);
     }
-
+        
     private void initComponents() {
         setTitle("Reschedule Table");
         setSize(900, 600);
@@ -30,6 +29,7 @@ public class RescheduleTable  extends JFrame {
         add(title);
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setBackground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -93,7 +93,7 @@ public class RescheduleTable  extends JFrame {
 
         backButton.addActionListener(e -> {
             this.dispose();
-            new ViewTableGuest();
+            new ViewTable(origin);
         });
 
         updateTableComboBox();
@@ -112,9 +112,5 @@ public class RescheduleTable  extends JFrame {
                 tableComboBox.addItem(String.valueOf(i));
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new view.member.table_member.RescheduleTable();
     }
 }

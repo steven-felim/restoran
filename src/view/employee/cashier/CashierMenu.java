@@ -1,6 +1,7 @@
 package view.employee.cashier;
 
 import controller.AuthenticationController;
+import view.fnb.OrderFnB;
 import view.guest.login.Login;
 import view.profile.ViewProfile;
 
@@ -30,6 +31,7 @@ public class CashierMenu extends JFrame{
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setLayout(null);
         buttonPanel.setBounds(44, 100, 300, 200);
 
@@ -48,7 +50,7 @@ public class CashierMenu extends JFrame{
 
         orderFnB.addActionListener(e -> {
             this.dispose();
-            new OrderFnBCashier();
+            new OrderFnB("Cashier");
         });
 
         JButton acceptDelivery = new JButton("View Profile");

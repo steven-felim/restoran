@@ -3,7 +3,6 @@ package view.member.history;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import view.member.MemberMenu;
 
 public class BookTableHistory extends JFrame {
 
@@ -22,6 +21,7 @@ public class BookTableHistory extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(Color.WHITE);
         JLabel titleLabel = new JLabel("Booking History", JLabel.CENTER);
         titleLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
@@ -43,16 +43,12 @@ public class BookTableHistory extends JFrame {
         JButton backButton = new JButton("Back Home");
         backButton.addActionListener(e -> {
             this.dispose();
-            new MemberMenu();
+            new ViewHistory();
         });
         buttonPanel.add(backButton);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         add(mainPanel);
-    }
-
-    public static void main(String[] args) {
-        new BookTableHistory();
     }
 }
 

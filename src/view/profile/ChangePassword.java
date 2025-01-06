@@ -34,6 +34,7 @@ public class ChangePassword extends JFrame {
         title.setBounds(50, 22, 300, 51);
 
         JPanel formPass = new JPanel();
+        formPass.setBackground(Color.WHITE);
         formPass.setLayout(null);
         formPass.setBounds(44, 111, 300, 250);
 
@@ -44,9 +45,22 @@ public class ChangePassword extends JFrame {
 
         JPasswordField oldPassField = new JPasswordField(255);
         oldPassField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
-        oldPassField.setBounds(0, 33, 298, 30);
+        oldPassField.setBounds(0, 33, 248, 30);
         oldPassField.setEchoChar('*');
         formPass.add(oldPassField);
+
+        JButton oldPassButton = new JButton("-");
+        oldPassButton.setBounds(248, 33, 50, 30);
+        formPass.add(oldPassButton);
+
+        PasswordToggleCommand command1 = new PasswordToggleCommand(oldPassButton, new JPasswordField[]{oldPassField});
+
+        oldPassButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                command1.execute();
+            }
+        });
 
         JLabel newPass = new JLabel("New Password:");
         newPass.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
@@ -55,9 +69,22 @@ public class ChangePassword extends JFrame {
 
         JPasswordField newPassField = new JPasswordField(255);
         newPassField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
-        newPassField.setBounds(0, 110, 298, 30);
+        newPassField.setBounds(0, 110, 248, 30);
         newPassField.setEchoChar('*');
         formPass.add(newPassField);
+
+        JButton newPassButton = new JButton("-");
+        newPassButton.setBounds(248, 110, 50, 30);
+        formPass.add(newPassButton);
+
+        PasswordToggleCommand command2 = new PasswordToggleCommand(newPassButton, new JPasswordField[]{newPassField});
+
+        newPassButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                command2.execute();
+            }
+        });
 
         JLabel confirmPass = new JLabel("Confirm New Password:");
         confirmPass.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
@@ -66,37 +93,38 @@ public class ChangePassword extends JFrame {
 
         JPasswordField confirmPassField = new JPasswordField(255);
         confirmPassField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
-        confirmPassField.setBounds(0, 190, 298, 30);
+        confirmPassField.setBounds(0, 190, 248, 30);
         confirmPassField.setEchoChar('*');
         formPass.add(confirmPassField);
 
+        JButton confirmPassButton = new JButton("-");
+        confirmPassButton.setBounds(248, 190, 50, 30);
+        formPass.add(confirmPassButton);
+
+        PasswordToggleCommand command3 = new PasswordToggleCommand(confirmPassButton, new JPasswordField[]{confirmPassField});
+
+        confirmPassButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                command3.execute();
+            }
+        });
+
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setLayout(null);
         buttonPanel.setBounds(43, 400, 350, 100);
 
         JButton resetButton = new JButton("Reset");
-        resetButton.setBounds(0, 0, 100, 40);
+        resetButton.setBounds(0, 0, 150, 40);
         buttonPanel.add(resetButton);
 
         resetButton.addActionListener(e -> {
             // logic save password ke DB
         });
 
-        JButton showButton = new JButton("Show Pass");
-        showButton.setBounds(100, 0, 100, 40);
-        buttonPanel.add(showButton);
-
-        PasswordToggleCommand command = new PasswordToggleCommand(showButton, new JPasswordField[]{oldPassField, newPassField, confirmPassField});
-
-        showButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                command.execute();
-            }
-        });
-
         JButton cancelButton = new JButton("Cancel");
-        cancelButton.setBounds(200, 0, 100, 40);
+        cancelButton.setBounds(150, 0, 150, 40);
         buttonPanel.add(cancelButton);
 
         cancelButton.addActionListener(e -> {

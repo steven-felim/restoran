@@ -3,7 +3,6 @@ package view.member.history;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import view.member.MemberMenu;
 
 public class PoinHistory extends JFrame {
     private JTable historyTable;
@@ -21,6 +20,7 @@ public class PoinHistory extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel(new BorderLayout());
+        panel.setBackground(Color.WHITE);
         JLabel titleLabel = new JLabel("History Penukaran Poin", JLabel.CENTER);
         titleLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
         panel.add(titleLabel, BorderLayout.NORTH);
@@ -41,15 +41,10 @@ public class PoinHistory extends JFrame {
         JButton backButton = new JButton("Back Home");
         backButton.addActionListener(e -> {
             this.dispose();
-            new MemberMenu();
+            new ViewHistory();
         });
         buttonPanel.add(backButton);
         panel.add(buttonPanel, BorderLayout.SOUTH);
         add(panel);
     }
-
-    public static void main(String[] args) {
-        new PoinHistory();
-    }
 }
-

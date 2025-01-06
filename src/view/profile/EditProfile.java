@@ -31,6 +31,7 @@ public class EditProfile extends JFrame {
         title.setBounds(120, 22, 300, 51);
 
         JPanel formPanel = new JPanel();
+        formPanel.setBackground(Color.WHITE);
         formPanel.setLayout(null);
         formPanel.setBounds(44, 111, 300, 250);
 
@@ -65,6 +66,7 @@ public class EditProfile extends JFrame {
         formPanel.add(phoneField);
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setLayout(null);
         buttonPanel.setBounds(43, 400, 350, 100);
 

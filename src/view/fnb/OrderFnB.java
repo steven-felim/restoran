@@ -1,14 +1,20 @@
-package view.employee.cashier;
+package view.fnb;
 
 import controller.FnBController;
 import model.classes.FoodAndBeverage;
+import view.employee.cashier.CashierMenu;
+import view.guest.GuestMenu;
+import view.member.MemberMenu;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class OrderFnBCashier extends JFrame {
-    public OrderFnBCashier() {
+public class OrderFnB extends JFrame {
+    private String origin;
+
+    public OrderFnB(String origin) {
+        this.origin = origin;
         initComponents();
         this.setVisible(true);
     }
@@ -23,6 +29,7 @@ public class OrderFnBCashier extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel topPanel = new JPanel();
+        topPanel.setBackground(Color.WHITE);
         topPanel.setLayout(null);
         topPanel.setPreferredSize(new Dimension(600, 75));
 
@@ -30,8 +37,16 @@ public class OrderFnBCashier extends JFrame {
         backButton.setBounds(25, 10, 150, 30);
 
         backButton.addActionListener(e -> {
-            this.dispose();
-            new CashierMenu();
+            if ("Member".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new MemberMenu();
+            } else if ("Guest".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new GuestMenu();
+            } else if ("Cashier".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new CashierMenu();
+            }
         });
 
         JLabel title = new JLabel("Order Menu");
@@ -105,27 +120,44 @@ public class OrderFnBCashier extends JFrame {
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        JButton buyButton = new JButton("Beli");
+        JButton buyButton = new JButton("Checkout");
         buyButton.addActionListener(e -> {
-            JOptionPane.showInputDialog("Input nama pembeli: ");
-//            if (nama pembeli ada di tabel guest) {
-//                langsung input ke cart & transaksi
-//            } else {
-//                input dulu ke tabel guest, karena baru pertama beli
-//                baru input ke cart & transaksi
-//            }
+            if (!"Member".equalsIgnoreCase(origin)) {
+                String name = JOptionPane.showInputDialog("Input nama pembeli: ");
+                if (name.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Silakan input nama terlebih dahulu", "Input nama", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+            // if (nama pembeli ada di tabel guest) {
+            //        langsung input ke cart & transaksi
+            //    } else {
+            //        input dulu ke tabel guest, karena baru pertama beli
+            //        baru input ke cart & transaksi
+            //    }
             JOptionPane.showMessageDialog(this, "Pemesanan berhasil!");
+            new ConfirmFnBOrder(origin);
+            this.dispose();
         });
 
-        JButton cancelButton = new JButton("Batal");
-        cancelButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Pemesanan dibatalkan.");
-//            input ke cart
-            });
-
         bottomPanel.add(buyButton);
-        bottomPanel.add(cancelButton);
 
+        if (!"Cashier".equalsIgnoreCase(origin)) {
+            JButton cancelButton = new JButton("Add to Cart");
+            cancelButton.addActionListener(e -> {
+                JOptionPane.showMessageDialog(this, "Pemesanan dimasukkan ke keranjang.");
+                if ("Member".equalsIgnoreCase(origin)) {
+                    // input ke cart
+                    this.dispose();
+                    new MemberMenu();
+                } else if ("Guest".equalsIgnoreCase(origin)) {
+                    // input ke cart
+                    this.dispose();
+                    new GuestMenu();
+                }
+            });
+            bottomPanel.add(cancelButton);
+        }
         this.add(bottomPanel, BorderLayout.SOUTH);
     }
 }
