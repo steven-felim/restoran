@@ -1,8 +1,8 @@
 package view.employee.deliveryman;
 
 import controller.AuthenticationController;
-import view.ViewProfile;
-import view.guest.Login;
+import view.guest.login.Login;
+import view.profile.ViewProfile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,7 +48,7 @@ public class DeliverymanMenu extends JFrame {
 
         acceptDelivery.addActionListener(e -> {
             this.dispose();
-            new ViewProfile();
+            new ViewProfile("Deliveryman");
         });
 
         JButton logout = new JButton("Logout");

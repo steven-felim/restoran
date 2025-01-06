@@ -7,13 +7,11 @@ import java.util.ArrayList;
 public class Member extends NonGuest implements Discount {
 	Wallet wallet;
 	int point;
-	ArrayList<Transaction> transactions;
 
-	public Member(Integer id, String name, String email, String password, String cellphone, Wallet wallet, int point, ArrayList<Transaction> transactions) {
+	public Member(Integer id, String name, String email, String password, String cellphone, Wallet wallet, int point) {
 		super(id, name, email, password, cellphone);
 		this.wallet = wallet;
 		this.point = point;
-		this.transactions = transactions;
 	}
 
 	public Wallet getWallet() {
@@ -30,14 +28,6 @@ public class Member extends NonGuest implements Discount {
 
 	public void setPoint(int point) {
 		this.point = point;
-	}
-
-	public ArrayList<Transaction> getTransactions() {
-		return transactions;
-	}
-
-	public void setTransactions(ArrayList<Transaction> transactions) {
-		this.transactions = transactions;
 	}
 
 	@Override

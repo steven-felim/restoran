@@ -1,17 +1,21 @@
-package view.guest;
+package view.guest.login;
 
 import controller.AuthenticationController;
 import controller.AuthenticationHelper;
 import controller.DatabaseHandler;
+import controller.PasswordToggleCommand;
 import view.admin.AdminMenu;
 import view.employee.cashier.CashierMenu;
 import view.employee.chef.ChefMenu;
 import view.employee.deliveryman.DeliverymanMenu;
 import view.employee.waiter.WaiterMenu;
+import view.guest.GuestMenu;
 import view.member.MemberMenu;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,6 +39,7 @@ public class Login extends JFrame {
 		title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 		title.setBounds(143, 22, 200, 51);
 		JPanel formLogin = new JPanel();
+		formLogin.setBackground(Color.WHITE);
 		formLogin.setLayout(null);
 		formLogin.setBounds(44, 111, 300, 150);
 
@@ -55,9 +60,21 @@ public class Login extends JFrame {
 
 		JPasswordField passwordField = new JPasswordField(255);
 		passwordField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
-		passwordField.setBounds(0, 110, 298, 30);
+		passwordField.setBounds(0, 110, 248, 30);
 		passwordField.setEchoChar('*');
 		formLogin.add(passwordField);
+
+		JButton showPass = new JButton("-");
+		showPass.setBounds(248, 110, 50, 30);
+		formLogin.add(showPass);
+
+		PasswordToggleCommand passCommand = new PasswordToggleCommand(showPass, new JPasswordField[]{passwordField});
+		showPass.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				passCommand.execute();
+			}
+		});
 
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(null);

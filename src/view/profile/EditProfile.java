@@ -1,4 +1,4 @@
-package view;
+package view.profile;
 
 import controller.AuthenticationController;
 
@@ -6,8 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class EditProfile extends JFrame {
+    private String originClass; // simpan origin dengan Design Pattern Memento
 
-    public EditProfile() {
+    public EditProfile(String originClass) {
+        this.originClass = originClass;
         initComponents();
         if (!new AuthenticationController().checkUser()) {
             this.dispose();
@@ -29,6 +31,7 @@ public class EditProfile extends JFrame {
         title.setBounds(120, 22, 300, 51);
 
         JPanel formPanel = new JPanel();
+        formPanel.setBackground(Color.WHITE);
         formPanel.setLayout(null);
         formPanel.setBounds(44, 111, 300, 250);
 
@@ -63,6 +66,7 @@ public class EditProfile extends JFrame {
         formPanel.add(phoneField);
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setLayout(null);
         buttonPanel.setBounds(43, 400, 350, 100);
 
@@ -80,7 +84,7 @@ public class EditProfile extends JFrame {
 
         cancelButton.addActionListener(e -> {
             this.dispose();
-            new ViewProfile();
+            new ViewProfile(originClass);
         });
 
         buttonPanel.add(saveButton);

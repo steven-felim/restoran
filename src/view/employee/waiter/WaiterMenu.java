@@ -1,8 +1,8 @@
 package view.employee.waiter;
 
 import controller.AuthenticationController;
-import view.ViewProfile;
-import view.guest.Login;
+import view.guest.login.Login;
+import view.profile.ViewProfile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,7 +48,7 @@ public class WaiterMenu extends JFrame {
 
         acceptDelivery.addActionListener(e -> {
             this.dispose();
-            new ViewProfile();
+            new ViewProfile("Waiter");
         });
 
         JButton logout = new JButton("Logout");

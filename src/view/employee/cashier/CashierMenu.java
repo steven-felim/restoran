@@ -1,8 +1,9 @@
 package view.employee.cashier;
 
 import controller.AuthenticationController;
-import view.guest.Login;
-import view.ViewProfile;
+import view.fnb.OrderFnB;
+import view.guest.login.Login;
+import view.profile.ViewProfile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,8 +48,8 @@ public class CashierMenu extends JFrame{
         buttonPanel.add(orderFnB);
 
         orderFnB.addActionListener(e -> {
-            new OrderFnBCashier();
             this.dispose();
+            new OrderFnB("Cashier");
         });
 
         JButton acceptDelivery = new JButton("View Profile");
@@ -57,7 +58,7 @@ public class CashierMenu extends JFrame{
 
         acceptDelivery.addActionListener(e -> {
             this.dispose();
-            new ViewProfile();
+            new ViewProfile("Cashier");
         });
 
         JButton logout = new JButton("Logout");

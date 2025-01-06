@@ -1,28 +1,36 @@
-package view.employee.cashier;
+package view.fnb;
 
 import controller.FnBController;
 import model.classes.FoodAndBeverage;
+import view.guest.GuestMenu;
+import view.member.MemberMenu;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class OrderFnBCashier extends JFrame {
-    public OrderFnBCashier() {
+public class ViewCart extends JFrame {
+    private String origin;
+    private FnBController fnbc;
+    // FnBController hanya untuk contoh gambaran program, nanti pakai data fnb di cart
+
+    public ViewCart(String origin) {
+        this.origin = origin;
         initComponents();
         this.setVisible(true);
     }
 
     private void initComponents() {
-        FnBController fnbc = new FnBController();
+        fnbc = new FnBController();
 
-        this.setTitle("Order FnB");
+        this.setTitle("Cart Summary");
         this.setSize(600, 400);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel topPanel = new JPanel();
+        topPanel.setBackground(Color.WHITE);
         topPanel.setLayout(null);
         topPanel.setPreferredSize(new Dimension(600, 75));
 
@@ -30,11 +38,16 @@ public class OrderFnBCashier extends JFrame {
         backButton.setBounds(25, 10, 150, 30);
 
         backButton.addActionListener(e -> {
-            this.dispose();
-            new CashierMenu();
+            if ("Member".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new MemberMenu();
+            } else if ("Guest".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new GuestMenu();
+            }
         });
 
-        JLabel title = new JLabel("Order Menu");
+        JLabel title = new JLabel("Your FnB Order");
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
         title.setBounds(200, 10, 300, 30);
 
@@ -62,21 +75,14 @@ public class OrderFnBCashier extends JFrame {
             gbc.weightx = 1.0;
             itemPanel.add(itemNameLabel, gbc);
 
-            JButton addButton = new JButton("Tambahkan ke Keranjang");
-            gbc.gridx = 1;
-            gbc.weightx = 0.0;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-            itemPanel.add(addButton, gbc);
-
             JPanel quantityPanel = new JPanel();
             quantityPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
             JTextField quantityField = new JTextField(5);
-            quantityField.setVisible(false);
             quantityPanel.add(quantityField);
+            // jumlah yg dipesan menyesuaikan cart & otomatis terisi di text field
 
-            JButton removeButton = new JButton("Hapus");
-            removeButton.setVisible(false);
+            JButton removeButton = new JButton("Delete");
             quantityPanel.add(removeButton);
 
             gbc.gridx = 2;
@@ -84,20 +90,14 @@ public class OrderFnBCashier extends JFrame {
             gbc.fill = GridBagConstraints.HORIZONTAL;
             itemPanel.add(quantityPanel, gbc);
 
-            addButton.addActionListener(e -> {
-                quantityField.setVisible(true);
-                removeButton.setVisible(true);
-                addButton.setVisible(false);
-            });
-
             removeButton.addActionListener(e -> {
-                quantityField.setVisible(false);
-                removeButton.setVisible(false);
-                addButton.setVisible(true);
+                // hapus dari cart
             });
 
             mainPanel.add(itemPanel);
         }
+        JLabel totalLabel = new JLabel("Total Price:    Rp"); // tambahkan total harga cart melalui controller
+        mainPanel.add(totalLabel);
 
         JScrollPane scrollPane = new JScrollPane(mainPanel);
         this.add(scrollPane, BorderLayout.CENTER);
@@ -105,27 +105,15 @@ public class OrderFnBCashier extends JFrame {
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        JButton buyButton = new JButton("Beli");
+        JButton buyButton = new JButton("Checkout");
         buyButton.addActionListener(e -> {
-            JOptionPane.showInputDialog("Input nama pembeli: ");
-//            if (nama pembeli ada di tabel guest) {
-//                langsung input ke cart & transaksi
-//            } else {
-//                input dulu ke tabel guest, karena baru pertama beli
-//                baru input ke cart & transaksi
-//            }
+            // input pesanan ke db
             JOptionPane.showMessageDialog(this, "Pemesanan berhasil!");
+            new ConfirmFnBOrder(origin);
+            this.dispose();
         });
 
-        JButton cancelButton = new JButton("Batal");
-        cancelButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Pemesanan dibatalkan.");
-//            input ke cart
-            });
-
         bottomPanel.add(buyButton);
-        bottomPanel.add(cancelButton);
-
         this.add(bottomPanel, BorderLayout.SOUTH);
     }
 }
