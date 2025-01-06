@@ -2,6 +2,11 @@ package view.member.transaction_member;
 
 import view.member.MemberMenu;
 
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import javax.swing.*;
 
 public class AddWallet extends JFrame {
@@ -21,8 +26,19 @@ public class AddWallet extends JFrame {
         setSize(400, 420);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        JPanel panel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+                int width = getWidth();
+                int height = getHeight();
+                g2d.setPaint(new GradientPaint(0, 0, Color.cyan, 0, height, Color.WHITE));
+                g2d.fillRect(0, 0, width, height);
+            }
+        };
         
-        JPanel panel = new JPanel();
         add(panel);
         panel.setLayout(null);
 
