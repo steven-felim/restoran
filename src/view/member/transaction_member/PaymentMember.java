@@ -25,7 +25,18 @@ public class PaymentMember extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        JPanel panel = new JPanel();
+        JPanel panel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+                int width = getWidth();
+                int height = getHeight();
+                g2d.setPaint(new GradientPaint(0, 0, Color.cyan, 0, height, Color.WHITE));
+                g2d.fillRect(0, 0, width, height);
+            }
+        };
+
         panel.setLayout(null);
         add(panel);
 
