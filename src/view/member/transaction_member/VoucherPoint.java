@@ -3,6 +3,7 @@ package view.member.transaction_member;
 import javax.swing.*;
 
 import controller.AuthenticationController;
+import controller.VoucherController;
 import model.classes.Voucher;
 import view.member.MemberMenu;
 import java.awt.*;
@@ -11,9 +12,7 @@ import java.util.List;
 
 
 public class VoucherPoint extends JFrame {
-    private JButton btnRedeem;
-    private JButton btnCancel;
-    private JComboBox<String> voucherComboBox;
+    private VoucherController vc;
 
     public VoucherPoint() {
         initComponents();
@@ -25,7 +24,9 @@ public class VoucherPoint extends JFrame {
     }
 
     private void initComponents() {
-        setTitle("Penukaran Poin");
+        vc = new VoucherController();
+
+        setTitle("Exchange Point");
         setSize(600, 400);
         getContentPane().setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,11 +57,7 @@ public class VoucherPoint extends JFrame {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        List<Voucher> vouchers = new ArrayList<>(); // = voucherController.getAllVoucher
-        // Dummy
-        vouchers.add(new Voucher(1, "Rp 5000 voucher", 0, 5000, 50));
-        vouchers.add(new Voucher(2, "Rp 10000 voucher", 0, 10000, 100));
-        vouchers.add(new Voucher(3, "Rp 15000 voucher", 0, 15000, 150));
+        List<Voucher> vouchers = vc.getAllVoucher();
 
         for (Voucher voucher : vouchers) {
             JPanel itemPanel = new JPanel();

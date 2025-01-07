@@ -1,5 +1,7 @@
 package view.member.history;
 
+import controller.AuthenticationController;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -10,7 +12,11 @@ public class TransactionHistory extends JFrame {
 
     public TransactionHistory() {
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            setVisible(true);
+        }
     }
 
     private void initComponents() {

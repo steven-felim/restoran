@@ -26,10 +26,11 @@ public class VoucherMenu extends JFrame {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setBackground(Color.WHITE);
         this.setTitle("View Voucher");
 
         JLabel title = new JLabel("View Voucher");
-        title.setBounds(490, 20, 700, 60);
+        title.setBounds(540, 20, 300, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel panel = new JPanel();
@@ -47,7 +48,7 @@ public class VoucherMenu extends JFrame {
         });
 
         JButton addVoucher = new JButton("Add Voucher");
-        addVoucher.setBounds(480, 0, 160, 30);
+        addVoucher.setBounds(460, 0, 160, 30);
         panel.add(addVoucher);
 
         addVoucher.addActionListener(e -> {
@@ -56,10 +57,11 @@ public class VoucherMenu extends JFrame {
         });
 
         table = new JTable(model);
-        model.addColumn("Employee ID");
-        model.addColumn("Name");
-        model.addColumn("Job desk");
-        model.addColumn("Status");
+        model.addColumn("Voucher ID");
+        model.addColumn("Voucher Name");
+        model.addColumn("Discount");
+        model.addColumn("Nominal");
+        model.addColumn("Point");
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(0, 60, 1080, 600);
@@ -74,11 +76,11 @@ public class VoucherMenu extends JFrame {
     }
 
     private void loadDataToView() {
-        List<Voucher> empList = vc.getAllVoucher();
+        List<Voucher> voucherList = vc.getAllVoucher();
 
         model.setRowCount(0);
 
-        for (Voucher v : empList) {
+        for (Voucher v : voucherList) {
             Object[] rowData = { v.getVoucherID(),v.getVoucherName(), v.getDiscount(), v.getNominal(), v.getPoint() };
             model.addRow(rowData);
         }
