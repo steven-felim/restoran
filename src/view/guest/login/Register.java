@@ -19,6 +19,7 @@ public class Register extends JFrame {
         this.setResizable(false);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Register!");
 
@@ -28,6 +29,7 @@ public class Register extends JFrame {
 
         JPanel formLogin = new JPanel();
         formLogin.setLayout(null);
+        formLogin.setBackground(Color.WHITE);
         formLogin.setBounds(44, 80, 300, 350);
 
         JLabel usernameUser = new JLabel("Username:");
@@ -106,7 +108,8 @@ public class Register extends JFrame {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(null);
-        buttonPanel.setBounds(86, 450, 350, 100);
+        buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setBounds(86, 450, 300, 40);
 
         JButton registerButton = new JButton("Register");
         registerButton.setBounds(0, 0, 100, 40);

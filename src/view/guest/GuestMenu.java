@@ -2,12 +2,12 @@ package view.guest;
 
 import javax.swing.*;
 
-import view.bookTable.ViewTable;
-import view.fnb.OrderFnB;
-import view.fnb.ViewCart;
+import view.guest.bookTable.BookTableForm;
+import view.guest.bookTable.ViewTable;
+import view.guest.fnb.OrderFnB;
+import view.guest.fnb.ViewCart;
 import view.guest.login.Login;
 import view.guest.login.Register;
-import view.bookTable.BookTableForm;
 
 import java.awt.*;
 
@@ -22,6 +22,7 @@ public class GuestMenu extends JFrame {
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Guest Menu");
 
@@ -39,7 +40,7 @@ public class GuestMenu extends JFrame {
 
         bookTableButton.addActionListener(e ->  {
             this.dispose();
-            new BookTableForm("Guest");
+            new BookTableForm();
         });
 
         JButton cancelTableButton = new JButton("View Table");
@@ -48,7 +49,7 @@ public class GuestMenu extends JFrame {
 
         cancelTableButton.addActionListener(e ->  {
             this.dispose();
-            new ViewTable("Guest");
+            new ViewTable();
         });
 
         JButton orderMenuButton = new JButton("Order F&B Menu");
@@ -57,7 +58,7 @@ public class GuestMenu extends JFrame {
 
         orderMenuButton.addActionListener(e ->  {
             this.dispose();
-            new OrderFnB("Guest");
+            new OrderFnB();
         });
 
         JButton viewCartButton = new JButton("Cart");
@@ -66,7 +67,7 @@ public class GuestMenu extends JFrame {
 
         viewCartButton.addActionListener(e ->  {
             this.dispose();
-            new ViewCart("Guest");
+            new ViewCart();
         });
 
         JButton registerButton = new JButton("Register");

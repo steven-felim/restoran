@@ -38,7 +38,7 @@ public class PaymentMember extends JFrame {
         totalLabel.setBounds(20, 60, 200, 25);
         panel.add(totalLabel);
 
-        balanceLabel = new JLabel("Your Balance: Rp " + wallet.getBalance());
+        balanceLabel = new JLabel("Your Balance: Rp ");
         balanceLabel.setBounds(20, 100, 200, 25);
         panel.add(balanceLabel);
 

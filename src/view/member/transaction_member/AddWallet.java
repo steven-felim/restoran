@@ -1,5 +1,6 @@
 package view.member.transaction_member;
 
+import controller.AuthenticationController;
 import view.member.MemberMenu;
 
 import javax.swing.*;
@@ -9,11 +10,14 @@ public class AddWallet extends JFrame {
     private JPasswordField pinField;
     private JButton addButton;
     private JLabel balanceLabel;
-    private AddWallet wallet;
 
     public AddWallet() {
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            setVisible(true);
+        }
     }
 
     private void initComponents() {
@@ -27,7 +31,7 @@ public class AddWallet extends JFrame {
         panel.setLayout(null);
 
         // Balance Label
-        balanceLabel = new JLabel("Current Balance: $" + wallet);
+        balanceLabel = new JLabel("Current Balance: Rp"); // controller get wallet
         balanceLabel.setBounds(10, 20, 250, 25);
         panel.add(balanceLabel);
         

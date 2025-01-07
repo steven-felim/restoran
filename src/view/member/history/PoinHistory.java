@@ -16,6 +16,7 @@ public class PoinHistory extends JFrame {
     private void initComponents() {
         setTitle("History Penukaran Poin");
         setSize(500, 400);
+        this.getContentPane().setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 

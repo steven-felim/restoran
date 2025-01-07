@@ -17,6 +17,7 @@ public class TransactionHistory extends JFrame {
         setTitle("Transaction History");
         setSize(800, 400);
         setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Create panel for the title

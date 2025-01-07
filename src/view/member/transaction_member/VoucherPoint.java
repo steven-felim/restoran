@@ -2,90 +2,96 @@ package view.member.transaction_member;
 
 import javax.swing.*;
 
+import controller.AuthenticationController;
+import model.classes.Voucher;
 import view.member.MemberMenu;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.lang.reflect.Member;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VoucherPoint extends JFrame {
     private JButton btnRedeem;
     private JButton btnCancel;
     private JComboBox<String> voucherComboBox;
-    private Member member;
 
     public VoucherPoint() {
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            setVisible(true);
+        }
     }
 
     private void initComponents() {
         setTitle("Penukaran Poin");
-        setSize(400, 300);
+        setSize(600, 400);
+        getContentPane().setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        
-        // Membuat panel dan komponen GUI
-        JPanel panel = new JPanel();
-        add(panel);
-        
-        panel.setLayout(null);
-        
-        JLabel label = new JLabel("Pilih Voucher untuk ditukar:");
-        label.setBounds(10, 20, 200, 25);
-        panel.add(label);
-        
-        voucherComboBox = new JComboBox<>();
-        voucherComboBox.setBounds(10, 50, 200, 25);
-        panel.add(voucherComboBox);
-        
-        //data dari database
-        // loadVouchers();
-        
-        btnRedeem = new JButton("Tukar Voucher");
-        btnRedeem.setBounds(10, 100, 150, 25);
-        panel.add(btnRedeem);
-        
-        btnCancel = new JButton("Batal");
-        btnCancel.setBounds(200, 100, 100, 25);
-        panel.add(btnCancel);
-        
-        btnRedeem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                redeemVoucher();
-            }
-        });
-        
-        btnCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cancelRedemption();
-            }
-        });
-    }
 
-    // Redeem voucher yang dipilih
-    private void redeemVoucher() {
-        int selectedIndex = voucherComboBox.getSelectedIndex();
-        if (selectedIndex == -1) {
-            JOptionPane.showMessageDialog(this, "Pilih voucher terlebih dahulu.");
-            return;
-        }
+        JPanel topPanel = new JPanel();
+        topPanel.setBackground(Color.WHITE);
+        topPanel.setLayout(null);
+        topPanel.setPreferredSize(new Dimension(600, 75));
 
-    }
+        JButton backButton = new JButton("Back to Main Menu");
+        backButton.setBounds(25, 10, 150, 30);
 
-    // Batalkan penukaran dan kembali ke menu utama
-    private void cancelRedemption() {
-        int response = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin membatalkan?", 
-        "Konfirmasi", JOptionPane.YES_NO_OPTION);
-        if (response == JOptionPane.YES_OPTION) {
-            this.dispose(); 
+        backButton.addActionListener(e -> {
+            this.dispose();
             new MemberMenu();
-            System.out.println("Pembatalan berhasil.");
-        }
-    }
+        });
 
+        JLabel title = new JLabel("Exchange Point");
+        title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
+        title.setBounds(200, 10, 300, 30);
+
+        topPanel.add(backButton);
+        topPanel.add(title);
+
+        this.add(topPanel, BorderLayout.NORTH);
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+
+        List<Voucher> vouchers = new ArrayList<>(); // = voucherController.getAllVoucher
+        // Dummy
+        vouchers.add(new Voucher(1, "Rp 5000 voucher", 0, 5000, 50));
+        vouchers.add(new Voucher(2, "Rp 10000 voucher", 0, 10000, 100));
+        vouchers.add(new Voucher(3, "Rp 15000 voucher", 0, 15000, 150));
+
+        for (Voucher voucher : vouchers) {
+            JPanel itemPanel = new JPanel();
+            itemPanel.setLayout(new GridBagLayout());
+
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.insets = new Insets(5, 5, 5, 5);
+
+            JLabel itemNameLabel = new JLabel(voucher.getVoucherName() + " - " + voucher.getPoint() + " points");
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.weightx = 1.0;
+            itemPanel.add(itemNameLabel, gbc);
+
+            JButton exchangeButton = new JButton("Tukar voucher");
+            gbc.gridx = 1;
+            gbc.weightx = 0.0;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            itemPanel.add(exchangeButton, gbc);
+
+            exchangeButton.addActionListener(e -> {
+                JOptionPane.showConfirmDialog(null, "Apakah Anda yakin mau menukar point Anda?", "Konfirmasi", JOptionPane.OK_CANCEL_OPTION);
+                // if ok
+                //    tukar point
+            });
+            mainPanel.add(itemPanel);
+        }
+
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        this.add(scrollPane, BorderLayout.CENTER);
+    }
 
     public static void main(String[] args) {
         new VoucherPoint();

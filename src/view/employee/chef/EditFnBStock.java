@@ -27,6 +27,7 @@ public class EditFnBStock extends JFrame {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setTitle("Edit F&B Stock");
 
         JLabel title = new JLabel("Edit F&B Stock");
@@ -35,6 +36,7 @@ public class EditFnBStock extends JFrame {
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
+        panel.setBackground(Color.WHITE);
         panel.setBounds(100, 60, 1080, 600);
 
         JLabel menuName = new JLabel("Menu Name");

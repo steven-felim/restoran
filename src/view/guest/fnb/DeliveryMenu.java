@@ -1,18 +1,14 @@
-package view.fnb;
+package view.guest.fnb;
 
 import model.classes.Cart;
 import view.guest.GuestMenu;
-import view.member.MemberMenu;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class DeliveryMenu extends JFrame {
-    private String origin;
     private Cart cart;
 
-    public DeliveryMenu(String origin) {
-        this.origin = origin;
+    public DeliveryMenu() {
         initComponents();
         this.setVisible(true);
     }
@@ -34,7 +30,7 @@ public class DeliveryMenu extends JFrame {
         backButton.setBounds(25, 10, 150, 30);
         backButton.addActionListener(e -> {
             this.dispose();
-            new ConfirmFnBOrder(origin);
+            new ConfirmFnBOrder();
         });
 
         JLabel title = new JLabel("Delivery Order");
@@ -83,13 +79,8 @@ public class DeliveryMenu extends JFrame {
         JButton cancelButton = new JButton("Cancel");
         cancelButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Order cancelled.");
-            if ("Member".equalsIgnoreCase(origin)) {
-                this.dispose();
-                new MemberMenu();
-            } else if ("Guest".equalsIgnoreCase(origin)) {
-                this.dispose();
-                new GuestMenu();
-            }
+            this.dispose();
+            new GuestMenu();
         });
 
         bottomPanel.add(placeOrderButton);

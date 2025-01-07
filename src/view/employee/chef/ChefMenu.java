@@ -22,6 +22,7 @@ public class ChefMenu extends JFrame {
         this.setLayout(null);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Chef Menu");
 
@@ -31,6 +32,7 @@ public class ChefMenu extends JFrame {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(null);
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setBounds(44, 100, 300, 200);
 
         JButton viewStock = new JButton("View F&B Stock");

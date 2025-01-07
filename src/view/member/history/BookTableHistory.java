@@ -17,6 +17,7 @@ public class BookTableHistory extends JFrame {
     private void initComponents() {
         setTitle("Booking History");
         setSize(800, 600);
+        this.getContentPane().setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 

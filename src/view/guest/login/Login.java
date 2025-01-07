@@ -16,10 +16,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
 
 public class Login extends JFrame {
 	public Login() {
@@ -32,6 +29,7 @@ public class Login extends JFrame {
 		this.setResizable(false);
 		this.setLayout(null);
 		this.setTitle("Login");
+		this.getContentPane().setBackground(Color.WHITE);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
@@ -39,6 +37,7 @@ public class Login extends JFrame {
 		title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 		title.setBounds(143, 22, 200, 51);
 		JPanel formLogin = new JPanel();
+		formLogin.setBackground(Color.WHITE);
 		formLogin.setLayout(null);
 		formLogin.setBounds(44, 111, 300, 150);
 
@@ -77,7 +76,8 @@ public class Login extends JFrame {
 
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(null);
-		buttonPanel.setBounds(43, 300, 350, 100);
+		buttonPanel.setBackground(Color.WHITE);
+		buttonPanel.setBounds(43, 300, 300, 40);
 
 		JButton loginButton = new JButton("Login");
 		loginButton.setBounds(0, 0, 100, 40);

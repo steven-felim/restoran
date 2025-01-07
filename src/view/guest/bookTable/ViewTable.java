@@ -1,8 +1,7 @@
-package view.bookTable;
+package view.guest.bookTable;
 
 import model.classes.Table;
 import view.guest.GuestMenu;
-import view.member.MemberMenu;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -69,7 +68,7 @@ public class ViewTable extends JFrame {
 
         backButton.addActionListener(e -> {
             this.dispose();
-            new MemberMenu();
+            new GuestMenu();
         });
 
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);

@@ -27,6 +27,7 @@ public class ViewCart extends JFrame {
         this.setSize(600, 400);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel topPanel = new JPanel();

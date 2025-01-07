@@ -1,22 +1,19 @@
-package view.fnb;
+package view.guest.fnb;
 
 import controller.FnBController;
 import model.classes.Cart;
 import model.classes.FoodAndBeverage;
 import view.employee.cashier.CashierMenu;
 import view.guest.GuestMenu;
-import view.member.MemberMenu;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
 public class ConfirmFnBOrder extends JFrame {
-    private String origin;
     private Cart cart;
     private FnBController fnbc;
 
-    public ConfirmFnBOrder(String origin) {
-        this.origin = origin;
+    public ConfirmFnBOrder() {
         initComponents();
         this.setVisible(true);
     }
@@ -35,19 +32,15 @@ public class ConfirmFnBOrder extends JFrame {
 
         JPanel topPanel = new JPanel();
         topPanel.setLayout(null);
+        topPanel.setBackground(Color.WHITE);
         topPanel.setPreferredSize(new Dimension(600, 75));
 
         JButton backButton = new JButton("Back to Main Menu");
         backButton.setBounds(25, 10, 150, 30);
 
         backButton.addActionListener(e -> {
-            if ("Member".equalsIgnoreCase(origin)) {
-                this.dispose();
-                new MemberMenu();
-            } else if ("Cashier".equalsIgnoreCase(origin)) {
-                this.dispose();
-                new CashierMenu();
-            }
+            this.dispose();
+            new CashierMenu();
         });
 
         topPanel.add(backButton);
@@ -102,16 +95,14 @@ public class ConfirmFnBOrder extends JFrame {
         methodLabel.setBounds(200, 360, 600, 30);
         bottomPanel.add(methodLabel);
 
-        if (!"Cashier".equalsIgnoreCase(origin)) {
-            JButton deliveryButton = new JButton("Delivery");
-            bottomPanel.add(deliveryButton);
+        JButton deliveryButton = new JButton("Delivery");
+        bottomPanel.add(deliveryButton);
 
-            deliveryButton.addActionListener(e -> {
-                JOptionPane.showMessageDialog(this, "You have chosen delivery. Please enter your address.");
-                new DeliveryMenu(origin);
-                this.dispose();
-            });
-        }
+        deliveryButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "You have chosen delivery. Please enter your address.");
+            new DeliveryMenu();
+            this.dispose();
+        });
 
         JButton takeAwayButton = new JButton("Take Away");
         bottomPanel.add(takeAwayButton);
@@ -119,13 +110,8 @@ public class ConfirmFnBOrder extends JFrame {
         takeAwayButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "You have chosen take away. A receipt will be generated.");
             generateReceipt();
-            if ("Member".equalsIgnoreCase(origin)) {
-                this.dispose();
-                new MemberMenu();
-            } else if ("Cashier".equalsIgnoreCase(origin)) {
-                this.dispose();
-                new CashierMenu();
-            }
+            this.dispose();
+            new GuestMenu();
         });
 
         JButton dineInButton = new JButton("Dine In");
@@ -134,13 +120,8 @@ public class ConfirmFnBOrder extends JFrame {
         dineInButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "You have chosen dine in.");
             generateReceipt();
-            if ("Member".equalsIgnoreCase(origin)) {
-                this.dispose();
-                new MemberMenu();
-            } else if ("Cashier".equalsIgnoreCase(origin)) {
-                this.dispose();
-                new CashierMenu();
-            }
+            this.dispose();
+            new GuestMenu();
         });
 
         this.add(bottomPanel, BorderLayout.SOUTH);

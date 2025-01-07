@@ -21,6 +21,7 @@ public class ViewHistory extends JFrame {
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("History");
 
@@ -31,7 +32,7 @@ public class ViewHistory extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBounds(44, 100, 300, 200);
-
+        panel.setBackground(Color.WHITE);
 
         JButton bookTableHistoryButton = new JButton("Book Table History");
         bookTableHistoryButton.setBounds(0, 0, 300, 40);
