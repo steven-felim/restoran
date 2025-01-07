@@ -75,8 +75,14 @@ public class OrderFnB extends JFrame {
             gbc.weightx = 1.0;
             itemPanel.add(itemNameLabel, gbc);
 
-            JButton addButton = new JButton("Tambahkan ke Keranjang");
+            JButton addFavorit = new JButton("Favorit");
             gbc.gridx = 1;
+            gbc.weightx = 0.0;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            itemPanel.add(addFavorit, gbc);
+
+            JButton addButton = new JButton("Keranjang");
+            gbc.gridx = 2;
             gbc.weightx = 0.0;
             gbc.fill = GridBagConstraints.HORIZONTAL;
             itemPanel.add(addButton, gbc);
@@ -97,16 +103,23 @@ public class OrderFnB extends JFrame {
             gbc.fill = GridBagConstraints.HORIZONTAL;
             itemPanel.add(quantityPanel, gbc);
 
+            addFavorit.addActionListener(e -> {
+                JOptionPane.showMessageDialog(this, "Berhasil ditambahken ke favorit!");
+                // tambahkan ke db
+            });
+
             addButton.addActionListener(e -> {
                 quantityField.setVisible(true);
                 removeButton.setVisible(true);
                 addButton.setVisible(false);
+                addFavorit.setVisible(false);
             });
 
             removeButton.addActionListener(e -> {
                 quantityField.setVisible(false);
                 removeButton.setVisible(false);
                 addButton.setVisible(true);
+                addFavorit.setVisible(true);
             });
 
             mainPanel.add(itemPanel);
@@ -151,5 +164,7 @@ public class OrderFnB extends JFrame {
             bottomPanel.add(cancelButton);
         }
         this.add(bottomPanel, BorderLayout.SOUTH);
+ 
+        
     }
 }
