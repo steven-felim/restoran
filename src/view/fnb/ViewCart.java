@@ -39,13 +39,8 @@ public class ViewCart extends JFrame {
         backButton.setBounds(25, 10, 150, 30);
 
         backButton.addActionListener(e -> {
-            if ("Member".equalsIgnoreCase(origin)) {
                 this.dispose();
-                new MemberMenu();
-            } else if ("Guest".equalsIgnoreCase(origin)) {
-                this.dispose();
-                new GuestMenu();
-            }
+                new MemberMenu();            
         });
 
         JLabel title = new JLabel("Your FnB Order");
