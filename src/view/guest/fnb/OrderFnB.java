@@ -129,8 +129,6 @@ public class OrderFnB extends JFrame {
         cancelButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Pemesanan dimasukkan ke keranjang.");
             // input ke cart
-            this.dispose();
-            new GuestMenu();
         });
         bottomPanel.add(cancelButton);
 
