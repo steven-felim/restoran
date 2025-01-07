@@ -21,7 +21,7 @@ public class FnBMenu extends JFrame {
             this.dispose();
         } else {
             this.setVisible(true);
-        }
+       }
     }
 
     private void initComponents() {
@@ -30,6 +30,7 @@ public class FnBMenu extends JFrame {
 
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
+        this.setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("F&B Menu");
 
@@ -42,24 +43,33 @@ public class FnBMenu extends JFrame {
         panel.setLayout(null);
         panel.setBounds(100, 80, 1080, 600);
 
-        JLabel id = new JLabel("Insert FnB ID");
-        id.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
-        id.setBounds(200, 0, 220, 30);
-        panel.add(id);
+        JButton back = new JButton("Back to Main Menu");
+        back.setBounds(0, 0, 160, 30);
+        panel.add(back);
 
-        JTextField idField = new JTextField(20);
-        idField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
-        idField.setBounds(410, 0, 220, 30);
-        panel.add(idField);
+        back.addActionListener(e ->  {
+            this.dispose();
+            new AdminMenu();
+        });
 
         JButton add = new JButton("Add");
-        add.setBounds(660, 0, 100, 30);
+        add.setBounds(190, 0, 100, 30);
         panel.add(add);
 
         add.addActionListener(e -> {
             this.dispose();
             new AddFnBMenu();
         });
+
+        JLabel id = new JLabel("Insert FnB ID");
+        id.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+        id.setBounds(340, 0, 180, 30);
+        panel.add(id);
+
+        JTextField idField = new JTextField(20);
+        idField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
+        idField.setBounds(480, 0, 220, 30);
+        panel.add(idField);
 
         JButton edit = new JButton("Edit");
         edit.setBounds(780, 0, 100, 30);
@@ -93,14 +103,7 @@ public class FnBMenu extends JFrame {
             }
         });
 
-        JButton back = new JButton("Back to Main Menu");
-        back.setBounds(0, 0, 160, 30);
-        panel.add(back);
 
-        back.addActionListener(e ->  {
-            this.dispose();
-            new AdminMenu();
-        });
 
         table = new JTable(model);
         model.addColumn("Fnb ID");
