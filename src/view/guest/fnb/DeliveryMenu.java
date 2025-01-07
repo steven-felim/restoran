@@ -53,6 +53,7 @@ public class DeliveryMenu extends JFrame {
 
         JTextArea addressArea = new JTextArea();
         addressArea.setBounds(25, 80, 550, 100);
+        addressArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         addressArea.setLineWrap(true);
         addressArea.setWrapStyleWord(true);
         addressPanel.add(addressArea);
