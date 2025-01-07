@@ -77,20 +77,15 @@ public class DeliveryMenu extends JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Order placed successfully! Your order will be delivered to: " + address);;
                 this.dispose();
-                new GuestMenu();
+                new MemberMenu();
             }
         });
 
         JButton cancelButton = new JButton("Cancel");
         cancelButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Order cancelled.");
-            if ("Member".equalsIgnoreCase(origin)) {
                 this.dispose();
-                new MemberMenu();
-            } else if ("Guest".equalsIgnoreCase(origin)) {
-                this.dispose();
-                new GuestMenu();
-            }
+                new MemberMenu();           
         });
 
         bottomPanel.add(placeOrderButton);
