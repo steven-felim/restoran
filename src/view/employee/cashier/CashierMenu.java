@@ -23,6 +23,7 @@ public class CashierMenu extends JFrame{
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Cashier Menu");
 
@@ -31,7 +32,9 @@ public class CashierMenu extends JFrame{
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setLayout(null);
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setBounds(44, 100, 300, 200);
 
         JButton viewOrder = new JButton("View Order");

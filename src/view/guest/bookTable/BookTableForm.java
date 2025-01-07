@@ -1,34 +1,31 @@
-package view.bookTable;
+package view.guest.bookTable;
 
+import org.jdatepicker.impl.DateComponentFormatter;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+import view.guest.GuestMenu;
 import javax.swing.*;
-
-import controller.AuthenticationController;
-import org.jdatepicker.impl.*;
-
 import java.awt.*;
 import java.util.Properties;
 
-public class RescheduleTable extends JFrame {
+public class BookTableForm extends JFrame {
     private JComboBox<String> roomComboBox;
     private JComboBox<String> tableComboBox;
 
-    public RescheduleTable() {
+    public BookTableForm() {
         initComponents();
-        if (!new AuthenticationController().checkUser()) {
-            this.dispose();
-        } else {
-            this.setVisible(true);
-        }
+        this.setVisible(true);
     }
-        
+
     private void initComponents() {
-        setTitle("Reschedule Table");
+        setTitle("Book Table");
         setSize(900, 600);
         getContentPane().setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JLabel title = new JLabel("Reschedule Table");
+        JLabel title = new JLabel("Book Table");
         title.setBounds(330, 40, 700, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
         add(title);
@@ -40,7 +37,7 @@ public class RescheduleTable extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
 
         gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc.gridy = 1;
         mainPanel.add(new JLabel("Select Room:"), gbc);
 
         roomComboBox = new JComboBox<>(new String[]{"VIP", "Indoor", "Outdoor"});
@@ -49,7 +46,7 @@ public class RescheduleTable extends JFrame {
         mainPanel.add(roomComboBox, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         mainPanel.add(new JLabel("Select Table:"), gbc);
 
         tableComboBox = new JComboBox<>();
@@ -57,7 +54,7 @@ public class RescheduleTable extends JFrame {
         mainPanel.add(tableComboBox, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         mainPanel.add(new JLabel("Select Date:"), gbc);
 
         UtilDateModel model = new UtilDateModel();
@@ -78,28 +75,19 @@ public class RescheduleTable extends JFrame {
         buttonPanel.add(backButton);
 
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridwidth = 2;
         mainPanel.add(buttonPanel, gbc);
 
         add(mainPanel);
 
         confirmButton.addActionListener(e -> {
-//            input ke DB
-//            id table = "room" + "nomor meja"
-//            if reschedule <= 2 kali
-//                otomatis reschedule
-//            else
-//                tunggu admin acc
-//                if admin acc
-//                    ok, reschedule
-//                else
-//                    balik ke semula
+
         });
 
         backButton.addActionListener(e -> {
             this.dispose();
-            new ViewTable();
+            new GuestMenu();
         });
 
         updateTableComboBox();

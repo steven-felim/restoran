@@ -1,11 +1,14 @@
 package view.bookTable;
 
+import controller.AuthenticationController;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 import org.jdatepicker.impl.DateComponentFormatter;
 
 import javax.swing.*;
+
+import view.employee.waiter.WaiterMenu;
 import view.guest.GuestMenu;
 import view.member.MemberMenu;
 
@@ -20,12 +23,17 @@ public class BookTableForm extends JFrame {
     public BookTableForm(String origin) {
         this.origin = origin;
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }
 
     private void initComponents() {
         setTitle("Book Table");
         setSize(900, 600);
+        getContentPane().setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -103,9 +111,9 @@ public class BookTableForm extends JFrame {
             if ("Member".equalsIgnoreCase(origin)) {
                 this.dispose();
                 new MemberMenu();
-            } else if ("Guest".equalsIgnoreCase(origin)) {
+            } else if ("Waiter".equalsIgnoreCase(origin)) {
                 this.dispose();
-                new GuestMenu();
+                new WaiterMenu();
             }
         });
 

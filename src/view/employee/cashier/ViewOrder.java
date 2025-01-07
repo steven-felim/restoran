@@ -28,6 +28,7 @@ public class ViewOrder extends JFrame {
 
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("View Order");
 
@@ -36,7 +37,9 @@ public class ViewOrder extends JFrame {
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
         panel.setLayout(null);
+        panel.setBackground(Color.WHITE);
         panel.setBounds(100, 80, 1080, 600);
 
         JButton back = new JButton("Back to Main Menu");

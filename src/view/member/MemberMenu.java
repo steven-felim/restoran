@@ -27,6 +27,7 @@ public class MemberMenu extends JFrame {
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Member Menu");
 
@@ -37,6 +38,7 @@ public class MemberMenu extends JFrame {
         JPanel panel = new JPanel();
         panel.setBackground(Color.WHITE);
         panel.setLayout(null);
+        panel.setBackground(Color.WHITE);
         panel.setBounds(44, 80, 300, 450);
 
         JButton bookTableButton = new JButton("Book Table");
@@ -54,7 +56,7 @@ public class MemberMenu extends JFrame {
 
         rescheduleTableButton.addActionListener(e -> {
             this.dispose();
-            new ViewTable("Member");
+            new ViewTable();
         });
 
         JButton walletButton = new JButton("Wallet");
@@ -93,11 +95,11 @@ public class MemberMenu extends JFrame {
             new ViewCart("Member");
         });
 
-        JButton viewPointButton = new JButton("View Point");
-        viewPointButton.setBounds(0, 300, 300, 40);
-        panel.add(viewPointButton);
+        JButton exchangePointButton = new JButton("Exchange Point");
+        exchangePointButton.setBounds(0, 300, 300, 40);
+        panel.add(exchangePointButton);
 
-        viewPointButton.addActionListener(e -> {
+        exchangePointButton.addActionListener(e -> {
             this.dispose();
             new VoucherPoint();
         });

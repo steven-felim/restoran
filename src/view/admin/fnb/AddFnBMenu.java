@@ -1,6 +1,7 @@
 package view.admin.fnb;
 
 import controller.AuthenticationController;
+import controller.FnBController;
 import view.admin.AdminMenu;
 
 import javax.swing.*;
@@ -27,6 +28,7 @@ public class AddFnBMenu extends JFrame {
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
         panel.setLayout(null);
         panel.setBounds(100, 60, 1080, 600);
 
@@ -65,7 +67,17 @@ public class AddFnBMenu extends JFrame {
         panel.add(submit);
 
         submit.addActionListener(e ->  {
-            // Sambungin ke DB, ada controller
+            String nameMenu = menuNameField.getText();
+            String stockMenu = stockField.getText();
+            String priceMenu = priceField.getText();
+            String result = new FnBController().addFnBMenu(nameMenu, stockMenu, priceMenu);
+            if (!result.isBlank()) {
+                JOptionPane.showMessageDialog(null, result);
+            } else {
+                JOptionPane.showMessageDialog(null, "Data Berhasil Ditambahkan.", "Sukses!", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+                new FnBMenu();
+            }
         });
 
         JButton back = new JButton("Back to Main Menu");

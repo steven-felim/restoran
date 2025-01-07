@@ -22,6 +22,7 @@ public class DeliverymanMenu extends JFrame {
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Chef Menu");
 
@@ -30,7 +31,9 @@ public class DeliverymanMenu extends JFrame {
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setLayout(null);
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setBounds(44, 100, 300, 200);
 
         JButton viewStock = new JButton("Accept Delivery Order");
