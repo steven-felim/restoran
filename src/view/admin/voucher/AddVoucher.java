@@ -78,7 +78,7 @@ public class AddVoucher extends JFrame {
             // Sambungin ke DB, ada controller
         });
 
-        JButton back = new JButton("Back to Main Menu");
+        JButton back = new JButton("Back");
         back.setBounds(440, 400, 440, 40);
         panel.add(back);
 

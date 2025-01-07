@@ -91,7 +91,7 @@ public class EditFnBForm extends JFrame {
             }
         });
 
-        JButton back = new JButton("Back to Main Menu");
+        JButton back = new JButton("Back");
         back.setBounds(440, 310, 440, 40);
         panel.add(back);
 
