@@ -146,8 +146,6 @@ public class OrderFnB extends JFrame {
                 JOptionPane.showMessageDialog(this, "Pemesanan dimasukkan ke keranjang.");
                 if ("Member".equalsIgnoreCase(origin)) {
                     // input ke cart
-                    this.dispose();
-                    new MemberMenu();
                 }
             });
             bottomPanel.add(cancelButton);
