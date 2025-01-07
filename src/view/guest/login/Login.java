@@ -39,6 +39,7 @@ public class Login extends JFrame {
 		title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 		title.setBounds(143, 22, 200, 51);
 		JPanel formLogin = new JPanel();
+		formLogin.setBackground(Color.WHITE);
 		formLogin.setLayout(null);
 		formLogin.setBounds(44, 111, 300, 150);
 
@@ -76,6 +77,7 @@ public class Login extends JFrame {
 		});
 
 		JPanel buttonPanel = new JPanel();
+		buttonPanel.setBackground(Color.WHITE);
 		buttonPanel.setLayout(null);
 		buttonPanel.setBounds(43, 300, 350, 100);
 

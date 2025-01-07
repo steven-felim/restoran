@@ -4,6 +4,10 @@ import javax.swing.*;
 
 import view.member.MemberMenu;
 
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Member;
@@ -25,10 +29,9 @@ public class VoucherPoint extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
-        // Membuat panel dan komponen GUI
         JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
         add(panel);
-        
         panel.setLayout(null);
         
         JLabel label = new JLabel("Pilih Voucher untuk ditukar:");

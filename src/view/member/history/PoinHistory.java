@@ -20,6 +20,7 @@ public class PoinHistory extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel(new BorderLayout());
+        panel.setBackground(Color.WHITE);
         JLabel titleLabel = new JLabel("History Penukaran Poin", JLabel.CENTER);
         titleLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
         panel.add(titleLabel, BorderLayout.NORTH);

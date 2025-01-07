@@ -1,17 +1,15 @@
 package view.member;
 
 import javax.swing.*;
-
 import controller.AuthenticationController;
-import view.member.fnb_member.OrderFnBMember;
-import view.member.fnb_member.ViewCartMember;
+import view.bookTable.BookTableForm;
+import view.bookTable.ViewTable;
+import view.fnb.OrderFnB;
+import view.fnb.ViewCart;
 import view.member.history.ViewHistory;
 import view.profile.ViewProfile;
-import view.member.table_member.BookTableForm;
-import view.member.table_member.ViewTableMember;
 import view.member.transaction_member.AddWallet;
 import view.member.transaction_member.VoucherPoint;
-
 import java.awt.*;
 
 public class MemberMenu extends JFrame {
@@ -37,6 +35,7 @@ public class MemberMenu extends JFrame {
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
         panel.setLayout(null);
         panel.setBounds(44, 80, 300, 450);
 
@@ -46,7 +45,7 @@ public class MemberMenu extends JFrame {
 
         bookTableButton.addActionListener(e -> {
             this.dispose();
-            new BookTableForm();
+            new BookTableForm("Member");
         });
 
         JButton rescheduleTableButton = new JButton("View Book Table");
@@ -55,7 +54,7 @@ public class MemberMenu extends JFrame {
 
         rescheduleTableButton.addActionListener(e -> {
             this.dispose();
-            new ViewTableMember();
+            new ViewTable("Member");
         });
 
         JButton walletButton = new JButton("Wallet");
@@ -82,7 +81,7 @@ public class MemberMenu extends JFrame {
 
         orderMenuButton.addActionListener(e -> {
             this.dispose();
-            new OrderFnBMember();
+            new OrderFnB("Member");
         });
 
         JButton viewCartButton = new JButton("Cart");
@@ -91,7 +90,7 @@ public class MemberMenu extends JFrame {
 
         viewCartButton.addActionListener(e -> {
             this.dispose();
-            new ViewCartMember();
+            new ViewCart("Member");
         });
 
         JButton viewPointButton = new JButton("View Point");

@@ -28,6 +28,7 @@ public class AddFnBMenu extends JFrame {
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
         panel.setLayout(null);
         panel.setBounds(100, 60, 1080, 600);
 

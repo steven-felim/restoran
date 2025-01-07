@@ -1,15 +1,18 @@
-package view.member.transaction_member;
+package view.fnb;
 
 import model.classes.Cart;
-import view.member.fnb_member.ViewCartMember;
+import view.guest.GuestMenu;
+import view.member.MemberMenu;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class DeliveryMember extends JFrame {
+public class DeliveryMenu extends JFrame {
+    private String origin;
     private Cart cart;
 
-    public DeliveryMember() {
+    public DeliveryMenu(String origin) {
+        this.origin = origin;
         initComponents();
         this.setVisible(true);
     }
@@ -21,8 +24,8 @@ public class DeliveryMember extends JFrame {
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        // Top Panel with back button
         JPanel topPanel = new JPanel();
+        topPanel.setBackground(Color.WHITE);
         topPanel.setLayout(null);
         topPanel.setPreferredSize(new Dimension(600, 75));
 
@@ -30,7 +33,7 @@ public class DeliveryMember extends JFrame {
         backButton.setBounds(25, 10, 150, 30);
         backButton.addActionListener(e -> {
             this.dispose();
-            new ViewCartMember(); 
+            new ConfirmFnBOrder(origin);
         });
 
         JLabel title = new JLabel("Delivery Order");
@@ -58,6 +61,7 @@ public class DeliveryMember extends JFrame {
 
         this.add(addressPanel, BorderLayout.CENTER);
 
+        // Bottom panel with Place Order and Cancel buttons
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -67,40 +71,27 @@ public class DeliveryMember extends JFrame {
             if (address.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please enter a valid delivery address.");
             } else {
-                // Transaction transaction = new Transaction(cart);
-                // transaction.setDeliveryAddress(address);
-
-                JOptionPane.showMessageDialog(this, "Order placed successfully! Your order will be delivered to: " + address);
-                
-                // Clear cart after order is placed
-                // cart.clearCart();
+                JOptionPane.showMessageDialog(this, "Order placed successfully! Your order will be delivered to: " + address);;
                 this.dispose();
+                new GuestMenu();
             }
         });
 
         JButton cancelButton = new JButton("Cancel");
         cancelButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Order cancelled.");
-            this.dispose();
-            new ViewCartMember(); 
-        });
-
-        JButton PaymentButton = new JButton("Payment");
-        PaymentButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Order Paymentled.");
-            this.dispose();
-            new PaymentMember(); 
+            if ("Member".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new MemberMenu();
+            } else if ("Guest".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new GuestMenu();
+            }
         });
 
         bottomPanel.add(placeOrderButton);
         bottomPanel.add(cancelButton);
-        bottomPanel.add(PaymentButton);
 
         this.add(bottomPanel, BorderLayout.SOUTH);
     }
-
-    public static void main(String[] args) {
-        new DeliveryMember();
-    }
 }
-

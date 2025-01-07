@@ -1,20 +1,21 @@
-package view.member.fnb_member;
+package view.fnb;
 
 import controller.FnBController;
-import model.classes.Cart;
 import model.classes.FoodAndBeverage;
+import view.guest.GuestMenu;
 import view.member.MemberMenu;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class ViewCartMember extends JFrame {
-    private Cart cart;
+public class ViewCart extends JFrame {
+    private String origin;
     private FnBController fnbc;
     // FnBController hanya untuk contoh gambaran program, nanti pakai data fnb di cart
 
-    public ViewCartMember() {
+    public ViewCart(String origin) {
+        this.origin = origin;
         initComponents();
         this.setVisible(true);
     }
@@ -22,22 +23,28 @@ public class ViewCartMember extends JFrame {
     private void initComponents() {
         fnbc = new FnBController();
 
-        this.setTitle("View Cart");
+        this.setTitle("Cart Summary");
         this.setSize(600, 400);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        // Top Panel with back button
         JPanel topPanel = new JPanel();
+        topPanel.setBackground(Color.WHITE);
         topPanel.setLayout(null);
         topPanel.setPreferredSize(new Dimension(600, 75));
 
         JButton backButton = new JButton("Back to Main Menu");
         backButton.setBounds(25, 10, 150, 30);
+
         backButton.addActionListener(e -> {
-            this.dispose();
-            new MemberMenu(); 
+            if ("Member".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new MemberMenu();
+            } else if ("Guest".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new GuestMenu();
+            }
         });
 
         JLabel title = new JLabel("Your FnB Order");
@@ -102,11 +109,11 @@ public class ViewCartMember extends JFrame {
         buyButton.addActionListener(e -> {
             // input pesanan ke db
             JOptionPane.showMessageDialog(this, "Pemesanan berhasil!");
+            new ConfirmFnBOrder(origin);
+            this.dispose();
         });
 
         bottomPanel.add(buyButton);
-
         this.add(bottomPanel, BorderLayout.SOUTH);
     }
 }
-

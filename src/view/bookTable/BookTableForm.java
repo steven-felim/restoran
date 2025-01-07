@@ -1,4 +1,4 @@
-package view.guest.table;
+package view.bookTable;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -7,14 +7,18 @@ import org.jdatepicker.impl.DateComponentFormatter;
 
 import javax.swing.*;
 import view.guest.GuestMenu;
+import view.member.MemberMenu;
+
 import java.awt.*;
 import java.util.Properties;
 
-public class BookTable extends JFrame {
+public class BookTableForm extends JFrame {
+    private String origin;
     private JComboBox<String> roomComboBox;
     private JComboBox<String> tableComboBox;
 
-    public BookTable() {
+    public BookTableForm(String origin) {
+        this.origin = origin;
         initComponents();
         this.setVisible(true);
     }
@@ -31,12 +35,23 @@ public class BookTable extends JFrame {
         add(title);
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setBackground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 10, 10, 10);
 
+        if ("Waiter".equalsIgnoreCase(origin)) {
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            mainPanel.add(new JLabel("Insert Name:"), gbc);
+
+            JTextField nameField = new JTextField();
+            gbc.gridx = 1;
+            mainPanel.add(nameField, gbc);
+        }
+
         gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc.gridy = 1;
         mainPanel.add(new JLabel("Select Room:"), gbc);
 
         roomComboBox = new JComboBox<>(new String[]{"VIP", "Indoor", "Outdoor"});
@@ -45,7 +60,7 @@ public class BookTable extends JFrame {
         mainPanel.add(roomComboBox, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         mainPanel.add(new JLabel("Select Table:"), gbc);
 
         tableComboBox = new JComboBox<>();
@@ -53,7 +68,7 @@ public class BookTable extends JFrame {
         mainPanel.add(tableComboBox, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         mainPanel.add(new JLabel("Select Date:"), gbc);
 
         UtilDateModel model = new UtilDateModel();
@@ -66,6 +81,7 @@ public class BookTable extends JFrame {
         mainPanel.add(datePicker, gbc);
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.WHITE);
         JButton confirmButton = new JButton("Confirm");
         JButton backButton = new JButton("Back");
 
@@ -73,31 +89,24 @@ public class BookTable extends JFrame {
         buttonPanel.add(backButton);
 
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridwidth = 2;
         mainPanel.add(buttonPanel, gbc);
 
         add(mainPanel);
 
         confirmButton.addActionListener(e -> {
-        // // Get selected data
-        // String selectedRoom = (String) roomComboBox.getSelectedItem();
-        // String selectedTable = (String) tableComboBox.getSelectedItem();
-        // String selectedDate = datePicker.getJFormattedTextField().getText(); 
 
-        // // Save booking data
-        // BookingController bookingController = new BookingController();
-        // bookingController.saveBooking(new BookTableData(selectedRoom, selectedTable, selectedDate));
-
-        // // Transition to ViewHistoryGuest
-        // this.dispose();
-        // new ViewHistoryGuest();
-    });
-
+        });
 
         backButton.addActionListener(e -> {
-            this.dispose();
-            new GuestMenu();
+            if ("Member".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new MemberMenu();
+            } else if ("Guest".equalsIgnoreCase(origin)) {
+                this.dispose();
+                new GuestMenu();
+            }
         });
 
         updateTableComboBox();
@@ -116,9 +125,5 @@ public class BookTable extends JFrame {
                 tableComboBox.addItem(String.valueOf(i));
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new BookTable();
     }
 }
