@@ -30,6 +30,7 @@ public class ViewFnBStock extends JFrame {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setLayout(null);
         this.getContentPane().setBackground(Color.WHITE);
         this.setTitle("View F&B Stock");
 
@@ -80,16 +81,17 @@ public class ViewFnBStock extends JFrame {
         model.addColumn("Stock");
         model.addColumn("Price");
 
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(0, 60, 1080, 600);
+        loadDataToView();
 
+        table.setPreferredScrollableViewportSize(new Dimension(1080, 450));
+        table.setFillsViewportHeight(true);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(0, 60, 1080, 450);
         panel.add(scrollPane);
 
-        this.setLayout(null);
         this.add(title);
         this.add(panel);
-
-        loadDataToView();
     }
 
     private void loadDataToView() {
