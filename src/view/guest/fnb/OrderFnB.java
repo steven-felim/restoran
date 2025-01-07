@@ -1,20 +1,14 @@
-package view.fnb;
+package view.guest.fnb;
 
 import controller.FnBController;
 import model.classes.FoodAndBeverage;
-import view.employee.cashier.CashierMenu;
 import view.guest.GuestMenu;
-import view.member.MemberMenu;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
 public class OrderFnB extends JFrame {
-    private String origin;
-
-    public OrderFnB(String origin) {
-        this.origin = origin;
+    public OrderFnB() {
         initComponents();
         this.setVisible(true);
     }
@@ -30,7 +24,6 @@ public class OrderFnB extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel topPanel = new JPanel();
-        topPanel.setBackground(Color.WHITE);
         topPanel.setLayout(null);
         topPanel.setPreferredSize(new Dimension(600, 75));
 
@@ -38,13 +31,8 @@ public class OrderFnB extends JFrame {
         backButton.setBounds(25, 10, 150, 30);
 
         backButton.addActionListener(e -> {
-            if ("Member".equalsIgnoreCase(origin)) {
-                this.dispose();
-                new MemberMenu();
-            } else if ("Cashier".equalsIgnoreCase(origin)) {
-                this.dispose();
-                new CashierMenu();
-            }
+            this.dispose();
+            new GuestMenu();
         });
 
         JLabel title = new JLabel("Order Menu");
@@ -120,38 +108,32 @@ public class OrderFnB extends JFrame {
 
         JButton buyButton = new JButton("Checkout");
         buyButton.addActionListener(e -> {
-            if (!"Member".equalsIgnoreCase(origin)) {
-                String name = JOptionPane.showInputDialog("Input nama pembeli: ");
-                if (name.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Silakan input nama terlebih dahulu", "Input nama", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+            String name = JOptionPane.showInputDialog("Input nama pembeli: ");
+            if (name.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Silakan input nama terlebih dahulu", "Input nama", JOptionPane.ERROR_MESSAGE);
+                return;
             }
-            // if (nama pembeli ada di tabel guest) {
+                        // if (nama pembeli ada di tabel guest) {
             //        langsung input ke cart & transaksi
             //    } else {
             //        input dulu ke tabel guest, karena baru pertama beli
             //        baru input ke cart & transaksi
             //    }
             JOptionPane.showMessageDialog(this, "Pemesanan berhasil!");
-            new ConfirmFnBOrder(origin);
+            new ConfirmFnBOrder();
             this.dispose();
         });
 
         bottomPanel.add(buyButton);
+        JButton cancelButton = new JButton("Add to Cart");
+        cancelButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Pemesanan dimasukkan ke keranjang.");
+            // input ke cart
+            this.dispose();
+            new GuestMenu();
+        });
+        bottomPanel.add(cancelButton);
 
-        if (!"Cashier".equalsIgnoreCase(origin)) {
-            JButton cancelButton = new JButton("Add to Cart");
-            cancelButton.addActionListener(e -> {
-                JOptionPane.showMessageDialog(this, "Pemesanan dimasukkan ke keranjang.");
-                if ("Member".equalsIgnoreCase(origin)) {
-                    // input ke cart
-                    this.dispose();
-                    new MemberMenu();
-                }
-            });
-            bottomPanel.add(cancelButton);
-        }
         this.add(bottomPanel, BorderLayout.SOUTH);
     }
 }

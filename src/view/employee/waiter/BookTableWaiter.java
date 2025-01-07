@@ -21,6 +21,7 @@ public class BookTableWaiter extends JFrame {
     private void initComponents() {
         setTitle("Book Table");
         setSize(900, 600);
+        this.getContentPane().setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

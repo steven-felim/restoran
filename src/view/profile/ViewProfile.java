@@ -28,6 +28,7 @@ public class ViewProfile extends JFrame {
         setSize(500, 600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.WHITE);
         setLayout(new BorderLayout());
 
         JLabel title = new JLabel("Your Profile", SwingConstants.CENTER);

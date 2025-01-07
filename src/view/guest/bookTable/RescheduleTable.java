@@ -1,10 +1,10 @@
-package view.bookTable;
+package view.guest.bookTable;
 
+import org.jdatepicker.impl.DateComponentFormatter;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 import javax.swing.*;
-
-import controller.AuthenticationController;
-import org.jdatepicker.impl.*;
-
 import java.awt.*;
 import java.util.Properties;
 
@@ -14,11 +14,7 @@ public class RescheduleTable extends JFrame {
 
     public RescheduleTable() {
         initComponents();
-        if (!new AuthenticationController().checkUser()) {
-            this.dispose();
-        } else {
-            this.setVisible(true);
-        }
+        this.setVisible(true);
     }
         
     private void initComponents() {

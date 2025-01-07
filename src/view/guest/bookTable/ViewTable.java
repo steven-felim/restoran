@@ -1,8 +1,7 @@
-package view.bookTable;
+package view.guest.bookTable;
 
 import model.classes.Table;
 import view.guest.GuestMenu;
-import view.member.MemberMenu;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -34,13 +33,13 @@ public class ViewTable extends JFrame {
         bookedTables.add(new Table("VIP2", 2)); 
         bookedTables.add(new Table("Regular3", 3)); 
 
+        // Title label
         JLabel titleLabel = new JLabel("Table Booking");
         titleLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(titleLabel, BorderLayout.NORTH);
 
         JPanel mainPanel = new JPanel();
-        mainPanel.setBackground(Color.WHITE);
         mainPanel.setLayout(new BorderLayout());
 
         tableListModel = new DefaultListModel<>();
@@ -69,7 +68,7 @@ public class ViewTable extends JFrame {
 
         backButton.addActionListener(e -> {
             this.dispose();
-            new MemberMenu();
+            new GuestMenu();
         });
 
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);

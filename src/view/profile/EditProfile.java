@@ -23,6 +23,7 @@ public class EditProfile extends JFrame {
         this.setResizable(false);
         this.setLayout(null);
         this.setTitle("Edit Profile");
+        this.getContentPane().setBackground(Color.WHITE);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
