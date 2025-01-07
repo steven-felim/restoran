@@ -9,6 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class VoucherPoint extends JFrame {
     private JButton btnRedeem;
     private JButton btnCancel;

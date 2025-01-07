@@ -26,6 +26,7 @@ public class PaymentMember extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
         panel.setLayout(null);
         add(panel);
 

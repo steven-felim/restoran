@@ -75,6 +75,7 @@ public class Login extends JFrame {
 		});
 
 		JPanel buttonPanel = new JPanel();
+		buttonPanel.setBackground(Color.WHITE);
 		buttonPanel.setLayout(null);
 		buttonPanel.setBackground(Color.WHITE);
 		buttonPanel.setBounds(43, 300, 300, 40);

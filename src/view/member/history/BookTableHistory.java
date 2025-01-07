@@ -22,6 +22,7 @@ public class BookTableHistory extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(Color.WHITE);
         JLabel titleLabel = new JLabel("Booking History", JLabel.CENTER);
         titleLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);

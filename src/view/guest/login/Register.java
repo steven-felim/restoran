@@ -28,6 +28,7 @@ public class Register extends JFrame {
         screenTitle.setBounds(116, 22, 200, 51);
 
         JPanel formLogin = new JPanel();
+        formLogin.setBackground(Color.WHITE);
         formLogin.setLayout(null);
         formLogin.setBackground(Color.WHITE);
         formLogin.setBounds(44, 80, 300, 350);
@@ -107,6 +108,7 @@ public class Register extends JFrame {
         });
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setLayout(null);
         buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setBounds(86, 450, 300, 40);

@@ -20,8 +20,8 @@ public class TransactionHistory extends JFrame {
         this.getContentPane().setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        // Create panel for the title
         JPanel titlePanel = new JPanel();
+        titlePanel.setBackground(Color.WHITE);
         JLabel titleLabel = new JLabel("Transaction History");
         titleLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
         titlePanel.add(titleLabel);

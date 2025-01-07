@@ -3,6 +3,8 @@ package view.member.transaction_member;
 import controller.AuthenticationController;
 import view.member.MemberMenu;
 
+import java.awt.Color;
+
 import javax.swing.*;
 
 public class AddWallet extends JFrame {
@@ -25,8 +27,9 @@ public class AddWallet extends JFrame {
         setSize(400, 420);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        
+
         JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
         add(panel);
         panel.setLayout(null);
 

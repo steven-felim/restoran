@@ -30,6 +30,7 @@ public class OrderFnB extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel topPanel = new JPanel();
+        topPanel.setBackground(Color.WHITE);
         topPanel.setLayout(null);
         topPanel.setPreferredSize(new Dimension(600, 75));
 

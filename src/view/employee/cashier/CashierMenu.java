@@ -32,6 +32,7 @@ public class CashierMenu extends JFrame{
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setLayout(null);
         buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setBounds(44, 100, 300, 200);
