@@ -11,10 +11,12 @@ import java.awt.*;
 public class EditFnBForm extends JFrame {
     private FoodAndBeverage temp;
     private FnBController fnbc;
+    private int idMenu;
 
     public EditFnBForm(int id) {
         fnbc = new FnBController();
         temp = fnbc.getDataFromDB(id);
+        this.idMenu = id;
 
         initComponents();
         if (!new AuthenticationController().checkUser()) {
@@ -73,7 +75,19 @@ public class EditFnBForm extends JFrame {
         panel.add(submit);
 
         submit.addActionListener(e ->  {
-            // Sambungin ke DB, ada controller
+            String result = new FnBController().editFnBMenu(
+                    idMenu,
+                    menuNameField.getText(),
+                    stockField.getText(),
+                    priceField.getText()
+            );
+            if (!result.isBlank()) {
+                JOptionPane.showMessageDialog(null, result);
+            } else {
+                JOptionPane.showMessageDialog(null, "Data Berhasil Diedit.", "Sukses!", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+                new FnBMenu();
+            }
         });
 
         JButton back = new JButton("Back to Main Menu");

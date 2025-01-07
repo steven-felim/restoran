@@ -65,8 +65,12 @@ public class FnBMenu extends JFrame {
         panel.add(edit);
 
         edit.addActionListener(e -> {
-            this.dispose();
-            new EditFnBForm(Integer.parseInt(idField.getText()));
+            if (idField.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Masukkan ID Menu terlebih dahulu.");
+            } else {
+                this.dispose();
+                new EditFnBForm(Integer.parseInt(idField.getText()));
+            }
         });
 
         JButton delete = new JButton("Delete");
@@ -74,7 +78,18 @@ public class FnBMenu extends JFrame {
         panel.add(delete);
 
         delete.addActionListener(e -> {
-            // controller hapus data
+            int idFnb = Integer.parseInt(idField.getText());
+            int confirm = JOptionPane.showConfirmDialog(
+                    null,
+                    "Apakah Anda yakin ingin menghapus id " + idFnb + "?",
+                    "Alert",
+                    JOptionPane.OK_CANCEL_OPTION
+            );
+            if (confirm == 0) {
+                new FnBController().deleteFnBMenu(idFnb);
+                idField.setText("");
+                loadDataToView();
+            }
         });
 
         JButton back = new JButton("Back to Main Menu");
