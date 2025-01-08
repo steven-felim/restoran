@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 06, 2025 at 11:14 AM
+-- Generation Time: Jan 08, 2025 at 06:25 AM
 -- Server version: 11.3.0-MariaDB
 -- PHP Version: 8.0.30
 
@@ -33,8 +33,8 @@ CREATE TABLE `booktable` (
                              `user_id` int(11) DEFAULT NULL,
                              `guest_id` int(11) DEFAULT NULL,
                              `date` date NOT NULL,
-                             `status` enum('BOOKED','PENDING') NOT NULL,
-                             `counts_reschedule` int(11) NOT NULL
+                             `status` enum('BOOKED','PENDING') NOT NULL DEFAULT 'BOOKED',
+                             `counts_reschedule` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
@@ -94,6 +94,17 @@ CREATE TABLE `discount` (
 INSERT INTO `discount` (`discount_id`, `role`, `discount_percent`) VALUES
                                                                        (1, 'GUEST', 0.00),
                                                                        (2, 'MEMBER', 10.00);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `favorite_menu`
+--
+
+CREATE TABLE `favorite_menu` (
+                                 `user_id` int(11) NOT NULL,
+                                 `fnb_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -225,7 +236,7 @@ CREATE TABLE `user` (
                         `email` varchar(255) NOT NULL,
                         `password` varchar(255) NOT NULL,
                         `cellphone` varchar(13) NOT NULL,
-                        `role` enum('ADMIN','EMPLOYEE','MEMBER') NOT NULL,
+                        `role` enum('ADMIN','EMPLOYEE','MEMBER','GUEST') NOT NULL,
                         `wallet_balance` double(10,2) DEFAULT 0.00,
                         `pin` char(6) DEFAULT NULL,
                         `point` int(11) DEFAULT 0,
@@ -315,6 +326,13 @@ ALTER TABLE `delivery`
 --
 ALTER TABLE `discount`
     ADD PRIMARY KEY (`discount_id`);
+
+--
+-- Indexes for table `favorite_menu`
+--
+ALTER TABLE `favorite_menu`
+    ADD PRIMARY KEY (`user_id`,`fnb_id`),
+  ADD KEY `fnb_id` (`fnb_id`);
 
 --
 -- Indexes for table `fnb`
@@ -451,6 +469,13 @@ ALTER TABLE `cart_items`
 --
 ALTER TABLE `delivery`
     ADD CONSTRAINT `delivery_ibfk_1` FOREIGN KEY (`deliveryman_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `favorite_menu`
+--
+ALTER TABLE `favorite_menu`
+    ADD CONSTRAINT `favorite_menu_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `favorite_menu_ibfk_2` FOREIGN KEY (`fnb_id`) REFERENCES `fnb` (`fnb_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `voucher_claim`

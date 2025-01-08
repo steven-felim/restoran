@@ -3,8 +3,8 @@ package view.guest.fnb;
 import controller.FnBController;
 import model.classes.Cart;
 import model.classes.FoodAndBeverage;
-import view.employee.cashier.CashierMenu;
 import view.guest.GuestMenu;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -20,111 +20,180 @@ public class ConfirmFnBOrder extends JFrame {
 
     private void initComponents() {
         fnbc = new FnBController();
-        this.setSize(600, 400);
+        this.setSize(900, 600);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setLayout(null);
         this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Confirm Order");
 
+        JPanel topPanel = new JPanel();
+        topPanel.setBackground(Color.WHITE);
+        topPanel.setLayout(null);
+        topPanel.setBounds(0, 0, 900, 100);
+
         JLabel title = new JLabel("Confirm Order");
-        title.setBounds(200, 0, 250, 60);
+        title.setBounds(340, 0, 220, 60);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 
-        JPanel topPanel = new JPanel();
-        topPanel.setLayout(null);
-        topPanel.setBackground(Color.WHITE);
-        topPanel.setPreferredSize(new Dimension(600, 75));
-
         JButton backButton = new JButton("Back to Main Menu");
-        backButton.setBounds(25, 10, 150, 30);
+        backButton.setBounds(25, 20, 150, 30);
 
         backButton.addActionListener(e -> {
             this.dispose();
-            new CashierMenu();
+            new GuestMenu();
         });
 
         topPanel.add(backButton);
         topPanel.add(title);
+        this.add(topPanel);
 
-        this.add(topPanel, BorderLayout.NORTH);
-
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-
-        List<FoodAndBeverage> menuItems = fnbc.getAllFnb();
+        List<FoodAndBeverage> cartItems = fnbc.getAllFnb();
         // nanti list fnb diganti jadi list cart
 
-        for (FoodAndBeverage item : menuItems) {
-            JPanel itemPanel = new JPanel();
-            itemPanel.setLayout(new GridBagLayout());
+        JPanel cartPanel = new JPanel();
+        cartPanel.setBackground(Color.WHITE);
+        cartPanel.setLayout(null);
+        cartPanel.setPreferredSize(new Dimension(600, cartItems.size() * 40));
 
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.anchor = GridBagConstraints.WEST;
-            gbc.insets = new Insets(5, 5, 5, 5);
+        System.out.println(cartItems.size());
+
+        for (int i = 0; i < cartItems.size(); i++) {
+            FoodAndBeverage item = cartItems.get(i);
+
+            JPanel itemPanel = new JPanel();
+            itemPanel.setLayout(null);
+            itemPanel.setBounds(0, i * 40, 600, 40);
 
             JLabel itemNameLabel = new JLabel(item.getName() + " - Rp " + item.getPrice());
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.weightx = 1.0;
-            itemPanel.add(itemNameLabel, gbc);
-
-            JPanel quantityPanel = new JPanel();
-            quantityPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+            itemNameLabel.setBounds(0, 0, 540, 40);
 
             JLabel quantity = new JLabel("1");
-            quantityPanel.add(quantity);
-            // jumlah yg dipesan menyesuaikan cart & otomatis terisi di text field
+            quantity.setBounds(540, 0, 60, 40);
 
-            gbc.gridx = 2;
-            gbc.weightx = 0.0;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-            itemPanel.add(quantityPanel, gbc);
-            mainPanel.add(itemPanel);
+            itemPanel.add(itemNameLabel);
+            itemPanel.add(quantity);
+
+            cartPanel.add(itemPanel);
         }
+
+        JScrollPane scrollPane = new JScrollPane(cartPanel);
+        scrollPane.setBounds(0, 100, 600, 400);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        this.add(scrollPane);
+
+        JPanel voucherPanel = new JPanel();
+        voucherPanel.setBackground(Color.WHITE);
+        voucherPanel.setLayout(null);
+        voucherPanel.setBounds(600, 100, 300, 133);
+
+        JLabel voucherLabel = new JLabel("Voucher");
+        voucherLabel.setBounds(100, 0, 100, 40);
+        voucherLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+        voucherPanel.add(voucherLabel);
+        JComboBox voucherComboBox = new JComboBox<>();
+        voucherComboBox.setBounds(20, 60, 250, 30); // get voucher_claim dari db
+        voucherPanel.add(voucherComboBox);
+        this.add(voucherPanel);
+
+        JPanel paymentMethod = new JPanel();
+        paymentMethod.setBackground(Color.WHITE);
+        paymentMethod.setLayout(null);
+        paymentMethod.setBounds(600, 233, 300, 197);
+
+        JLabel paymentLabel = new JLabel("Payment Method");
+        paymentLabel.setBounds(70, 0, 200, 40);
+        paymentLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+
+        ButtonGroup payment = new ButtonGroup();
+
+        JRadioButton cash =  new JRadioButton("Cash");
+        cash.setBackground(Color.WHITE);
+        cash.setBounds(25, 45, 100, 30);
+        payment.add(cash);
+
+        paymentMethod.add(paymentLabel);
+        paymentMethod.add(cash);
+        this.add(paymentMethod);
+
+        JPanel totalPayment = new JPanel();
+        totalPayment.setBackground(Color.WHITE);
+        totalPayment.setLayout(null);
+        totalPayment.setBounds(600, 430, 300, 70);
+
         JLabel totalLabel = new JLabel("Total Price:    Rp"); // tambahkan total harga cart melalui controller
-        mainPanel.add(totalLabel);
+        totalLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+        totalLabel.setBounds(25, 10, 250, 50);
+        totalPayment.add(totalLabel);
+        this.add(totalPayment);
 
-        JScrollPane scrollPane = new JScrollPane(mainPanel);
-        this.add(scrollPane, BorderLayout.CENTER);
+        JPanel orderTypePanel = new JPanel();
+        orderTypePanel.setBackground(Color.WHITE);
+        orderTypePanel.setBounds(0, 500, 600, 100);
 
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-
-        // Choose Delivery or Pick-up
         JLabel methodLabel = new JLabel("Choose a method to collect your order:");
-        methodLabel.setBounds(200, 360, 600, 30);
-        bottomPanel.add(methodLabel);
+        ButtonGroup orderMethod = new ButtonGroup();
 
-        JButton deliveryButton = new JButton("Delivery");
-        bottomPanel.add(deliveryButton);
-
-        deliveryButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "You have chosen delivery. Please enter your address.");
-            new DeliveryMenu();
-            this.dispose();
+        JRadioButton delivery = new JRadioButton("Delivery");
+        delivery.setBackground(Color.WHITE);
+        delivery.addActionListener(e -> {
+            if (delivery.isSelected()) {
+                orderMethod.setSelected(delivery.getModel(), true);
+            }
         });
 
-        JButton takeAwayButton = new JButton("Take Away");
-        bottomPanel.add(takeAwayButton);
+        JRadioButton takeaway = new JRadioButton("Take Away");
+        takeaway.setBackground(Color.WHITE);
 
-        takeAwayButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "You have chosen take away. A receipt will be generated.");
-            generateReceipt();
-            this.dispose();
-            new GuestMenu();
+        JRadioButton dinein = new JRadioButton("Dine In");
+        dinein.setBackground(Color.WHITE);
+
+        orderMethod.add(delivery);
+        orderMethod.add(takeaway);
+        orderMethod.add(dinein);
+
+        orderTypePanel.add(methodLabel);
+        orderTypePanel.add(delivery);
+        orderTypePanel.add(takeaway);
+        orderTypePanel.add(dinein);
+        this.add(orderTypePanel);
+
+        JPanel confirmPanel = new JPanel();
+        confirmPanel.setBackground(Color.WHITE);
+        confirmPanel.setLayout(null);
+        confirmPanel.setBounds(600, 500, 300, 100);
+
+        JButton confirmButton = new JButton("Checkout");
+        confirmButton.setBounds(0, 0, 285, 60);
+        confirmPanel.add(confirmButton);
+        this.add(confirmPanel);
+
+        revalidate();
+        repaint();
+
+        confirmButton.addActionListener(e -> {
+            if (!orderMethod.getSelection().isSelected()) {
+                JOptionPane.showMessageDialog(null, "Please select your order method", "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (delivery.isSelected()) {
+                JOptionPane.showMessageDialog(this, "You have chosen delivery. Please enter your address.");
+                new DeliveryMenu();
+                this.dispose();
+            } else if (takeaway.isSelected()) {
+                JOptionPane.showMessageDialog(this, "You have chosen take away.");
+                generateReceipt();
+                this.dispose();
+                new GuestMenu();
+            } else if (dinein.isSelected()){
+                JOptionPane.showMessageDialog(this, "You have chosen dine in.");
+                generateReceipt();
+                this.dispose();
+                new GuestMenu();
+            }
         });
 
-        JButton dineInButton = new JButton("Dine In");
-        bottomPanel.add(dineInButton);
-
-        dineInButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "You have chosen dine in.");
-            generateReceipt();
-            this.dispose();
-            new GuestMenu();
-        });
-
-        this.add(bottomPanel, BorderLayout.SOUTH);
     }
 
     //Method to generate receipt for pick-up option

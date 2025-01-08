@@ -1,5 +1,6 @@
 package view.fnb;
 
+import controller.AuthenticationController;
 import controller.FnBController;
 import model.classes.Cart;
 import model.classes.FoodAndBeverage;
@@ -17,7 +18,11 @@ public class ConfirmFnBOrder extends JFrame {
     public ConfirmFnBOrder(String origin) {
         this.origin = origin;
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            setVisible(true);
+        }
     }
 
     private void initComponents() {
@@ -127,9 +132,25 @@ public class ConfirmFnBOrder extends JFrame {
         wallet.setBounds(25, 75, 100, 30);
         payment.add(wallet);
 
-        // if wallet dipilih -> tampilkan walletBalance
         JLabel walletBalance = new JLabel("Balance: Rp"); // tampilkan saldo dari controller
         walletBalance.setBounds(25, 105, 150, 30);
+        walletBalance.setVisible(false);
+
+        wallet.addActionListener(e -> {
+            if (wallet.isSelected()) {
+                if ("Cashier".equalsIgnoreCase(origin)) {
+                    JOptionPane.showInputDialog("Input member's cellphone number:");
+                    // if nomor telepon ada -> tampilkan saldo member
+                }
+                walletBalance.setVisible(true);
+            }
+        });
+
+        cash.addActionListener(e -> {
+            if (cash.isSelected()) {
+                walletBalance.setVisible(false);
+            }
+        });
 
         paymentMethod.add(walletBalance);
         paymentMethod.add(paymentLabel);
@@ -188,12 +209,22 @@ public class ConfirmFnBOrder extends JFrame {
         confirmButton.addActionListener(e -> {
             if (!orderMethod.getSelection().isSelected()) {
                 JOptionPane.showMessageDialog(null, "Please select your order method", "Error", JOptionPane.ERROR_MESSAGE);
-            } else if ("Delivery".equals(orderMethod.getSelection().toString())) {
+            } else if (delivery.isSelected()) {
                 JOptionPane.showMessageDialog(this, "You have chosen delivery. Please enter your address.");
                 new DeliveryMenu(origin);
                 this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "You have chosen " + orderMethod.getSelection().toString());
+            } else if (takeaway.isSelected()){
+                JOptionPane.showMessageDialog(this, "You have chosen take away.");
+                generateReceipt();
+                if ("Member".equalsIgnoreCase(origin)) {
+                    this.dispose();
+                    new MemberMenu();
+                } else if ("Cashier".equalsIgnoreCase(origin)) {
+                    this.dispose();
+                    new CashierMenu();
+                }
+            } else if (dinein.isSelected()){
+                JOptionPane.showMessageDialog(this, "You have chosen dine in.");
                 generateReceipt();
                 if ("Member".equalsIgnoreCase(origin)) {
                     this.dispose();
@@ -228,9 +259,5 @@ public class ConfirmFnBOrder extends JFrame {
         receiptTextArea.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
 
         JOptionPane.showMessageDialog(this, new JScrollPane(receiptTextArea), "Receipt", JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    public static void main(String[] args) {
-        new ConfirmFnBOrder("Cashier");
     }
 }
