@@ -91,7 +91,21 @@ public class AddEmployee extends JFrame {
         panel.add(submit);
 
         submit.addActionListener(e ->  {
-            // Sambungin ke DB, ada controller
+            String jobdesk = "";
+            JRadioButton[] radio = {cashier, chef, waiter, deliveryman};
+            for (JRadioButton button : radio) {
+                if (button.isSelected()) {
+                    jobdesk = button.getText();
+                }
+            }
+            new EmployeeController().addEmployee(
+                    empNameField.getText(),
+                    emailField.getText(),
+                    jobdesk
+            );
+            JOptionPane.showMessageDialog(null, "Data Berhasil Ditambahkan.", "Sukses!", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            new EmployeeMenu();
         });
 
         JButton back = new JButton("Back to Main Menu");

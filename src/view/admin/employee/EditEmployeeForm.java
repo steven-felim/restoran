@@ -11,10 +11,12 @@ import java.awt.*;
 public class EditEmployeeForm extends JFrame {
     private Employee temp;
     private EmployeeController ec;
+    private int id = 0;
 
     public EditEmployeeForm(int id) {
         ec = new EmployeeController();
         temp = ec.getDataFromDB(id);
+        this.id = id;
 
         initComponents();
         if (!new AuthenticationController().checkUser()) {
@@ -111,7 +113,22 @@ public class EditEmployeeForm extends JFrame {
         panel.add(submit);
 
         submit.addActionListener(e ->  {
-            // Sambungin ke DB, ada controller
+            String jobdesk = "";
+            JRadioButton[] radio = {cashier, chef, waiter, deliveryman};
+            for (JRadioButton button : radio) {
+                if (button.isSelected()) {
+                    jobdesk = button.getText();
+                }
+            }
+            new EmployeeController().editEmployee(
+                    id,
+                    empNameField.getText(),
+                    emailField.getText(),
+                    jobdesk
+            );
+            JOptionPane.showMessageDialog(null, "Data Berhasil Diedit.", "Sukses!", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            new EmployeeMenu();
         });
 
         JButton back = new JButton("Back to Main Menu");
