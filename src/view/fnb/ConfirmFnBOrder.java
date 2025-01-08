@@ -69,8 +69,6 @@ public class ConfirmFnBOrder extends JFrame {
         cartPanel.setLayout(null);
         cartPanel.setPreferredSize(new Dimension(600, cartItems.size() * 40));
 
-        System.out.println(cartItems.size());
-
         for (int i = 0; i < cartItems.size(); i++) {
             FoodAndBeverage item = cartItems.get(i);
 
