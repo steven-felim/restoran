@@ -116,7 +116,7 @@ public class FnBMenu extends JFrame {
         table.setFillsViewportHeight(true);
 
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(0, 10, 1080, 450);
+        scrollPane.setBounds(0, 60, 1080, 450);
         panel.add(scrollPane);
 
         this.add(title);

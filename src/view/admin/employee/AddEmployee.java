@@ -56,12 +56,11 @@ public class AddEmployee extends JFrame {
         panel.add(cellPhone);
 
         JTextField cellPhoneField = new JTextField(20);
-        cellPhoneField.setEnabled(false);
         cellPhoneField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
         cellPhoneField.setBounds(510, 210, 220, 30);
         panel.add(cellPhoneField);
 
-        JLabel role = new JLabel("Role");
+        JLabel role = new JLabel("Job Desk");
         role.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
         role.setBounds(200, 260, 220, 30);
         panel.add(role);
@@ -108,7 +107,7 @@ public class AddEmployee extends JFrame {
             new EmployeeMenu();
         });
 
-        JButton back = new JButton("Back to Main Menu");
+        JButton back = new JButton("Back");
         back.setBounds(440, 360, 440, 40);
         panel.add(back);
 
