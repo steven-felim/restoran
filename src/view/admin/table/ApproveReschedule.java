@@ -66,7 +66,7 @@ public class ApproveReschedule extends JFrame {
             // Controller kembalikan ke book table asal
         });
 
-        JButton back = new JButton("Back to Main Menu");
+        JButton back = new JButton("Back");
         back.setBounds(0, 0, 160, 30);
         panel.add(back);
 

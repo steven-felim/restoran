@@ -92,7 +92,7 @@ public class AddVoucher extends JFrame {
 	        }
         });
 
-        JButton back = new JButton("Back to Main Menu");
+        JButton back = new JButton("Back");
         back.setBounds(440, 400, 440, 40);
         panel.add(back);
 

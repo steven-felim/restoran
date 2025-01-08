@@ -40,7 +40,7 @@ public class ViewSalesReport extends JFrame {
         panel.setLayout(null);
         panel.setBounds(100, 80, 1080, 600);
 
-        JButton back = new JButton("Back to Main Menu");
+        JButton back = new JButton("Back");
         back.setBounds(0, 0, 160, 30);
         panel.add(back);
 
