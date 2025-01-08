@@ -14,6 +14,7 @@ public class DiscountController {
 		try {
 			PreparedStatement stmt = DatabaseHandler.getInstance().con.prepareStatement(getMemberDiscQuery);
 			ResultSet rs = stmt.executeQuery();
+			rs.next();
 			return new Discount(rs.getInt("discount_percent"));
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -30,6 +31,7 @@ public class DiscountController {
 		try {
 			PreparedStatement stmt = DatabaseHandler.getInstance().con.prepareStatement(getGuestDiscQuery);
 			ResultSet rs = stmt.executeQuery();
+			rs.next();
 			return new Discount(rs.getInt("discount_percent"));
 		} catch (SQLException e) {
 			e.printStackTrace();
