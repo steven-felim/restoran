@@ -3,7 +3,6 @@ package view.admin.employee;
 import controller.AuthenticationController;
 import controller.EmployeeController;
 import model.classes.Employee;
-import view.admin.AdminMenu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -67,7 +66,7 @@ public class EditEmployeeMenu extends JFrame {
             }
         });
 
-        JButton back = new JButton("Back to Main Menu");
+        JButton back = new JButton("Back");
         back.setBounds(0, 0, 160, 30);
         panel.add(back);
 
