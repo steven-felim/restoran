@@ -128,7 +128,7 @@ public class EditEmployeeForm extends JFrame {
             );
             JOptionPane.showMessageDialog(null, "Data Berhasil Diedit.", "Sukses!", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
-            new EmployeeMenu();
+            new EditEmployeeMenu();
         });
 
         JButton back = new JButton("Back");
