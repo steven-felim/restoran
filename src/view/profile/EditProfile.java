@@ -1,15 +1,20 @@
 package view.profile;
 
-import controller.AuthenticationController;
+import controller.*;
+import model.classes.NonGuest;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class EditProfile extends JFrame {
     private String originClass; // simpan origin dengan Design Pattern Memento
+    private NonGuest user;
+    private UserController uc;
 
     public EditProfile(String originClass) {
         this.originClass = originClass;
+        uc = new UserController();
+        user = uc.getDataFromDB(AuthenticationHelper.getInstance().getUserId());
         initComponents();
         if (!new AuthenticationController().checkUser()) {
             this.dispose();
@@ -41,7 +46,7 @@ public class EditProfile extends JFrame {
         name.setBounds(115, 0, 130, 30);
         formPanel.add(name);
 
-        JTextField nameField = new JTextField(255);
+        JTextField nameField = new JTextField(user.getName(), 255);
         nameField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
         nameField.setBounds(0, 33, 298, 30);
         formPanel.add(nameField);
@@ -51,7 +56,7 @@ public class EditProfile extends JFrame {
         email.setBounds(125, 77, 130, 30);
         formPanel.add(email);
 
-        JTextField emailField = new JTextField(255);
+        JTextField emailField = new JTextField(user.getEmail(), 255);
         emailField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
         emailField.setBounds(0, 110, 298, 30);
         formPanel.add(emailField);
@@ -61,7 +66,7 @@ public class EditProfile extends JFrame {
         phone.setBounds(95, 153, 180, 30);
         formPanel.add(phone);
 
-        JTextField phoneField = new JTextField(255);
+        JTextField phoneField = new JTextField(user.getCellphone(), 255);
         phoneField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
         phoneField.setBounds(0, 190, 298, 30);
         formPanel.add(phoneField);
@@ -76,7 +81,8 @@ public class EditProfile extends JFrame {
         buttonPanel.add(saveButton);
 
         saveButton.addActionListener(e -> {
-            // logic save ke DB
+            uc.editUserDetails(AuthenticationHelper.getInstance().getUserId(), nameField.getText(), emailField.getText(), phoneField.getText());
+            JOptionPane.showMessageDialog(null, "Data successfully updated!");
         });
 
         JButton cancelButton = new JButton("Cancel");

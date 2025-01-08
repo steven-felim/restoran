@@ -1,6 +1,11 @@
 package view.profile;
 
 import controller.AuthenticationController;
+import controller.AuthenticationHelper;
+import controller.EmployeeController;
+import controller.MemberController;
+import model.classes.Employee;
+import model.classes.Member;
 import view.employee.cashier.CashierMenu;
 import view.employee.chef.ChefMenu;
 import view.employee.deliveryman.DeliverymanMenu;
@@ -12,9 +17,22 @@ import java.awt.*;
 
 public class ViewProfile extends JFrame {
     private String originClass; // simpan origin dengan Design Pattern Memento
+    private Employee emp;
+    private Member mem;
+    private EmployeeController ec;
+    private MemberController mc;
 
     public ViewProfile(String originClass) {
         this.originClass = originClass;
+        if (!originClass.isBlank()) {
+            if ("Member".equals(originClass)) {
+                mc = new MemberController();
+                mem = mc.getDataFromDB(AuthenticationHelper.getInstance().getUserId());
+            } else {
+                ec = new EmployeeController();
+                emp = ec.getDataFromDB(AuthenticationHelper.getInstance().getUserId());
+            }
+        }
         initComponents();
         if (!new AuthenticationController().checkUser()) {
             this.dispose();
@@ -43,9 +61,19 @@ public class ViewProfile extends JFrame {
         String username = "";
         String email = "";
         String phone = "";
-        String walletBalance = "";      
+        String walletBalance = "";
 
-        // Tambahkan data ke panel
+        if ("Member".equals(originClass)) {
+            username = mem.getName();
+            email = mem.getEmail();
+            phone = mem.getCellphone();
+            walletBalance = String.valueOf(mem.getWallet().getBalance());
+        } else if ("Chef".equals(originClass) || "Cashier".equals(originClass) || "Waiter".equals(originClass) || "Deliveryman".equals(originClass)) {
+            username = emp.getName();
+            email = emp.getEmail();
+            phone = emp.getCellphone();
+        }
+
         profilePanel.add(new JLabel("Username:"));
         JLabel usernameLabel = new JLabel(username);
         profilePanel.add(usernameLabel);
