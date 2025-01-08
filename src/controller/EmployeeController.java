@@ -5,6 +5,7 @@ import model.classes.Employee;
 import model.enums.DeliverymanStatus;
 import model.enums.Jobdesk;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -89,5 +90,46 @@ public class EmployeeController {
             e.printStackTrace();
         }
         return empList;
+    }
+
+    public void addEmployee(String name, String email, String jobdesk) {
+        DatabaseHandler.getInstance().connect();
+
+        String query = "INSERT INTO user(name, email, password, cellphone, role, jobdesk) VALUES (?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement pstmt = DatabaseHandler.getInstance().con.prepareStatement(query);
+
+            pstmt.setString(1, name);
+            pstmt.setString(2, email);
+            pstmt.setString(3, "123456xyz");
+            pstmt.setString(4, "-");
+            pstmt.setString(5, "EMPLOYEE");
+            pstmt.setString(6, jobdesk);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseHandler.getInstance().disconnect();
+        }
+    }
+
+    public void editEmployee(int idUser, String name, String email, String jobdesk) {
+        DatabaseHandler.getInstance().connect();
+
+        String query = "UPDATE user SET name = ?, email = ?, cellphone = ?, jobdesk = ? WHERE user_id = ?";
+        try {
+            PreparedStatement pstmt = DatabaseHandler.getInstance().con.prepareStatement(query);
+
+            pstmt.setString(1, name);
+            pstmt.setString(2, email);
+            pstmt.setString(3, "-");
+            pstmt.setString(4, jobdesk);
+            pstmt.setInt(5, idUser);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseHandler.getInstance().disconnect();
+        }
     }
 }
