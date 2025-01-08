@@ -1,5 +1,6 @@
 package controller;
 
+// design patern singletone
 public class AuthenticationHelper {
 	private static AuthenticationHelper instance;
 	private int userId = 0;

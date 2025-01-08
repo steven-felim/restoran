@@ -82,16 +82,18 @@ public class AcceptDeliveryOrder extends JFrame {
         model.addColumn("Transaction ID");
         model.addColumn("Deliveryman ID");
 
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(0, 60, 1080, 600);
+        loadDataToView();
 
+        table.setPreferredScrollableViewportSize(new Dimension(1080, 450));
+        table.setFillsViewportHeight(true);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(0, 60, 1080, 450);
         panel.add(scrollPane);
 
         this.setLayout(null);
         this.add(title);
         this.add(panel);
-
-        loadDataToView();
     }
 
     private void loadDataToView() {

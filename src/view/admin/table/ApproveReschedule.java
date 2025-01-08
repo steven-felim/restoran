@@ -28,6 +28,7 @@ public class ApproveReschedule extends JFrame {
 
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Approve Table Reschedule");
 

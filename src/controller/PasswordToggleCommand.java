@@ -4,6 +4,7 @@ import model.interfaces.Command;
 
 import javax.swing.*;
 
+// design pattern command
 public class PasswordToggleCommand implements Command {
     private JPasswordField[] passwordFields;
     private JButton toggleButton;

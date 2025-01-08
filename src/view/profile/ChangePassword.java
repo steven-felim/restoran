@@ -1,7 +1,10 @@
 package view.profile;
 
 import controller.AuthenticationController;
+import controller.AuthenticationHelper;
 import controller.PasswordToggleCommand;
+import controller.UserController;
+import model.classes.NonGuest;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,9 +13,14 @@ import java.awt.event.ActionListener;
 
 public class ChangePassword extends JFrame {
     private String originClass; // simpan origin dengan Design Pattern Memento
+    private NonGuest user;
+    private UserController uc;
 
     public ChangePassword(String originClass) {
         this.originClass = originClass;
+        uc = new UserController();
+        user = uc.getDataFromDB(AuthenticationHelper.getInstance().getUserId());
+
         initComponents();
         if (!new AuthenticationController().checkUser()) {
             this.dispose();
@@ -121,7 +129,20 @@ public class ChangePassword extends JFrame {
         buttonPanel.add(resetButton);
 
         resetButton.addActionListener(e -> {
-            // logic save password ke DB
+            if (!oldPassField.getText().equals(user.getPassword())) {
+                JOptionPane.showMessageDialog(null, "Old Password is not correct", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                if (oldPassField.getText().equals(newPassField.getText())) {
+                    JOptionPane.showMessageDialog(null, "You can't input old password as new password", "Error", JOptionPane.ERROR_MESSAGE);
+                } else if (!newPassField.getText().equals(confirmPassField.getText())) {
+                    JOptionPane.showMessageDialog(null, "New Password & Confirm Password doesn't match", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    uc.editPassword(AuthenticationHelper.getInstance().getUserId(), newPassField.getText());
+                    JOptionPane.showMessageDialog(null, "Password Reset Successfully");
+                    this.dispose();
+                    new EditProfile(originClass);
+                }
+            }
         });
 
         JButton cancelButton = new JButton("Cancel");
