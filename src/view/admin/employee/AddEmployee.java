@@ -67,12 +67,16 @@ public class AddEmployee extends JFrame {
 
         JRadioButton cashier = new JRadioButton(String.valueOf(Jobdesk.CASHIER));
         cashier.setBounds(510, 260, 100, 30);
+        cashier.setBackground(Color.WHITE);
         JRadioButton chef = new JRadioButton(String.valueOf(Jobdesk.CHEF));
         chef.setBounds(660, 260, 100, 30);
+        chef.setBackground(Color.WHITE);
         JRadioButton waiter = new JRadioButton(String.valueOf(Jobdesk.WAITER));
         waiter.setBounds(810, 260, 100, 30);
+        waiter.setBackground(Color.WHITE);
         JRadioButton deliveryman = new JRadioButton(String.valueOf(Jobdesk.DELIVERYMAN));
         deliveryman.setBounds(960, 260, 150, 30);
+        deliveryman.setBackground(Color.WHITE);
 
         ButtonGroup job = new ButtonGroup();
         job.add(cashier);

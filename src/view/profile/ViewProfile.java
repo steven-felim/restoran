@@ -58,6 +58,7 @@ public class ViewProfile extends JFrame {
         JLabel phoneLabel = new JLabel(phone);
         profilePanel.add(phoneLabel);
 
+        // design pattern memento
         if ("Member".equals(originClass)) {
             profilePanel.add(new JLabel("Wallet Balance:"));
             JLabel walletLabel = new JLabel("Rp" + walletBalance);

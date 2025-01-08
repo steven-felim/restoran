@@ -44,46 +44,46 @@ public class OrderFnB extends JFrame {
 
         this.add(topPanel, BorderLayout.NORTH);
 
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-
         List<FoodAndBeverage> menuItems = fnbc.getAllFnb();
 
-        for (FoodAndBeverage item : menuItems) {
+        JPanel menuPanel = new JPanel();
+        menuPanel.setBackground(Color.WHITE);
+        menuPanel.setLayout(null);
+        menuPanel.setPreferredSize(new Dimension(560, menuItems.size() * 40));
+
+        for (int i = 0; i < menuItems.size(); i++) {
+            FoodAndBeverage item = menuItems.get(i);
+
             JPanel itemPanel = new JPanel();
-            itemPanel.setLayout(new GridBagLayout());
+            itemPanel.setLayout(null);
+            itemPanel.setBounds(0, i * 40, 560, 40);
 
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.anchor = GridBagConstraints.WEST;
-            gbc.insets = new Insets(5, 5, 5, 5);
+            JLabel itemNameLabel = new JLabel(item.getName());
+            itemNameLabel.setBounds(0, 0, 200, 40);
+            itemPanel.add(itemNameLabel);
 
-            JLabel itemNameLabel = new JLabel(item.getName() + " - Rp " + item.getPrice());
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.weightx = 1.0;
-            itemPanel.add(itemNameLabel, gbc);
+            JLabel itemPriceLabel = new JLabel("Rp" + item.getPrice());
+            itemPriceLabel.setBounds(200, 0, 50, 40);
+            itemPanel.add(itemPriceLabel);
 
-            JButton addButton = new JButton("Tambahkan ke Keranjang");
-            gbc.gridx = 1;
-            gbc.weightx = 0.0;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-            itemPanel.add(addButton, gbc);
+            JButton addButton = new JButton("Keranjang");
+            addButton.setBounds(455, 5, 95, 30);
+            itemPanel.add(addButton);
 
             JPanel quantityPanel = new JPanel();
-            quantityPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+            quantityPanel.setBounds(250, 0, 380, 40);
 
             JTextField quantityField = new JTextField(5);
             quantityField.setVisible(false);
+            quantityField.setBounds(0, 0 , 180, 40);
             quantityPanel.add(quantityField);
 
             JButton removeButton = new JButton("Hapus");
             removeButton.setVisible(false);
+            removeButton.setBounds(200, 0, 160, 40);
             quantityPanel.add(removeButton);
 
-            gbc.gridx = 2;
-            gbc.weightx = 0.0;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-            itemPanel.add(quantityPanel, gbc);
+            itemPanel.add(quantityPanel);
 
             addButton.addActionListener(e -> {
                 quantityField.setVisible(true);
@@ -97,10 +97,10 @@ public class OrderFnB extends JFrame {
                 addButton.setVisible(true);
             });
 
-            mainPanel.add(itemPanel);
+            menuPanel.add(itemPanel);
         }
 
-        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        JScrollPane scrollPane = new JScrollPane(menuPanel);
         this.add(scrollPane, BorderLayout.CENTER);
 
         JPanel bottomPanel = new JPanel();

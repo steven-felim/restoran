@@ -67,7 +67,6 @@ public class EditEmployeeForm extends JFrame {
         panel.add(cellPhone);
 
         JTextField cellPhoneField = new JTextField(String.valueOf(temp.getCellphone()), 20);
-        cellPhoneField.setEnabled(false);
         cellPhoneField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
         cellPhoneField.setBounds(510, 210, 220, 30);
         panel.add(cellPhoneField);
@@ -79,12 +78,16 @@ public class EditEmployeeForm extends JFrame {
 
         JRadioButton cashier = new JRadioButton(String.valueOf(Jobdesk.CASHIER));
         cashier.setBounds(510, 260, 100, 30);
+        cashier.setBackground(Color.WHITE);
         JRadioButton chef = new JRadioButton(String.valueOf(Jobdesk.CHEF));
         chef.setBounds(660, 260, 100, 30);
+        chef.setBackground(Color.WHITE);
         JRadioButton waiter = new JRadioButton(String.valueOf(Jobdesk.WAITER));
         waiter.setBounds(810, 260, 100, 30);
+        waiter.setBackground(Color.WHITE);
         JRadioButton deliveryman = new JRadioButton(String.valueOf(Jobdesk.DELIVERYMAN));
         deliveryman.setBounds(960, 260, 150, 30);
+        deliveryman.setBackground(Color.WHITE);
 
         switch(temp.getJobdesk()) {
             case CASHIER:

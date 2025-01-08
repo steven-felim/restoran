@@ -29,6 +29,7 @@ public class EditEmployeeMenu extends JFrame {
 
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Edit Employee Menu");
 
@@ -82,16 +83,18 @@ public class EditEmployeeMenu extends JFrame {
         model.addColumn("Cellphone");
         model.addColumn("Job desk");
 
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(0, 60, 1080, 600);
+        loadDataToView();
 
+        table.setPreferredScrollableViewportSize(new Dimension(1080, 450));
+        table.setFillsViewportHeight(true);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(0, 60, 1080, 450);
         panel.add(scrollPane);
 
         this.setLayout(null);
         this.add(title);
         this.add(panel);
-
-        loadDataToView();
     }
 
     private void loadDataToView() {
