@@ -83,6 +83,8 @@ public class EditProfile extends JFrame {
         saveButton.addActionListener(e -> {
             uc.editUserDetails(AuthenticationHelper.getInstance().getUserId(), nameField.getText(), emailField.getText(), phoneField.getText());
             JOptionPane.showMessageDialog(null, "Data successfully updated!");
+            this.dispose();
+            new ViewProfile(originClass);
         });
 
         JButton cancelButton = new JButton("Cancel");

@@ -140,7 +140,9 @@ public class OrderFnB extends JFrame {
                 quantityField.setVisible(false);
                 removeButton.setVisible(false);
                 addButton.setVisible(true);
-                addFavorit.setVisible(true);
+                if ("Member".equalsIgnoreCase(origin)) {
+                    addFavorit.setVisible(true);
+                }
                 deleteFavorit.setVisible(false);
             });
 

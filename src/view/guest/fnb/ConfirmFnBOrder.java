@@ -41,6 +41,7 @@ public class ConfirmFnBOrder extends JFrame {
         backButton.setBounds(25, 20, 150, 30);
 
         backButton.addActionListener(e -> {
+            JOptionPane.showConfirmDialog(null, "Are you sure to cancel your order?", "Confirm Order", JOptionPane.OK_CANCEL_OPTION);
             this.dispose();
             new GuestMenu();
         });
@@ -173,7 +174,7 @@ public class ConfirmFnBOrder extends JFrame {
         repaint();
 
         confirmButton.addActionListener(e -> {
-            if (!orderMethod.getSelection().isSelected()) {
+            if (orderMethod.getSelection() == null) {
                 JOptionPane.showMessageDialog(null, "Please select your order method", "Error", JOptionPane.ERROR_MESSAGE);
             } else if (delivery.isSelected()) {
                 JOptionPane.showMessageDialog(this, "You have chosen delivery. Please enter your address.");
