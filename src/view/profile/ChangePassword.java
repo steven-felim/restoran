@@ -137,7 +137,7 @@ public class ChangePassword extends JFrame {
                     uc.editPassword(AuthenticationHelper.getInstance().getUserId(), newPassField.getText());
                     JOptionPane.showMessageDialog(null, "Password Reset Successfully");
                     this.dispose();
-                    new EditProfile(originClass);
+                    new ViewProfile(originClass);
                 }
             }
         });

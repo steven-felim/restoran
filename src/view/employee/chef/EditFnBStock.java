@@ -85,7 +85,7 @@ public class EditFnBStock extends JFrame {
 
         back.addActionListener(e ->  {
             this.dispose();
-            new ChefMenu();
+            new ViewFnBStock();
         });
 
         this.add(title);
