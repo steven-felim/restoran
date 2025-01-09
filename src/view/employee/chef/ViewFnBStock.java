@@ -45,7 +45,7 @@ public class ViewFnBStock extends JFrame {
 
         JLabel id = new JLabel("Insert FnB ID");
         id.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
-        id.setBounds(200, 0, 220, 30);
+        id.setBounds(250, 0, 150, 30);
         panel.add(id);
 
         JTextField idField = new JTextField(20);
@@ -53,7 +53,7 @@ public class ViewFnBStock extends JFrame {
         idField.setBounds(410, 0, 220, 30);
         panel.add(idField);
 
-        JButton submit = new JButton("Add Stock");
+        JButton submit = new JButton("Edit Stock");
         submit.setBounds(660, 0, 220, 30);
         panel.add(submit);
 

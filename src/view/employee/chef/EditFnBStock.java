@@ -71,7 +71,7 @@ public class EditFnBStock extends JFrame {
         priceField.setBounds(510, 210, 220, 30);
         panel.add(priceField);
 
-        JButton submit = new JButton("Add Stock");
+        JButton submit = new JButton("Edit Stock");
         submit.setBounds(440, 260, 440, 40);
         panel.add(submit);
 
@@ -79,7 +79,7 @@ public class EditFnBStock extends JFrame {
             // Sambungin ke DB, ada controller
         });
 
-        JButton back = new JButton("Back to Main Menu");
+        JButton back = new JButton("Back");
         back.setBounds(440, 310, 440, 40);
         panel.add(back);
 

@@ -53,7 +53,7 @@ public class AcceptDeliveryOrder extends JFrame {
 
         JLabel id = new JLabel("Insert Delivery ID");
         id.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
-        id.setBounds(200, 0, 220, 30);
+        id.setBounds(230, 0, 180, 30);
         panel.add(id);
 
         JTextField idField = new JTextField(20);
