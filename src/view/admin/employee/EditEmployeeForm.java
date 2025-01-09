@@ -11,10 +11,12 @@ import java.awt.*;
 public class EditEmployeeForm extends JFrame {
     private Employee temp;
     private EmployeeController ec;
+    private int id = 0;
 
     public EditEmployeeForm(int id) {
         ec = new EmployeeController();
         temp = ec.getDataFromDB(id);
+        this.id = id;
 
         initComponents();
         if (!new AuthenticationController().checkUser()) {
@@ -65,24 +67,27 @@ public class EditEmployeeForm extends JFrame {
         panel.add(cellPhone);
 
         JTextField cellPhoneField = new JTextField(String.valueOf(temp.getCellphone()), 20);
-        cellPhoneField.setEnabled(false);
         cellPhoneField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
         cellPhoneField.setBounds(510, 210, 220, 30);
         panel.add(cellPhoneField);
 
-        JLabel role = new JLabel("Role");
+        JLabel role = new JLabel("Job Desk");
         role.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
         role.setBounds(200, 260, 220, 30);
         panel.add(role);
 
         JRadioButton cashier = new JRadioButton(String.valueOf(Jobdesk.CASHIER));
         cashier.setBounds(510, 260, 100, 30);
+        cashier.setBackground(Color.WHITE);
         JRadioButton chef = new JRadioButton(String.valueOf(Jobdesk.CHEF));
         chef.setBounds(660, 260, 100, 30);
+        chef.setBackground(Color.WHITE);
         JRadioButton waiter = new JRadioButton(String.valueOf(Jobdesk.WAITER));
         waiter.setBounds(810, 260, 100, 30);
+        waiter.setBackground(Color.WHITE);
         JRadioButton deliveryman = new JRadioButton(String.valueOf(Jobdesk.DELIVERYMAN));
         deliveryman.setBounds(960, 260, 150, 30);
+        deliveryman.setBackground(Color.WHITE);
 
         switch(temp.getJobdesk()) {
             case CASHIER:
@@ -111,10 +116,26 @@ public class EditEmployeeForm extends JFrame {
         panel.add(submit);
 
         submit.addActionListener(e ->  {
-            // Sambungin ke DB, ada controller
+            String jobdesk = "";
+            JRadioButton[] radio = {cashier, chef, waiter, deliveryman};
+            for (JRadioButton button : radio) {
+                if (button.isSelected()) {
+                    jobdesk = button.getText();
+                }
+            }
+            new EmployeeController().editEmployee(
+                    id,
+                    empNameField.getText(),
+                    emailField.getText(),
+                    cellPhoneField.getText(),
+                    jobdesk
+            );
+            JOptionPane.showMessageDialog(null, "Data Berhasil Diedit.", "Sukses!", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            new EditEmployeeMenu();
         });
 
-        JButton back = new JButton("Back to Main Menu");
+        JButton back = new JButton("Back");
         back.setBounds(440, 360, 440, 40);
         panel.add(back);
 

@@ -1,5 +1,6 @@
 package view.fnb;
 
+import controller.AuthenticationController;
 import model.classes.Cart;
 import view.guest.GuestMenu;
 import view.member.MemberMenu;
@@ -8,13 +9,15 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DeliveryMenu extends JFrame {
-    private String origin;
     private Cart cart;
 
-    public DeliveryMenu(String origin) {
-        this.origin = origin;
+    public DeliveryMenu() {
         initComponents();
-        this.setVisible(true);
+        if (!new AuthenticationController().checkUser()) {
+            this.dispose();
+        } else {
+            setVisible(true);
+        }
     }
 
     private void initComponents() {
@@ -31,18 +34,10 @@ public class DeliveryMenu extends JFrame {
         topPanel.setBackground(Color.WHITE);
         topPanel.setPreferredSize(new Dimension(600, 75));
 
-        JButton backButton = new JButton("Back to Cart");
-        backButton.setBounds(25, 10, 150, 30);
-        backButton.addActionListener(e -> {
-            this.dispose();
-            new ConfirmFnBOrder(origin);
-        });
-
         JLabel title = new JLabel("Delivery Order");
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
         title.setBounds(200, 10, 300, 30);
 
-        topPanel.add(backButton);
         topPanel.add(title);
 
         this.add(topPanel, BorderLayout.NORTH);
@@ -86,7 +81,7 @@ public class DeliveryMenu extends JFrame {
         cancelButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Order cancelled.");
                 this.dispose();
-                new MemberMenu();           
+                new ConfirmFnBOrder("Member");
         });
 
         bottomPanel.add(placeOrderButton);

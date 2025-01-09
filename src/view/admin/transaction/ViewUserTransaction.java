@@ -28,6 +28,7 @@ public class ViewUserTransaction extends JFrame {
 
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("User Transaction");
 
@@ -40,7 +41,7 @@ public class ViewUserTransaction extends JFrame {
         panel.setLayout(null);
         panel.setBounds(100, 80, 1080, 600);
 
-        JButton back = new JButton("Back to Main Menu");
+        JButton back = new JButton("Back");
         back.setBounds(0, 0, 160, 30);
         panel.add(back);
 
@@ -60,7 +61,7 @@ public class ViewUserTransaction extends JFrame {
         panel.add(idField);
 
         JButton member = new JButton("Search Member");
-        member.setBounds(660, 0, 110, 30);
+        member.setBounds(660, 0, 160, 30);
         panel.add(member);
 
         member.addActionListener(e -> {
@@ -68,7 +69,7 @@ public class ViewUserTransaction extends JFrame {
         });
 
         JButton guest = new JButton("Search Guest");
-        guest.setBounds(790, 0, 110, 30);
+        guest.setBounds(840, 0, 160, 30);
         panel.add(guest);
 
         guest.addActionListener(e -> {

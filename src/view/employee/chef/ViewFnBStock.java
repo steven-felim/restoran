@@ -30,6 +30,7 @@ public class ViewFnBStock extends JFrame {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setLayout(null);
         this.getContentPane().setBackground(Color.WHITE);
         this.setTitle("View F&B Stock");
 
@@ -44,7 +45,7 @@ public class ViewFnBStock extends JFrame {
 
         JLabel id = new JLabel("Insert FnB ID");
         id.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
-        id.setBounds(200, 0, 220, 30);
+        id.setBounds(250, 0, 150, 30);
         panel.add(id);
 
         JTextField idField = new JTextField(20);
@@ -52,7 +53,7 @@ public class ViewFnBStock extends JFrame {
         idField.setBounds(410, 0, 220, 30);
         panel.add(idField);
 
-        JButton submit = new JButton("Add Stock");
+        JButton submit = new JButton("Edit Stock");
         submit.setBounds(660, 0, 220, 30);
         panel.add(submit);
 
@@ -80,16 +81,17 @@ public class ViewFnBStock extends JFrame {
         model.addColumn("Stock");
         model.addColumn("Price");
 
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(0, 60, 1080, 600);
+        loadDataToView();
 
+        table.setPreferredScrollableViewportSize(new Dimension(1080, 450));
+        table.setFillsViewportHeight(true);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(0, 60, 1080, 450);
         panel.add(scrollPane);
 
-        this.setLayout(null);
         this.add(title);
         this.add(panel);
-
-        loadDataToView();
     }
 
     private void loadDataToView() {

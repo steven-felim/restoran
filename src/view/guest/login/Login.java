@@ -1,8 +1,6 @@
 package view.guest.login;
 
 import controller.AuthenticationController;
-import controller.AuthenticationHelper;
-import controller.DatabaseHandler;
 import controller.PasswordToggleCommand;
 import view.admin.AdminMenu;
 import view.employee.cashier.CashierMenu;

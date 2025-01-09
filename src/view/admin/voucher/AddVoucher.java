@@ -1,6 +1,8 @@
 package view.admin.voucher;
 
 import controller.AuthenticationController;
+import controller.VoucherController;
+import view.admin.fnb.FnBMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -75,10 +77,22 @@ public class AddVoucher extends JFrame {
         panel.add(submit);
 
         submit.addActionListener(e ->  {
-            // Sambungin ke DB, ada controller
+	        String result = new VoucherController().addVoucher(
+					voucherNameField.getText(),
+			        voucherDiscField.getText(),
+			        voucherNominalField.getText(),
+			        pointField.getText()
+	        );
+			if (!result.isBlank()) {
+		        JOptionPane.showMessageDialog(null, result);
+	        } else {
+		        JOptionPane.showMessageDialog(null, "Data Berhasil Ditambahkan.", "Sukses!", JOptionPane.INFORMATION_MESSAGE);
+		        this.dispose();
+		        new VoucherMenu();
+	        }
         });
 
-        JButton back = new JButton("Back to Main Menu");
+        JButton back = new JButton("Back");
         back.setBounds(440, 400, 440, 40);
         panel.add(back);
 

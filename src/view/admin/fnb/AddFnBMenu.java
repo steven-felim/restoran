@@ -20,6 +20,7 @@ public class AddFnBMenu extends JFrame {
     private void initComponents() {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Add F&B Menu");
 
@@ -80,7 +81,7 @@ public class AddFnBMenu extends JFrame {
             }
         });
 
-        JButton back = new JButton("Back to Main Menu");
+        JButton back = new JButton("Back");
         back.setBounds(440, 310, 440, 40);
         panel.add(back);
 

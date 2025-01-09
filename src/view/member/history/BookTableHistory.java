@@ -47,7 +47,7 @@ public class BookTableHistory extends JFrame {
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();
-        JButton backButton = new JButton("Back Home");
+        JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> {
             this.dispose();
             new ViewHistory();

@@ -29,6 +29,7 @@ public class EditFnBForm extends JFrame {
     private void initComponents() {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Edit F&B Menu");
 
@@ -71,7 +72,7 @@ public class EditFnBForm extends JFrame {
         priceField.setBounds(510, 210, 220, 30);
         panel.add(priceField);
 
-        JButton submit = new JButton("Add Menu");
+        JButton submit = new JButton("Edit Menu");
         submit.setBounds(440, 260, 440, 40);
         panel.add(submit);
 
@@ -91,7 +92,7 @@ public class EditFnBForm extends JFrame {
             }
         });
 
-        JButton back = new JButton("Back to Main Menu");
+        JButton back = new JButton("Back");
         back.setBounds(440, 310, 440, 40);
         panel.add(back);
 

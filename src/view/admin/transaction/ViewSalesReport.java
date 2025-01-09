@@ -28,6 +28,7 @@ public class ViewSalesReport extends JFrame {
 
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Sales Report");
 
@@ -40,7 +41,7 @@ public class ViewSalesReport extends JFrame {
         panel.setLayout(null);
         panel.setBounds(100, 80, 1080, 600);
 
-        JButton back = new JButton("Back to Main Menu");
+        JButton back = new JButton("Back");
         back.setBounds(0, 0, 160, 30);
         panel.add(back);
 

@@ -29,6 +29,7 @@ public class ViewDeliveryMan extends JFrame {
 
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("View Deliveryman");
 
@@ -41,7 +42,7 @@ public class ViewDeliveryMan extends JFrame {
         panel.setLayout(null);
         panel.setBounds(100, 80, 1080, 600);
 
-        JButton back = new JButton("Back to Main Menu");
+        JButton back = new JButton("Back");
         back.setBounds(0, 0, 160, 30);
         panel.add(back);
 
@@ -56,16 +57,18 @@ public class ViewDeliveryMan extends JFrame {
         model.addColumn("Job desk");
         model.addColumn("Status");
 
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(0, 60, 1080, 600);
+        loadDataToView();
 
+        table.setPreferredScrollableViewportSize(new Dimension(1080, 450));
+        table.setFillsViewportHeight(true);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(0, 60, 1080, 450);
         panel.add(scrollPane);
 
         this.setLayout(null);
         this.add(title);
         this.add(panel);
-
-        loadDataToView();
     }
 
     private void loadDataToView() {

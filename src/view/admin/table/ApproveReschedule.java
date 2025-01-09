@@ -28,6 +28,7 @@ public class ApproveReschedule extends JFrame {
 
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Approve Table Reschedule");
 
@@ -66,7 +67,7 @@ public class ApproveReschedule extends JFrame {
             // Controller kembalikan ke book table asal
         });
 
-        JButton back = new JButton("Back to Main Menu");
+        JButton back = new JButton("Back");
         back.setBounds(0, 0, 160, 30);
         panel.add(back);
 

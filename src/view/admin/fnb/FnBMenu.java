@@ -30,7 +30,8 @@ public class FnBMenu extends JFrame {
 
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
-        this.setBackground(Color.WHITE);
+        this.getContentPane().setBackground(Color.WHITE);
+        this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("F&B Menu");
 
@@ -47,7 +48,7 @@ public class FnBMenu extends JFrame {
         back.setBounds(0, 0, 160, 30);
         panel.add(back);
 
-        back.addActionListener(e ->  {
+        back.addActionListener(e -> {
             this.dispose();
             new AdminMenu();
         });
@@ -103,24 +104,26 @@ public class FnBMenu extends JFrame {
             }
         });
 
-
-
         table = new JTable(model);
         model.addColumn("Fnb ID");
         model.addColumn("Name");
         model.addColumn("Stock");
         model.addColumn("Price");
 
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(0, 60, 1080, 900);
+        loadDataToView();
 
+        table.setPreferredScrollableViewportSize(new Dimension(1080, 450));
+        table.setFillsViewportHeight(true);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(0, 60, 1080, 450);
         panel.add(scrollPane);
 
-        this.setLayout(null);
         this.add(title);
         this.add(panel);
 
-        loadDataToView();
+        revalidate();
+        repaint();
     }
 
     private void loadDataToView() {

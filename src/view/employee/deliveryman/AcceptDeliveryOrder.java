@@ -53,7 +53,7 @@ public class AcceptDeliveryOrder extends JFrame {
 
         JLabel id = new JLabel("Insert Delivery ID");
         id.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
-        id.setBounds(200, 0, 220, 30);
+        id.setBounds(230, 0, 180, 30);
         panel.add(id);
 
         JTextField idField = new JTextField(20);
@@ -82,16 +82,18 @@ public class AcceptDeliveryOrder extends JFrame {
         model.addColumn("Transaction ID");
         model.addColumn("Deliveryman ID");
 
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(0, 60, 1080, 600);
+        loadDataToView();
 
+        table.setPreferredScrollableViewportSize(new Dimension(1080, 450));
+        table.setFillsViewportHeight(true);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(0, 60, 1080, 450);
         panel.add(scrollPane);
 
         this.setLayout(null);
         this.add(title);
         this.add(panel);
-
-        loadDataToView();
     }
 
     private void loadDataToView() {

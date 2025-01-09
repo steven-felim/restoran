@@ -26,7 +26,7 @@ public class VoucherMenu extends JFrame {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setBackground(Color.WHITE);
+        this.getContentPane().setBackground(Color.WHITE);
         this.setTitle("View Voucher");
 
         JLabel title = new JLabel("View Voucher");
@@ -63,16 +63,18 @@ public class VoucherMenu extends JFrame {
         model.addColumn("Nominal");
         model.addColumn("Point");
 
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(0, 60, 1080, 600);
+        loadDataToView();
 
+        table.setPreferredScrollableViewportSize(new Dimension(1080, 450));
+        table.setFillsViewportHeight(true);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(0, 60, 1080, 450);
         panel.add(scrollPane);
 
         this.setLayout(null);
         this.add(title);
         this.add(panel);
-
-        loadDataToView();
     }
 
     private void loadDataToView() {
