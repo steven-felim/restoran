@@ -26,18 +26,10 @@ public class DeliveryMenu extends JFrame {
         topPanel.setBackground(Color.WHITE);
         topPanel.setPreferredSize(new Dimension(600, 75));
 
-        JButton backButton = new JButton("Back");
-        backButton.setBounds(25, 10, 150, 30);
-        backButton.addActionListener(e -> {
-            this.dispose();
-            new ConfirmFnBOrder();
-        });
-
         JLabel title = new JLabel("Delivery Order");
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
         title.setBounds(200, 10, 300, 30);
 
-        topPanel.add(backButton);
         topPanel.add(title);
 
         this.add(topPanel, BorderLayout.NORTH);
@@ -81,7 +73,7 @@ public class DeliveryMenu extends JFrame {
         cancelButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Order cancelled.");
             this.dispose();
-            new GuestMenu();
+            new ConfirmFnBOrder();
         });
 
         bottomPanel.add(placeOrderButton);
