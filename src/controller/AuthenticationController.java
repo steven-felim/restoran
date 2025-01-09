@@ -23,9 +23,8 @@ public class AuthenticationController {
 				String password = rs.getString("password");
 				String role = rs.getString("role");
 				String jobdesk = rs.getString("jobdesk");
-				if (name.equals(userProfileField) || email.equals(userProfileField)) {
-//					if (new PasswordEncoder().authenticate(passwordField.toCharArray(), password)) {
-					if (password.equals(passwordField)) {
+				if (name.equalsIgnoreCase(userProfileField) || email.equalsIgnoreCase(userProfileField)) {
+					if (new PasswordEncoder().authenticate(passwordField.toCharArray(), password)) {
 						AuthenticationHelper.getInstance().setUserId(userId);
 						switch (role) {
 							case "ADMIN":

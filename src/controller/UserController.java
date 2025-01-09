@@ -51,6 +51,7 @@ public class UserController {
 
     public void editPassword(int idUser, String password) {
         DatabaseHandler.getInstance().connect();
+        password = new PasswordEncoder().hash(password);
 
         String query = "UPDATE user SET password = ? WHERE user_id = ?";
         try {
