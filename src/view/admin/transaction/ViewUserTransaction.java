@@ -61,7 +61,7 @@ public class ViewUserTransaction extends JFrame {
         panel.add(idField);
 
         JButton member = new JButton("Search Member");
-        member.setBounds(660, 0, 110, 30);
+        member.setBounds(660, 0, 160, 30);
         panel.add(member);
 
         member.addActionListener(e -> {
@@ -69,7 +69,7 @@ public class ViewUserTransaction extends JFrame {
         });
 
         JButton guest = new JButton("Search Guest");
-        guest.setBounds(790, 0, 110, 30);
+        guest.setBounds(840, 0, 160, 30);
         panel.add(guest);
 
         guest.addActionListener(e -> {
