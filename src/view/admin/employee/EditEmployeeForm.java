@@ -127,6 +127,7 @@ public class EditEmployeeForm extends JFrame {
                     id,
                     empNameField.getText(),
                     emailField.getText(),
+                    cellPhoneField.getText(),
                     jobdesk
             );
             JOptionPane.showMessageDialog(null, "Data Berhasil Diedit.", "Sukses!", JOptionPane.INFORMATION_MESSAGE);

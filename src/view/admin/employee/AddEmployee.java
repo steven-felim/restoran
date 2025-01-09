@@ -104,9 +104,9 @@ public class AddEmployee extends JFrame {
             new EmployeeController().addEmployee(
                     empNameField.getText(),
                     emailField.getText(),
+                    cellPhoneField.getText(),
                     jobdesk
             );
-            JOptionPane.showMessageDialog(null, "Data Berhasil Ditambahkan.", "Sukses!", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
             new EmployeeMenu();
         });
