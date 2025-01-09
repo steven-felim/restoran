@@ -1,8 +1,6 @@
 package controller;
 
 import model.classes.NonGuest;
-import model.classes.Wallet;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
