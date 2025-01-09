@@ -1,9 +1,6 @@
 package view.profile;
 
-import controller.AuthenticationController;
-import controller.AuthenticationHelper;
-import controller.PasswordToggleCommand;
-import controller.UserController;
+import controller.*;
 import model.classes.NonGuest;
 
 import javax.swing.*;
@@ -129,7 +126,7 @@ public class ChangePassword extends JFrame {
         buttonPanel.add(resetButton);
 
         resetButton.addActionListener(e -> {
-            if (!oldPassField.getText().equals(user.getPassword())) {
+            if (!new PasswordEncoder().authenticate(new String(oldPassField.getPassword()).toCharArray(), new String(user.getPassword()))) {
                 JOptionPane.showMessageDialog(null, "Old Password is not correct", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 if (oldPassField.getText().equals(newPassField.getText())) {

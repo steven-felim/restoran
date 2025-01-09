@@ -1,6 +1,7 @@
 package view.guest.login;
 
 import controller.PasswordToggleCommand;
+import controller.RegisterController;
 
 import javax.swing.*;
 
@@ -99,7 +100,7 @@ public class Register extends JFrame {
         showPIN.setBounds(246, 310, 50, 30);
         formLogin.add(showPIN);
 
-        PasswordToggleCommand pinCommand = new PasswordToggleCommand(showPass, new JPasswordField[]{passwordField});
+        PasswordToggleCommand pinCommand = new PasswordToggleCommand(showPIN, new JPasswordField[]{pinField});
         showPIN.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -120,6 +121,23 @@ public class Register extends JFrame {
         JButton loginButton = new JButton("Login");
         loginButton.setBounds(110, 0, 100, 40);
         buttonPanel.add(loginButton);
+
+        registerButton.addActionListener(e -> {
+            String result = new RegisterController().register(
+                    usernameField.getText(),
+                    emailField.getText(),
+                    new String(passwordField.getPassword()),
+                    phoneField.getText(),
+                    new String(pinField.getPassword())
+            );
+            if (!result.isBlank()) {
+                JOptionPane.showMessageDialog(null, result);
+            } else {
+                JOptionPane.showMessageDialog(null, "Data Berhasil Ditambahkan. Silahkan Login.", "Sukses!", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+                new Login();
+            }
+        });
 
         loginButton.addActionListener(e -> {
             this.dispose();
