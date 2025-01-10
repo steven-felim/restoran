@@ -1,8 +1,8 @@
 package view.fnb;
 
-import controller.FnBController;
-import model.classes.FoodAndBeverage;
-import view.guest.GuestMenu;
+import controller.AuthenticationHelper;
+import controller.CartController;
+import model.classes.Cart;
 import view.member.MemberMenu;
 
 import javax.swing.*;
@@ -11,8 +11,7 @@ import java.util.List;
 
 public class ViewCart extends JFrame {
     private String origin;
-    private FnBController fnbc;
-    // FnBController hanya untuk contoh gambaran program, nanti pakai data fnb di cart
+    private CartController cc;
 
     public ViewCart(String origin) {
         this.origin = origin;
@@ -21,7 +20,7 @@ public class ViewCart extends JFrame {
     }
 
     private void initComponents() {
-        fnbc = new FnBController();
+        cc = new CartController();
 
         this.setTitle("Cart Summary");
         this.setSize(600, 400);
@@ -39,8 +38,8 @@ public class ViewCart extends JFrame {
         backButton.setBounds(25, 10, 150, 30);
 
         backButton.addActionListener(e -> {
-                this.dispose();
-                new MemberMenu();            
+            this.dispose();
+            new MemberMenu();
         });
 
         JLabel title = new JLabel("Your FnB Order");
@@ -55,9 +54,9 @@ public class ViewCart extends JFrame {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        List<FoodAndBeverage> menuItems = fnbc.getAllFnb();
+        List<Cart> menuItems = cc.getAllMemberCart(AuthenticationHelper.getInstance().getUserId());
 
-        for (FoodAndBeverage item : menuItems) {
+        for (Cart item : menuItems) {
             JPanel itemPanel = new JPanel();
             itemPanel.setLayout(new GridBagLayout());
 
@@ -65,7 +64,7 @@ public class ViewCart extends JFrame {
             gbc.anchor = GridBagConstraints.WEST;
             gbc.insets = new Insets(5, 5, 5, 5);
 
-            JLabel itemNameLabel = new JLabel(item.getName() + " - Rp " + item.getPrice());
+            JLabel itemNameLabel = new JLabel(item.getFnb().getName() + " - Rp " + item.getFnb().getPrice());
             gbc.gridx = 0;
             gbc.gridy = 0;
             gbc.weightx = 1.0;
