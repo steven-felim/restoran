@@ -1,62 +1,83 @@
 package model.classes;
 
-import model.classes.FoodAndBeverage;
-
-import java.util.ArrayList;
-
 public class Cart {
     private int cart_Id;
     private int user_id;
     private int guest_id;
+    private boolean checkoutStatus;
     private int quantity;
-    private ArrayList<FoodAndBeverage> listFnB;
+    private FoodAndBeverage fnb;
 
-    public Cart(int cart_Id, int user_id, int guest_id, int quantity, ArrayList<FoodAndBeverage> listFnB) {
-        this.cart_Id = cart_Id;
-        this.user_id = user_id;
-        this.guest_id = guest_id;
-        this.quantity = quantity;
-        this.listFnB = listFnB;
+    // Design Pattern Builder
+    public Cart(Builder builder) {
+        this.cart_Id = builder.cart_Id;
+        this.user_id = builder.user_id;
+        this.guest_id = builder.guest_id;
+        this.checkoutStatus = builder.checkoutStatus;
+        this.quantity = builder.quantity;
+        this.fnb = builder.fnb;
     }
 
     public int getCart_Id() {
         return cart_Id;
     }
 
-    public void setCart_Id(int cart_Id) {
-        this.cart_Id = cart_Id;
-    }
-
     public int getUser_id() {
         return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
     }
 
     public int getGuest_id() {
         return guest_id;
     }
 
-    public void setGuest_id(int guest_id) {
-        this.guest_id = guest_id;
+    public boolean isCheckoutStatus() {
+        return checkoutStatus;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public FoodAndBeverage getFnb() {
+        return fnb;
     }
 
-    public ArrayList<FoodAndBeverage> getListFnB() {
-        return listFnB;
-    }
+    public static class Builder {
+        private int cart_Id;
+        private int user_id;
+        private int guest_id;
+        private boolean checkoutStatus;
+        private int quantity;
+        private FoodAndBeverage fnb;
 
-    public void setListFnB(ArrayList<FoodAndBeverage> listFnB) {
-        this.listFnB = listFnB;
-    }
+        public Builder setCart_Id(int cart_Id) {
+            this.cart_Id = cart_Id;
+            return this;
+        }
 
+        public Builder setUser_id(int user_id) {
+            this.user_id = user_id;
+            return this;
+        }
+
+        public Builder setGuest_id(int guest_id) {
+            this.guest_id = guest_id;
+            return this;
+        }
+
+        public Builder setCheckoutStatus(boolean checkoutStatus) {
+            this.checkoutStatus = checkoutStatus;
+            return this;
+        }
+
+        public Builder setQuantity(int quantity) {
+            this.quantity = quantity;
+            return this;
+        }
+
+        public Builder setFnb(FoodAndBeverage fnb) {
+            this.fnb = fnb;
+            return this;
+        }
+    }
 }

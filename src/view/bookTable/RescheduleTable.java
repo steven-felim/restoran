@@ -6,6 +6,7 @@ import controller.AuthenticationController;
 import org.jdatepicker.impl.*;
 
 import java.awt.*;
+import java.util.Calendar;
 import java.util.Properties;
 
 public class RescheduleTable extends JFrame {
@@ -69,6 +70,23 @@ public class RescheduleTable extends JFrame {
         gbc.gridx = 1;
         mainPanel.add(datePicker, gbc);
 
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        mainPanel.add(new JLabel("Select time: "), gbc);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 12);
+        calendar.set(Calendar.MINUTE, 0);
+
+        SpinnerDateModel dateModel = new SpinnerDateModel(calendar.getTime(), null, null, Calendar.MINUTE);
+        JSpinner timeSpinner = new JSpinner(dateModel);
+
+        JSpinner.DateEditor editor = new JSpinner.DateEditor(timeSpinner, "hh:mm a");
+        timeSpinner.setEditor(editor);
+
+        gbc.gridx = 1;
+        mainPanel.add(timeSpinner, gbc);
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.WHITE);
         JButton confirmButton = new JButton("Confirm");
@@ -78,7 +96,7 @@ public class RescheduleTable extends JFrame {
         buttonPanel.add(backButton);
 
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridwidth = 2;
         mainPanel.add(buttonPanel, gbc);
 

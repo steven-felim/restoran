@@ -1,10 +1,7 @@
 package controller;
 
-import model.classes.Employee;
 import model.classes.Member;
 import model.classes.Wallet;
-import model.enums.Jobdesk;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
