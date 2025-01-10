@@ -1,7 +1,5 @@
 package model.classes;
 
-import model.classes.FoodAndBeverage;
-
 public class Cart {
     private int cart_Id;
     private int user_id;
@@ -10,6 +8,7 @@ public class Cart {
     private int quantity;
     private FoodAndBeverage fnb;
 
+    // Design Pattern Builder
     public Cart(Builder builder) {
         this.cart_Id = builder.cart_Id;
         this.user_id = builder.user_id;
