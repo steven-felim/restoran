@@ -7,6 +7,9 @@ import view.member.MemberMenu;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewCart extends JFrame {
@@ -73,9 +76,25 @@ public class ViewCart extends JFrame {
             JPanel quantityPanel = new JPanel();
             quantityPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-            JTextField quantityField = new JTextField(5);
+            JTextField quantityField = new JTextField(String.valueOf(item.getQuantity()), 5);
             quantityPanel.add(quantityField);
-            // jumlah yg dipesan menyesuaikan cart & otomatis terisi di text field
+
+            quantityField.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    int keyCode = e.getKeyCode();
+                    if (keyCode >= KeyEvent.VK_0 && keyCode <= KeyEvent.VK_9) {
+                        try {
+                            int quantity = Integer.parseInt(quantityField.getText());
+                            if (quantity > 0) {
+                                cc.editCartQuantity(item.getCart_Id(), item.getFnb().getId(), quantity);
+                            }
+                        } catch (NumberFormatException ex) {
+                            System.out.println("Invalid input.");
+                        }
+                    }
+                }
+            });
 
             JButton removeButton = new JButton("Delete");
             quantityPanel.add(removeButton);
@@ -86,7 +105,8 @@ public class ViewCart extends JFrame {
             itemPanel.add(quantityPanel, gbc);
 
             removeButton.addActionListener(e -> {
-                // hapus dari cart
+                JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus item ini?", "Konfirmasi", JOptionPane.OK_CANCEL_OPTION);
+                cc.deleteCartItems(item.getCart_Id(), item.getFnb().getId());
             });
 
             mainPanel.add(itemPanel);

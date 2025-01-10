@@ -10,7 +10,6 @@ import view.member.MemberMenu;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -152,6 +151,9 @@ public class OrderFnB extends JFrame {
                     addFavorit.setVisible(true);
                 }
                 deleteFavorit.setVisible(false);
+
+                orderedItems.remove(item);
+                quantityList.remove(Integer.parseInt(quantityField.getText()));
             });
 
             quantityField.addKeyListener(new KeyAdapter() {
@@ -159,7 +161,6 @@ public class OrderFnB extends JFrame {
                 public void keyReleased(KeyEvent e) {
                     int keyCode = e.getKeyCode();
                     if (keyCode >= KeyEvent.VK_0 && keyCode <= KeyEvent.VK_9) {
-                        System.out.println("Current quantity: " + quantityField.getText());
                         try {
                             int quantity = Integer.parseInt(quantityField.getText());
                             if (quantity > 0) {
@@ -167,11 +168,9 @@ public class OrderFnB extends JFrame {
 
                                 if (index != -1) {
                                     quantityList.set(index, quantity);
-                                    System.out.println("Updated item in cart: " + item.getName() + " x" + quantity);
                                 } else {
                                     orderedItems.add(item);
                                     quantityList.add(quantity);
-                                    System.out.println("Added item to cart: " + item.getName() + " x" + quantity);
                                 }
                             }
                         } catch (NumberFormatException ex) {
