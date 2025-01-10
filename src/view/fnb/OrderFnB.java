@@ -1,13 +1,19 @@
 package view.fnb;
 
+import controller.AuthenticationHelper;
+import controller.CartController;
 import controller.FnBController;
+import model.classes.Cart;
 import model.classes.FoodAndBeverage;
 import view.employee.cashier.CashierMenu;
-import view.guest.GuestMenu;
 import view.member.MemberMenu;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderFnB extends JFrame {
@@ -21,6 +27,7 @@ public class OrderFnB extends JFrame {
 
     private void initComponents() {
         FnBController fnbc = new FnBController();
+        CartController cc = new CartController();
 
         this.setTitle("Order FnB");
         this.setSize(600, 400);
@@ -65,6 +72,9 @@ public class OrderFnB extends JFrame {
         menuPanel.setBackground(Color.WHITE);
         menuPanel.setLayout(null);
         menuPanel.setPreferredSize(new Dimension(560, menuItems.size() * 40));
+
+        List<FoodAndBeverage> orderedItems = new ArrayList<>();
+        List<Integer> quantityList = new ArrayList<>();
 
         for (int i = 0; i < menuItems.size(); i++) {
             FoodAndBeverage item = menuItems.get(i);
@@ -118,14 +128,12 @@ public class OrderFnB extends JFrame {
                 JOptionPane.showMessageDialog(this, "Berhasil ditambahkan ke favorit!");
                 deleteFavorit.setVisible(true);
                 addFavorit.setVisible(false);
-                // tambahkan ke db
             });
 
             deleteFavorit.addActionListener(e -> {
                 JOptionPane.showMessageDialog(this, "Berhasil ditambahkan ke favorit!");
                 addFavorit.setVisible(true);
                 deleteFavorit.setVisible(false);
-                // tambahkan ke db
             });
 
             addButton.addActionListener(e -> {
@@ -146,6 +154,32 @@ public class OrderFnB extends JFrame {
                 deleteFavorit.setVisible(false);
             });
 
+            quantityField.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    int keyCode = e.getKeyCode();
+                    if (keyCode >= KeyEvent.VK_0 && keyCode <= KeyEvent.VK_9) {
+                        System.out.println("Current quantity: " + quantityField.getText());
+                        try {
+                            int quantity = Integer.parseInt(quantityField.getText());
+                            if (quantity > 0) {
+                                int index = orderedItems.indexOf(item);
+
+                                if (index != -1) {
+                                    quantityList.set(index, quantity);
+                                    System.out.println("Updated item in cart: " + item.getName() + " x" + quantity);
+                                } else {
+                                    orderedItems.add(item);
+                                    quantityList.add(quantity);
+                                    System.out.println("Added item to cart: " + item.getName() + " x" + quantity);
+                                }
+                            }
+                        } catch (NumberFormatException ex) {
+                            System.out.println("Invalid input.");
+                        }
+                    }
+                }
+            });
             menuPanel.add(itemPanel);
         }
 
@@ -177,15 +211,20 @@ public class OrderFnB extends JFrame {
 
         bottomPanel.add(buyButton);
 
+
         if (!"Cashier".equalsIgnoreCase(origin)) {
-            JButton cancelButton = new JButton("Add to Cart");
-            cancelButton.addActionListener(e -> {
-                JOptionPane.showMessageDialog(this, "Pemesanan dimasukkan ke keranjang.");
-                if ("Member".equalsIgnoreCase(origin)) {
-                    // input ke cart
+            JButton addToCartButton = new JButton("Add to Cart");
+            addToCartButton.addActionListener(e -> {
+                Cart cart = cc.findOrCreateCartForMember(AuthenticationHelper.getInstance().getUserId());
+                if (orderedItems.isEmpty()) {
+                    System.out.println("empty list");
+                }
+                for (int i = 0; i < orderedItems.size(); i++) {
+                    System.out.println("adding items");
+                    cc.addItemToCart(cart.getCart_Id(), orderedItems.get(i).getId(), quantityList.get(i));
                 }
             });
-            bottomPanel.add(cancelButton);
+            bottomPanel.add(addToCartButton);
         }
         this.add(bottomPanel, BorderLayout.SOUTH);
     }
