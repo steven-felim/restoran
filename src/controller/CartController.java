@@ -28,7 +28,8 @@ public class CartController {
                 String name = rs.getString("name");
                 int price = rs.getInt("price");
                 int stock = rs.getInt("stock");
-                Cart.Builder builder = new Cart.Builder().setCart_Id(cartId).setFnb(new FoodAndBeverage(fnbId, name, stock, price)).setCheckoutStatus(false);
+                int quantity = rs.getInt("quantity");
+                Cart.Builder builder = new Cart.Builder().setCart_Id(cartId).setFnb(new FoodAndBeverage(fnbId, name, stock, price)).setCheckoutStatus(false).setQuantity(quantity);
                 cartList.add(new Cart(builder));
             }
 
@@ -49,6 +50,35 @@ public class CartController {
             pstmt.setInt(1, cartId);
             pstmt.setInt(2, fnbId);
             pstmt.setInt(3, quantity);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseHandler.getInstance().disconnect();
+        }
+    }
+
+    public void editCartQuantity(int cartId, int fnbId, int quantity) {
+        DatabaseHandler.getInstance().connect();
+        String query = "UPDATE cart_items SET quantity = ? WHERE cart_id = " + cartId + " AND fnb_id = " + fnbId + ";";
+        try {
+            PreparedStatement pstmt = DatabaseHandler.getInstance().con.prepareStatement(query);
+            pstmt.setInt(1, quantity);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseHandler.getInstance().disconnect();
+        }
+    }
+
+    public void deleteCartItems(int cartId, int fnbId) {
+        DatabaseHandler.getInstance().connect();
+        String query = "DELETE FROM cart_items WHERE cart_id = ? AND fnb_id = ?";
+        try {
+            PreparedStatement pstmt = DatabaseHandler.getInstance().con.prepareStatement(query);
+            pstmt.setInt(1, cartId);
+            pstmt.setInt(2, fnbId);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
