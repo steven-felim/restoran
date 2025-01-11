@@ -3,7 +3,8 @@ package controller;
 // design patern singletone
 public class AuthenticationHelper {
 	private static AuthenticationHelper instance;
-	private int userId = 0;
+	private int roleId = 0;
+	private String role = "";
 
 	public static AuthenticationHelper getInstance() {
 		if (instance == null) {
@@ -16,15 +17,24 @@ public class AuthenticationHelper {
 		return instance;
 	}
 
-	public int getUserId() {
-		return userId;
+	public int getRoleId() {
+		return roleId;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public void reset() {
-		this.userId = 0;
+		this.roleId = 0;
+		this.role = "";
 	}
 }

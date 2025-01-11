@@ -33,7 +33,7 @@ public class RegisterController {
             DatabaseHandler.getInstance().disconnect();
         }
 
-        if (password.length() <= 4) {
+        if (password.length() < 4) {
             return "Buatlah password minimal 4 karakter!";
         }
 
@@ -55,6 +55,6 @@ public class RegisterController {
         } finally {
             DatabaseHandler.getInstance().disconnect();
         }
-        return "Berhasil melakukan registrasi!";
+        return "";
     }
 }

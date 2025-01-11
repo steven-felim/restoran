@@ -16,7 +16,7 @@ public class ChangePassword extends JFrame {
     public ChangePassword(String originClass) {
         this.originClass = originClass;
         uc = new UserController();
-        user = uc.getDataFromDB(AuthenticationHelper.getInstance().getUserId());
+        user = uc.getDataFromDB(AuthenticationHelper.getInstance().getRoleId());
 
         initComponents();
         if (!new AuthenticationController().checkUser()) {
@@ -134,7 +134,7 @@ public class ChangePassword extends JFrame {
                 } else if (!newPassField.getText().equals(confirmPassField.getText())) {
                     JOptionPane.showMessageDialog(null, "New Password & Confirm Password doesn't match", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    uc.editPassword(AuthenticationHelper.getInstance().getUserId(), newPassField.getText());
+                    uc.editPassword(AuthenticationHelper.getInstance().getRoleId(), newPassField.getText());
                     JOptionPane.showMessageDialog(null, "Password Reset Successfully");
                     this.dispose();
                     new ViewProfile(originClass);

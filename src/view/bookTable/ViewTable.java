@@ -1,5 +1,8 @@
 package view.bookTable;
 
+import controller.BookingController;
+import controller.TableController;
+import model.classes.BookTable;
 import model.classes.Table;
 import view.guest.GuestMenu;
 import view.member.MemberMenu;
@@ -14,7 +17,6 @@ public class ViewTable extends JFrame {
     private JButton cancelButton;
     private JButton backButton;
     private JButton rescheduleButton;
-    private List<Table> bookedTables;
 
     public ViewTable() {
         initComponents();
@@ -28,12 +30,6 @@ public class ViewTable extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Dummy dulu, nanti tarik dari db
-        bookedTables = new ArrayList<>();
-        bookedTables.add(new Table("Outdoor1", 1));  
-        bookedTables.add(new Table("VIP2", 2)); 
-        bookedTables.add(new Table("Regular3", 3)); 
-
         JLabel titleLabel = new JLabel("Table Booking");
         titleLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -45,8 +41,9 @@ public class ViewTable extends JFrame {
 
         tableListModel = new DefaultListModel<>();
 
-        for (Table table : bookedTables) {
-            tableListModel.addElement("Table ID: " + table.getTableID() + ", Table No : " + table.getTableNo());
+        for (BookTable bookTable : new BookingController().getMemberBookTable()) {
+            int tableNo = new TableController().getTableNo(bookTable.getTableID());
+            tableListModel.addElement("Table ID: " + bookTable.getTableID() + ", Table No : " + tableNo);
         }
 
         tableList = new JList<>(tableListModel);

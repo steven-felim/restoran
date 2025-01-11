@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class WalletController {
 	public Wallet getWalletMember() {
 		return new MemberController().getDataFromDB(
-				AuthenticationHelper.getInstance().getUserId()
+				AuthenticationHelper.getInstance().getRoleId()
 		).getWallet();
 	}
 
@@ -34,7 +34,7 @@ public class WalletController {
 			PreparedStatement pstmt = DatabaseHandler.getInstance().con.prepareStatement(query);
 
 			pstmt.setDouble(1, getWalletMember().getBalance() + Double.parseDouble(amount));
-			pstmt.setInt(2, AuthenticationHelper.getInstance().getUserId());
+			pstmt.setInt(2, AuthenticationHelper.getInstance().getRoleId());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
