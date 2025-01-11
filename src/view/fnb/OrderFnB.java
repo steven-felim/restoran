@@ -130,7 +130,7 @@ public class OrderFnB extends JFrame {
             });
 
             deleteFavorit.addActionListener(e -> {
-                JOptionPane.showMessageDialog(this, "Berhasil ditambahkan ke favorit!");
+                JOptionPane.showMessageDialog(this, "Berhasil dihapus dari favorit!");
                 addFavorit.setVisible(true);
                 deleteFavorit.setVisible(false);
             });
