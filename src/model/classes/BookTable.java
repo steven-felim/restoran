@@ -1,6 +1,8 @@
 package model.classes;
 
 import model.enums.BookStatus;
+
+import java.sql.Time;
 import java.util.Date;
 
 public class BookTable {
@@ -9,14 +11,16 @@ public class BookTable {
     private int userID;
     private int guestID;
     private Date date;
+    private Time time;
     private BookStatus status;
 
-    public BookTable(int bookID, String tableID, int userID, int guestID, Date date, BookStatus status) {
+    public BookTable(int bookID, String tableID, int userID, int guestID, Date date, Time time, BookStatus status) {
         this.bookID = bookID;
         this.tableID = tableID;
         this.userID = userID;
         this.guestID = guestID;
         this.date = date;
+        this.time = time;
         this.status = status;
     }
 
@@ -58,6 +62,14 @@ public class BookTable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
     }
 
     public BookStatus getStatus() {

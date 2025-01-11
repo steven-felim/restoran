@@ -1,6 +1,7 @@
 package view.bookTable;
 
 import controller.AuthenticationController;
+import controller.BookingController;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -13,7 +14,9 @@ import view.guest.GuestMenu;
 import view.member.MemberMenu;
 
 import java.awt.*;
+import java.sql.Time;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 
 public class BookTableForm extends JFrame {
@@ -122,7 +125,30 @@ public class BookTableForm extends JFrame {
         add(mainPanel);
 
         confirmButton.addActionListener(e -> {
-
+            String tableId = "";
+            String room = "";
+            int tableNo = tableComboBox.getSelectedIndex() + 1;
+            switch (roomComboBox.getSelectedIndex()) {
+                case 0:
+                    room = "VIP";
+                    break;
+                case 1:
+                    room = "Indoor";
+                    break;
+                case 2:
+                    room = "Outdoor";
+                    break;
+            }
+            if (tableNo < 10) {
+                tableId = room + "0" + tableNo;
+            } else {
+                tableId = room + tableNo;
+            }
+            new BookingController().bookTable(
+                    tableId,
+                    new Date(datePicker.getJFormattedTextField().getText()),
+                    timeSpinner.getValue().toString().split(" ")[3]
+            );
         });
 
         backButton.addActionListener(e -> {
