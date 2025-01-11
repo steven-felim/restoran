@@ -38,7 +38,7 @@ public class AdminMenu extends JFrame {
         JPanel panel = new JPanel();
         panel.setBackground(Color.WHITE);
         panel.setLayout(null);
-        panel.setBounds(44, 80, 300, 400);
+        panel.setBounds(44, 130, 300, 400);
 
         JButton table = new JButton("Table Menu");
         table.setBounds(0, 0, 300, 40);
@@ -58,17 +58,17 @@ public class AdminMenu extends JFrame {
             new FnBMenu();
         });
 
-        JButton viewTransaction = new JButton("Transaction Menu");
-        viewTransaction.setBounds(0, 100, 300, 40);
-        panel.add(viewTransaction);
-
-        viewTransaction.addActionListener(e -> {
-            this.dispose();
-            new TransactionMenu();
-        });
+//        JButton viewTransaction = new JButton("Transaction Menu");
+//        viewTransaction.setBounds(0, 100, 300, 40);
+//        panel.add(viewTransaction);
+//
+//        viewTransaction.addActionListener(e -> {
+//            this.dispose();
+//            new TransactionMenu();
+//        });
 
         JButton editEmployee = new JButton("Employee Menu");
-        editEmployee.setBounds(0, 150, 300, 40);
+        editEmployee.setBounds(0, 100, 300, 40);
         panel.add(editEmployee);
 
         editEmployee.addActionListener(e -> {
@@ -77,7 +77,7 @@ public class AdminMenu extends JFrame {
         });
 
         JButton voucher = new JButton("Voucher");
-        voucher.setBounds(0, 200, 300, 40);
+        voucher.setBounds(0, 150, 300, 40);
         panel.add(voucher);
 
         voucher.addActionListener(e -> {
@@ -86,7 +86,7 @@ public class AdminMenu extends JFrame {
         });
 
         JButton addDiscount = new JButton("Add Discount");
-        addDiscount.setBounds(0, 250, 300, 40);
+        addDiscount.setBounds(0, 200, 300, 40);
         panel.add(addDiscount);
 
         addDiscount.addActionListener(e -> {
@@ -95,7 +95,7 @@ public class AdminMenu extends JFrame {
         });
 
         JButton logout = new JButton("Logout");
-        logout.setBounds(0, 300, 300, 40);
+        logout.setBounds(0, 250, 300, 40);
         panel.add(logout);
 
         logout.addActionListener(e -> {
