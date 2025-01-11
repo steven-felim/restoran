@@ -20,11 +20,11 @@ public class CartController {
                 ResultSet rs = stmt.executeQuery("SELECT c.*, ci.*, f.* FROM cart AS c " +
                         "INNER JOIN cart_items AS ci ON c.cart_id = ci.cart_id " +
                         "INNER JOIN fnb AS f ON ci.fnb_id = f.fnb_id " +
-                        "WHERE c.user_id = " + userId + " AND checkout_status = 0;")) {
+                        "WHERE c.user_id = " + userId + " AND c.checkout_status = 0;")) {
 
             while (rs.next()) {
-                int cartId = rs.getInt("cart_id");
-                int fnbId = rs.getInt("fnb_id");
+                int cartId = rs.getInt("c.cart_id");
+                int fnbId = rs.getInt("f.fnb_id");
                 String name = rs.getString("name");
                 int price = rs.getInt("price");
                 int stock = rs.getInt("stock");
@@ -40,6 +40,14 @@ public class CartController {
         }
 
         return cartList;
+    }
+
+    public int getTotalCart() {
+        int userId = AuthenticationHelper.getInstance().getRoleId();
+        int totalPrice = 0;
+        for (Cart cart : getAllMemberCart(userId)) {
+            totalPrice += cart.getFnb().getPrice() * cart.getQuantity();
+        } return totalPrice;
     }
 
     public void addItemToCart(int cartId, int fnbId, int quantity) {

@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ViewCart extends JFrame {
@@ -57,8 +56,9 @@ public class ViewCart extends JFrame {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        List<Cart> menuItems = cc.getAllMemberCart(AuthenticationHelper.getInstance().getUserId());
+        List<Cart> menuItems = cc.getAllMemberCart(AuthenticationHelper.getInstance().getRoleId());
 
+        JLabel totalLabel = new JLabel("Total Price:    Rp" + cc.getTotalCart());
         for (Cart item : menuItems) {
             JPanel itemPanel = new JPanel();
             itemPanel.setLayout(new GridBagLayout());
@@ -88,6 +88,7 @@ public class ViewCart extends JFrame {
                             int quantity = Integer.parseInt(quantityField.getText());
                             if (quantity > 0) {
                                 cc.editCartQuantity(item.getCart_Id(), item.getFnb().getId(), quantity);
+                                totalLabel.setText("Total Price:    Rp" + cc.getTotalCart());
                             }
                         } catch (NumberFormatException ex) {
                             System.out.println("Invalid input.");
@@ -111,7 +112,6 @@ public class ViewCart extends JFrame {
 
             mainPanel.add(itemPanel);
         }
-        JLabel totalLabel = new JLabel("Total Price:    Rp"); // tambahkan total harga cart melalui controller
         mainPanel.add(totalLabel);
 
         JScrollPane scrollPane = new JScrollPane(mainPanel);

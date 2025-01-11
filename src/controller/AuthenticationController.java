@@ -25,7 +25,8 @@ public class AuthenticationController {
 				String jobdesk = rs.getString("jobdesk");
 				if (name.equalsIgnoreCase(userProfileField) || email.equalsIgnoreCase(userProfileField)) {
 					if (new PasswordEncoder().authenticate(passwordField.toCharArray(), password)) {
-						AuthenticationHelper.getInstance().setUserId(userId);
+						AuthenticationHelper.getInstance().setRoleId(userId);
+						AuthenticationHelper.getInstance().setRole("user");
 						switch (role) {
 							case "ADMIN":
 								return 1;
@@ -61,7 +62,7 @@ public class AuthenticationController {
 	}
 
 	public boolean checkUser() {
-		if (AuthenticationHelper.getInstance().getUserId() == 0) {
+		if (AuthenticationHelper.getInstance().getRoleId() == 0) {
 			new Login();
 			JOptionPane.showMessageDialog(
 					null,

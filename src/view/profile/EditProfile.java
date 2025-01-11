@@ -14,7 +14,7 @@ public class EditProfile extends JFrame {
     public EditProfile(String originClass) {
         this.originClass = originClass;
         uc = new UserController();
-        user = uc.getDataFromDB(AuthenticationHelper.getInstance().getUserId());
+        user = uc.getDataFromDB(AuthenticationHelper.getInstance().getRoleId());
         initComponents();
         if (!new AuthenticationController().checkUser()) {
             this.dispose();
@@ -81,7 +81,7 @@ public class EditProfile extends JFrame {
         buttonPanel.add(saveButton);
 
         saveButton.addActionListener(e -> {
-            uc.editUserDetails(AuthenticationHelper.getInstance().getUserId(), nameField.getText(), emailField.getText(), phoneField.getText());
+            uc.editUserDetails(AuthenticationHelper.getInstance().getRoleId(), nameField.getText(), emailField.getText(), phoneField.getText());
             JOptionPane.showMessageDialog(null, "Data successfully updated!");
             this.dispose();
             new ViewProfile(originClass);

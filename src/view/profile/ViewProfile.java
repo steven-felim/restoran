@@ -27,10 +27,10 @@ public class ViewProfile extends JFrame {
         if (!originClass.isBlank()) {
             if ("Member".equals(originClass)) {
                 mc = new MemberController();
-                mem = mc.getDataFromDB(AuthenticationHelper.getInstance().getUserId());
+                mem = mc.getDataFromDB(AuthenticationHelper.getInstance().getRoleId());
             } else {
                 ec = new EmployeeController();
-                emp = ec.getDataFromDB(AuthenticationHelper.getInstance().getUserId());
+                emp = ec.getDataFromDB(AuthenticationHelper.getInstance().getRoleId());
             }
         }
         initComponents();

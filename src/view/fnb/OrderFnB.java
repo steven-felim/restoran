@@ -214,7 +214,7 @@ public class OrderFnB extends JFrame {
         if (!"Cashier".equalsIgnoreCase(origin)) {
             JButton addToCartButton = new JButton("Add to Cart");
             addToCartButton.addActionListener(e -> {
-                Cart cart = cc.findOrCreateCartForMember(AuthenticationHelper.getInstance().getUserId());
+                Cart cart = cc.findOrCreateCartForMember(AuthenticationHelper.getInstance().getRoleId());
                 for (int i = 0; i < orderedItems.size(); i++) {
                     cc.addItemToCart(cart.getCart_Id(), orderedItems.get(i).getId(), quantityList.get(i));
                 }
