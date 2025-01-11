@@ -37,6 +37,33 @@ public class FnBController {
         return fnbList;
     }
 
+    public List<FoodAndBeverage> getAllFnbMember() {
+        List<FoodAndBeverage> fnbList = new ArrayList<>();
+        int userId = AuthenticationHelper.getInstance().getRoleId();
+
+        DatabaseHandler.getInstance().connect();
+        try (
+             Statement stmt = DatabaseHandler.getInstance().con.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT fnb_id FROM favorite_menu WHERE user_id = " + userId)) {
+
+            while (rs.next()) {
+                int id = rs.getInt("fnb_id");
+                String name = rs.getString("name");
+                int stock = rs.getInt("stock");
+                int price = rs.getInt("price");
+
+                fnbList.add(new FoodAndBeverage(id, name, stock, price));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseHandler.getInstance().disconnect();
+        }
+
+        return fnbList;
+    }
+
     public String addFnBMenu(String nameMenu, String stockMenu, String priceMenu) {
         int stock;
         if (stockMenu.isEmpty()) {
@@ -138,6 +165,42 @@ public class FnBController {
             PreparedStatement pstmt = DatabaseHandler.getInstance().con.prepareStatement(query);
 
             pstmt.setInt(1, idFnB);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseHandler.getInstance().disconnect();
+        }
+    }
+
+    public void addFavMenu(int idFnB) {
+        DatabaseHandler.getInstance().connect();
+        int userId = AuthenticationHelper.getInstance().getRoleId();
+
+        String query = "INSERT INTO favorite_menu VALUES (?, ?)";
+        try {
+            PreparedStatement pstmt = DatabaseHandler.getInstance().con.prepareStatement(query);
+
+            pstmt.setInt(1, userId);
+            pstmt.setInt(2, idFnB);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseHandler.getInstance().disconnect();
+        }
+    }
+
+    public void delFavMenu(int idFnB) {
+        DatabaseHandler.getInstance().connect();
+        int userId = AuthenticationHelper.getInstance().getRoleId();
+
+        String query = "DELETE FROM favorite_menu WHERE fnb_id = ? AND user_id = ?";
+        try {
+            PreparedStatement pstmt = DatabaseHandler.getInstance().con.prepareStatement(query);
+
+            pstmt.setInt(1, idFnB);
+            pstmt.setInt(2, userId);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
